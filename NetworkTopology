@@ -1,0 +1,12 @@
+Node number:
+5
+Edge number:
+6
+Adjacent Matrix:
+0 1 0 1 1
+1 0 1 0 0
+0 1 0 1 0
+1 0 1 0 1
+1 0 0 1 0
+Partition Result:
+1 2 3 3 0
