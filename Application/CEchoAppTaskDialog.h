@@ -5,8 +5,8 @@
 #include <QGraphicsItem>
 #include <vector>
 #include <QMessageBox>
-#include "CNewSwitcher.h"
-#include "Device/CSwitcher.h"
+#include "../CNewSwitcher.h"
+#include "../Device/CSwitcher.h"
 
 namespace Ui {
 class CEchoAppTaskDialog;

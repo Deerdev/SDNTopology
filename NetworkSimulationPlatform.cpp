@@ -45,9 +45,9 @@ void NetworkSimulationPlatform::init( void )
     setCentralWidget(ui_editWidget);
     ui_editWidget->translate(1000,1000);
 
-    setWindowTitle(tr("模拟仿真系统"));
-	setToolTip(tr("模拟仿真系统"));
-	setStatusTip(tr("模拟仿真系统"));
+    setWindowTitle(tr("SDN网络拓扑"));
+    setToolTip(tr("SDN网络拓扑"));
+    setStatusTip(tr("SDN网络拓扑"));
 
 	//创建动作
 	createActions();
@@ -57,6 +57,7 @@ void NetworkSimulationPlatform::init( void )
 	createToolBar();
 	//添加新工具栏
 	createNewTooBar();
+
 	//创建停靠窗口
 	createDockWindow();
 
@@ -129,14 +130,6 @@ void NetworkSimulationPlatform::createActions( void )
     /*抽取SNMP拓扑*/
     importSNMPTopologyAction = new QAction( tr("解析SNMP导入拓扑"), this);
     connect(importSNMPTopologyAction, SIGNAL(triggered()), this, SLOT(importSNMPTopology()));
-
-    /*导入地图*/
-    importBackgroundAction = new QAction( tr("打开地图"), this);
-    connect(importBackgroundAction, SIGNAL(triggered()), ui_editWidget, SLOT(drawBackGround()));
-
-    /*关闭地图*/
-    deleteBackgroundAction = new QAction( tr("关闭地图"), this);
-    connect(deleteBackgroundAction, SIGNAL(triggered()), ui_editWidget, SLOT(deleteBackground()));
 
     /*设置放大动作*/
 	zoomInAction = new QAction( tr("放大"), this );
@@ -476,11 +469,11 @@ void NetworkSimulationPlatform::createToolBar( void )
 {
 	mainToolBar->addAction(newNetworkItemAction);
 	mainToolBar->addAction(openNetworkItemAction);
+    mainToolBar->addAction(saveItemAction);
 	mainToolBar->addSeparator();
 	mainToolBar->addAction(zoomInAction);
 	mainToolBar->addAction(zoomOutAction);
-	mainToolBar->addAction(saveItemAction);
-	mainToolBar->addAction(layoutAction);
+    //mainToolBar->addAction(layoutAction); //拓扑布局
     //mainToolBar->addAction(configTaskAction);
 }
 
@@ -493,37 +486,36 @@ void NetworkSimulationPlatform::createToolBar( void )
 void NetworkSimulationPlatform::createMenu( void )
 {
     menu_startMenu = QMainWindow::menuBar()->addMenu(tr("开始"));
-    menu_startMenu->addAction(startSimulateAction);
-    menu_startMenu->addAction(importSNMPTopologyAction);
-    menu_startMenu->addAction(importBackgroundAction);
-    menu_startMenu->addAction(deleteBackgroundAction);
+    //menu_startMenu->addAction(startSimulateAction);
+    //menu_startMenu->addAction(importSNMPTopologyAction);
+    //menu_startMenu->addAction(importBackgroundAction);
+    //menu_startMenu->addAction(deleteBackgroundAction);
     menu_startMenu->addAction(exitAction);
 
-    menu_networkEditMenu = QMainWindow::menuBar()->addMenu(tr("网络编辑"));
+    menu_networkEditMenu = QMainWindow::menuBar()->addMenu(tr("编辑"));
     menu_networkEditMenu->addAction(newNetworkItemAction);
     menu_networkEditMenu->addAction(openNetworkItemAction);
     menu_networkEditMenu->addAction(saveItemAction);
+    menu_networkEditMenu->addAction(zoomInAction);
+    menu_networkEditMenu->addAction(zoomOutAction);
 
-    menu_editTopologyMenu = menu_networkEditMenu->addMenu(tr("编辑"));
-    menu_editTopologyMenu->addAction(zoomInAction);
-    menu_editTopologyMenu->addAction(zoomOutAction);
-    menu_networkEditMenu->addAction(exportTopologyAction);
-    menu_networkEditMenu->addAction(importTopologyAction);
+    //menu_networkEditMenu->addAction(exportTopologyAction);
+    //menu_networkEditMenu->addAction(importTopologyAction);
     menu_networkEditMenu->addAction(clearseceneAction);
 
-    menu_configNetworkMenu = menu_networkEditMenu->addMenu(tr("配置"));
-    menu_configNetworkMenu->addAction(linkSetAction);
-    menu_configNetworkMenu->addAction(flowSetAction);
-    menu_configNetworkMenu->addAction(partitionNumAction);
+//    menu_configNetworkMenu = menu_networkEditMenu->addMenu(tr("配置"));
+//    menu_configNetworkMenu->addAction(linkSetAction);
+//    menu_configNetworkMenu->addAction(flowSetAction);
+//    menu_configNetworkMenu->addAction(partitionNumAction);
 
     menu_toolMenu = menu_networkEditMenu->addMenu(tr("工具"));
-    menu_networkStateMenu = QMainWindow::menuBar()->addMenu(tr("网络运行状态"));
-    menu_networkStateMenu->addAction(networkBandAction);
-    menu_networkStateMenu->addAction(networkCapacityAction);
+//    menu_networkStateMenu = QMainWindow::menuBar()->addMenu(tr("网络运行状态"));
+//    menu_networkStateMenu->addAction(networkBandAction);
+//    menu_networkStateMenu->addAction(networkCapacityAction);
 
-    menu_configTaskMenu = QMainWindow::menuBar()->addMenu(tr("任务管理"));
-    menu_configTaskMenu->addAction(configTaskAction);
-    menu_configTaskMenu->addAction(eventSchedulAction);
+//    menu_configTaskMenu = QMainWindow::menuBar()->addMenu(tr("任务管理"));
+//    menu_configTaskMenu->addAction(configTaskAction);
+//    menu_configTaskMenu->addAction(eventSchedulAction);
 }
 
 /*************************************************
@@ -556,31 +548,31 @@ void NetworkSimulationPlatform::setLink( void )
 *************************************************/
 void NetworkSimulationPlatform::createDockWindow( void )
 {
-    ui_networkDeviceDock = new QDockWidget(tr("网络设备"), this);
-    ui_networkDeviceWidget = new QWidget(ui_networkDeviceDock);
-    ui_networkToolBox = new QToolBox(ui_networkDeviceWidget);
-    ui_routerDevice = new QWidget;
-    ui_PCDevice = new QWidget;
+//    ui_networkDeviceDock = new QDockWidget(tr("网络设备"), this);
+//    ui_networkDeviceWidget = new QWidget(ui_networkDeviceDock);
+//    ui_networkToolBox = new QToolBox(ui_networkDeviceWidget);
+//    ui_routerDevice = new QWidget;
+//    ui_PCDevice = new QWidget;
 
-    ui_networkToolBox->addItem(ui_routerDevice, tr("路由器"));
-    ui_networkToolBox->addItem(ui_PCDevice, tr("终端"));
+//    ui_networkToolBox->addItem(ui_routerDevice, tr("路由器"));
+//    ui_networkToolBox->addItem(ui_PCDevice, tr("终端"));
 
-    //所有的设备在CUnitboxwidget类中添加
-    ui_unitboxwidget = new CUnitboxWidget(ui_routerDevice);
-    ui_editWidget->setLabelWidget(ui_unitboxwidget);
+//    //所有的设备在CUnitboxwidget类中添加
+//    ui_unitboxwidget = new CUnitboxWidget(ui_routerDevice);
+//    ui_editWidget->setLabelWidget(ui_unitboxwidget);
 
-	//设置栅格布局
-    ui_toolBoxGridLayout = new QGridLayout(ui_networkDeviceWidget);
-    ui_toolBoxGridLayout->setSpacing(6);
-    ui_toolBoxGridLayout->setMargin(11);
-    ui_toolBoxGridLayout->addWidget(ui_networkToolBox, 0, 0, 1, 1);
-    ui_networkDeviceDock->setMinimumWidth(150);//设置最小宽度
+//	//设置栅格布局
+//    ui_toolBoxGridLayout = new QGridLayout(ui_networkDeviceWidget);
+//    ui_toolBoxGridLayout->setSpacing(6);
+//    ui_toolBoxGridLayout->setMargin(11);
+//    ui_toolBoxGridLayout->addWidget(ui_networkToolBox, 0, 0, 1, 1);
+//    ui_networkDeviceDock->setMinimumWidth(150);//设置最小宽度
 
-	/*设置设备停靠窗口停靠区域*/
-    ui_networkDeviceDock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    ui_networkDeviceDock->setWidget(ui_networkDeviceWidget);
-    addDockWidget(Qt::RightDockWidgetArea, ui_networkDeviceDock);
-    menu_toolMenu->addAction(ui_networkDeviceDock->toggleViewAction());
+//	/*设置设备停靠窗口停靠区域*/
+//    ui_networkDeviceDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+//    ui_networkDeviceDock->setWidget(ui_networkDeviceWidget);
+//    addDockWidget(Qt::RightDockWidgetArea, ui_networkDeviceDock);
+//    menu_toolMenu->addAction(ui_networkDeviceDock->toggleViewAction());
 
 	/*设置操作记录停靠窗口停靠区域*/
     ui_historyDock = new QDockWidget(tr("操作记录"), this);

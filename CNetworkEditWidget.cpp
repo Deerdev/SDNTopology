@@ -14,6 +14,7 @@ CTopologyWidget::CTopologyWidget(QWidget *parent)
     setDragMode(QGraphicsView::RubberBandDrag);
     creatRightMenu();
 
+    //对话框
     m_switchDia = new CSwitherConfigure;
     m_newSwitcherDia = new CNewSwitcher;
     m_newPortDia = new CPortDialog;
@@ -45,6 +46,7 @@ CTopologyWidget::~CTopologyWidget()
 
 void CTopologyWidget::setLabelWidget(CUnitboxWidget* _unitW)
 {
+    //放图片标签的窗口
 	m_unitWidget = _unitW;	
 }
 
@@ -96,17 +98,7 @@ void CTopologyWidget::clearScene(void)
     drawLegend();
 }
 
-
-//void CTopologyWidget::drawLegend()
-//{
-//    QPixmap pixmap(":/NetworkSimulationPlatform/Resources/back.jpg");
-//    QPalette palette;
-//    //setMask(pixmap.mask()); //可以将图片中透明部分显示为透明的
-//    palette.setBrush(this->backgroundRole(),QBrush(pixmap));
-//    this->setAutoFillBackground(true);
-//    this->setPalette(palette);
-//    return;
-//}
+//画图例
 void CTopologyWidget::drawLegend()
 {
     QFont t_font("Times New Roman");
@@ -322,50 +314,6 @@ void CTopologyWidget::slotSwitchDia()
                     }
                 }
             }
-            //delete link from scene
-//            for(int j = 0; j < m_vlink.size(); ++j)
-//            {
-//                CLinkInfo linkInfo = m_vlink[j]->getLinkInfo();
-//                if(linkInfo.s_switchID == deletePortsInfo[i].Device_ID && linkInfo.e_switchID == deletePortsInfo[i].linkPort_Device_ID)
-//                {
-//                    delete m_vlink[j];
-//                    m_vlink[j] = NULL;
-//                    m_vlink.erase(m_vlink.begin() + j);
-//                    j--;
-//                }
-//            }
-//            QList<QGraphicsItem*> t_itemlist = m_scene->items();
-//            QVector<Clink *>  t_vlink;
-
-//            for (int i = 0; i < t_itemlist.count(); i++)
-//            {
-//                Clink * t_link = NULL;
-
-//                t_link = dynamic_cast<Clink*>(t_itemlist[i]);
-
-//                if (t_link != NULL)
-//                {
-//                    t_vlink.push_back(t_link);
-//                }
-//            }
-//            for (int j = 0; j < t_vlink.size();++j)
-//            {
-//                 if (t_vlink[j] != NULL && t_vlink[j]->getStartPort() != NULL && t_vlink[j]->getEndPort() != NULL)
-//                 {
-//                     CSwitcher* s_switcherItem = dynamic_cast<CSwitcher*>(t_vlink[j]->getStartPort()->parentItem());
-//                     CSwitcher* e_switcherItem = dynamic_cast<CSwitcher*>(t_vlink[j]->getEndPort()->parentItem());
-//                     QString sID = s_switcherItem->getSwitcherInfo().name, DelID = deletePortsInfo[i].linkPort_name;
-//                     qDebug()<< sID<< " "<<DelID;
-//                     if (s_switcherItem->getSwitcherInfo().name == deletePortsInfo[i].name &&
-//                         e_switcherItem->getSwitcherInfo().name == deletePortsInfo[i].linkPort_name)
-//                     {
-//                        delete t_vlink[j];
-//                        t_vlink[j] = NULL;
-//                        t_vlink.erase(t_vlink.begin() + j);
-//                        j--;
-//                     }
-//                }
-//            }
         }
 
     }
@@ -2063,62 +2011,258 @@ void CTopologyWidget::InputTopology(QString path)
     }
 }
 
+
+void CTopologyWidget::RefreshTopology()
+{
+    this->centerOn(0,0);
+
+
+    QPointF t_pos;
+    QRectF t_rect;
+
+    QList<QString>  lineList;
+    while(!out.atEnd())
+    {
+        QString eachline = out.readLine();
+        lineList.append(eachline);
+    }
+    int lineNum = 0;
+    for (int i = 0; i < count; i++)
+    {
+        double x,y,z,w;
+        if (lineNum >= lineList.size())
+        {
+            break;
+        }
+
+        item_type = QVariant(lineList[lineNum]).toInt();
+
+        t_pos.setX(QVariant(lineList[lineNum]).toDouble());
+
+        t_pos.setY(QVariant(lineList[lineNum]).toDouble());
+
+
+        x = QVariant(lineList[lineNum]).toDouble();
+
+        y = QVariant(lineList[lineNum]).toDouble();
+
+        z = QVariant(lineList[lineNum]).toDouble();
+
+        w = QVariant(lineList[lineNum]).toDouble();
+
+        t_rect = QRectF(x,y,z,w);
+
+
+        //交换机
+        if (item_type == 0)
+        {
+            CSwitcherInfo t_switchInfo;
+            int vnodeSize = 0;
+            t_switchInfo.switchType = lineList[lineNum];
+
+            t_switchInfo.name = lineList[lineNum];
+
+            t_switchInfo.ID = QVariant(lineList[lineNum]).toInt();
+
+            t_switchInfo.portNum = QVariant(lineList[lineNum]).toInt();
+
+            t_switchInfo.protocol = lineList[lineNum];
+
+            t_switchInfo.networkLocation = lineList[lineNum];
+
+            vnodeSize =  QVariant(lineList[lineNum]).toInt();
+
+            //t_switchInfo.LNodes.resize(vnodeSize);
+            for (int j = 0; j < vnodeSize; j ++)
+            {
+                SNodeStructInfo t_node;
+                t_node.Port_ID = QVariant(lineList[lineNum]).toInt();
+
+                t_node.Device_ID = QVariant(lineList[lineNum]).toInt();
+
+                t_node.networkLocation = lineList[lineNum];
+
+                t_node.name = lineList[lineNum];
+
+                t_node.interfaceName = lineList[lineNum];
+
+                t_node.area = lineList[lineNum];
+
+                t_node.IP = lineList[lineNum];
+
+                t_node.subnetMask = lineList[lineNum];
+
+
+                if(!(t_IPPond.count(t_node.IP)))
+                    t_IPPond.insert(t_node.IP);
+                QString networkID = calculateNetworkID(t_node.IP,t_node.subnetMask);
+
+                if (t_node.IP == networkID )
+                {
+                    QMessageBox::information(this, tr("错误"), tr("%1 IP地址不能为所在网号！").arg(t_node.name),QMessageBox::Ok);
+                    return;
+                }
+                if(!m_IPPool.count(networkID))
+                    m_IPPool[networkID] = 1;
+                else
+                {
+                    //full
+                    if(m_IPPool[networkID] == 2)
+                    {
+                        QMessageBox::information(this,tr("错误"),tr("%1 IP地址所在网络已被使用!").arg(t_node.name),QMessageBox::Ok);
+                        return;
+                    }
+                    else
+                        m_IPPool[networkID] = 2;
+                }
+
+                t_node.describe = lineList[lineNum];
+
+                t_node.costValue = lineList[lineNum];
+
+                t_node.remark = lineList[lineNum];
+
+
+                t_node.linkPort_ID =QVariant(lineList[lineNum]).toInt();
+
+                t_node.linkPort_Device_ID =QVariant(lineList[lineNum]).toInt();
+
+                t_node.linkPort_name = lineList[lineNum];
+
+                t_node.linkPort_interfaceName = lineList[lineNum];
+
+                t_node.linkPort_area = lineList[lineNum];
+
+                t_node.linkPort_IP = lineList[lineNum];
+
+                t_node.linkPort_subnetMask = lineList[lineNum];
+
+
+                if(!(t_IPPond.count(t_node.linkPort_IP)))
+                    t_IPPond.insert(t_node.linkPort_IP);
+
+                QString desNetworkID = calculateNetworkID(t_node.linkPort_IP, t_node.linkPort_subnetMask);
+                if(desNetworkID != networkID)
+                {
+                    QMessageBox::information(this,tr("错误"),tr("%1 IP地址与对端不在同一网络!").arg(t_node.linkPort_name),QMessageBox::Ok);
+                }
+                if (t_node.linkPort_IP == networkID )
+                {
+                    QMessageBox::information(this, tr("错误"), tr("%1 IP地址不能为所在网号！").arg(t_node.linkPort_name),QMessageBox::Ok);
+                }
+
+                t_node.linkPort_describe = lineList[lineNum];
+
+                t_node.linkPort_costValue = lineList[lineNum];
+
+                t_node.linkPort_remark = lineList[lineNum];
+
+                t_node.linkType = QVariant(lineList[lineNum]).toInt();
+
+                t_node.bandWidth = QVariant(lineList[lineNum]).toInt();
+
+                t_node.delay = QVariant(lineList[lineNum]).toFloat();
+
+                t_switchInfo.LNodes.append(t_node);
+            }
+            CSwitcher* t_switch = new CSwitcher(NULL,m_scene);
+            t_switch->setPos(t_pos);
+            t_switch->setToolTip(tr("名称: ") + t_switchInfo.name + "\n"+
+                                 tr("型号:") + t_switchInfo.switchType + "\n" +
+                                 tr("位置: ") + t_switchInfo.networkLocation);
+            t_switch->setBoundingRect(t_rect);
+
+            CNetworkPort *t_port = new CNetworkPort(t_switch, m_scene);
+            QRectF m_boundingRect = t_switch->boundingRect();
+            t_port->setPos(m_boundingRect.width()/2, m_boundingRect.height()/2+5);
+            t_port->setID(t_switchInfo.ID);
+            t_switch->setSwitcherInfo(t_switchInfo);
+            m_vSwtich.push_back(t_switchInfo);
+            //t_vSwitchInOut.push_back(t_switch);
+            t_vPortInOut.push_back(t_port);
+        }
+
+    }
+    //解析link
+    int t_linksize = QVariant(lineList[lineNum]).toInt();
+
+    if(t_linksize != 0)
+    {
+        for (int i = 0; i < t_linksize; i++)
+        {
+            int item_type =0;
+            item_type = QVariant(lineList[lineNum]).toInt();
+
+            if(item_type == 1)
+            {
+                int s_swichID = QVariant(lineList[lineNum]).toInt();
+
+                int e_swichID = QVariant(lineList[lineNum]).toInt();
+
+                int _linkType = QVariant(lineList[lineNum]).toInt();
+
+                QString _bandWidth = lineList[lineNum];
+
+                QString _delay = lineList[lineNum];
+
+                int pos_linkNum = QVariant(lineList[lineNum]).toInt();
+
+                int ethernet_linkNum = QVariant(lineList[lineNum]).toInt();
+
+                int ss_ID = 0, ee_ID = 0;
+                for(size_t i = 0; i < t_vPortInOut.size(); i++)
+                {
+                    if(t_vPortInOut[i]->getID() == s_swichID)
+                        ss_ID = i;
+                    else if(t_vPortInOut[i]->getID() == e_swichID)
+                        ee_ID = i;
+                }
+                Clink* t_link = new Clink(m_scene,t_vPortInOut[ss_ID], t_vPortInOut[ee_ID]);
+                CLinkInfo t_linkInfo;
+                t_linkInfo.s_switchID = s_swichID;
+                t_linkInfo.e_switchID = e_swichID;
+                t_linkInfo.linkType = _linkType;
+                t_linkInfo.bandWidth = _bandWidth;
+                t_linkInfo.delay = _delay;
+                t_linkInfo.pos_link_num = pos_linkNum;
+                t_linkInfo.ethernet_link_num = ethernet_linkNum;
+                t_link->setLinkInfo(t_linkInfo);
+                QString linkType = (_linkType == 0)?"POS":"Ethernet";
+                t_link->setToolTip(tr("类型:") + linkType + "\n" +
+                                 tr("速率:") + _bandWidth + "\n" +
+                                 tr("时延:") + _delay + "\n");
+
+                m_scene->addItem(t_link);
+                m_itemGroup->addToGroup(t_link);
+
+                //updata all same type links, hide items
+                for ( int i = 0; i < m_vlink.size(); ++i )
+                {
+                    if (m_vlink[i]->getLinkInfo().linkType != _linkType)
+                    {
+                        continue;
+                    }
+                    CLinkInfo& tmpLinkInfo = m_vlink[i]->getLinkInfo();
+                    if ((tmpLinkInfo.s_switchID == s_swichID && tmpLinkInfo.e_switchID == e_swichID) ||
+                        (tmpLinkInfo.s_switchID == e_swichID && tmpLinkInfo.e_switchID == s_swichID))
+                    {
+                        m_vlink[i]->hide();
+                    }
+                }
+
+                m_vlink.push_back(t_link);
+
+            }
+        }
+    }
+}
+
 void CTopologyWidget::zoomIn()
 {
     QMatrix t_matrix;
     t_matrix.scale(1.25,1.25);
     setMatrix(t_matrix, true);
     m_zoom++;
-}
-
-void CTopologyWidget::drawBackGround()
-{
-    QPixmap pixmap(":/NetworkSimulationPlatform/Resources/back.jpg");
-    QPixmap tmp = pixmap.scaled(m_scene->width(),m_scene->height());
-
-    if(m_backItem!=NULL)
-    {
-        QList<QGraphicsItem *> t_list = m_scene->items();
-        for(int i = 0; i < t_list.size(); i++)
-        {
-            QGraphicsPixmapItem *tmp1 = dynamic_cast<QGraphicsPixmapItem*>(t_list[i]);
-            if( tmp1!= NULL)
-            {
-                if(tmp1->toolTip() == "backgroundItem")
-                {
-                    m_scene->removeItem(t_list[i]);
-                    break;
-                }
-            }
-        }
-        m_backItem = NULL;
-    }
-    m_backItem = new QGraphicsPixmapItem(tmp);
-    m_backItem->setZValue(-10000);
-    m_backItem->setSelected(false);
-    m_backItem->setToolTip("backgroundItem");
-    m_scene->addItem(m_backItem);
-}
-
-void CTopologyWidget::deleteBackground()
-{
-    if(m_backItem!=NULL)
-    {
-        QList<QGraphicsItem *> t_list = m_scene->items();
-        for(int i = 0; i < t_list.size(); i++)
-        {
-            QGraphicsPixmapItem *tmp1 = dynamic_cast<QGraphicsPixmapItem*>(t_list[i]);
-            if( tmp1!= NULL)
-            {
-                if(tmp1->toolTip() == "backgroundItem")
-                {
-                    m_scene->removeItem(t_list[i]);
-                    break;
-                }
-            }
-        }
-        m_backItem = NULL;
-    }
 }
 
 void CTopologyWidget::zoomOut()

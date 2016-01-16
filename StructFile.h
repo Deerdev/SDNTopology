@@ -54,13 +54,30 @@ struct SNodeStructInfo
 //交换机属性
 struct CSwitcherInfo
 {
-    QString switchType;
     QString name;//设备名称
     int ID;//域ID
     int portNum;//端口数
     QString protocol; //协议名
     QString networkLocation;//网络位置
     QVector<SNodeStructInfo> LNodes;  //已经连接的端口属性
+};
+
+//主机属性
+struct CHostInfo
+{
+    QString name;//设备名称
+    int ID;//域ID
+    QString networkLocation;//网络位置
+    //
+    QString macAddr;
+    //
+    int attachSId;
+    //
+    int attachSPort;
+    //
+    QString userName;
+    //
+    QString userGroup;
 };
 
 //链路属性

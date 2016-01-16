@@ -37,6 +37,8 @@ class CTopologyWidget : public QGraphicsView
 		QAction *getActionm_deleteAct() {return m_deleteAct;}
 		QAction *getActionm_configuerAct() {return m_configuerAct;}
 
+        //更新拓扑
+        void RefreshTopology();
 		//输入拓扑
         void InputTopology(QString path);
 		//输出拓扑
@@ -58,8 +60,11 @@ class CTopologyWidget : public QGraphicsView
 
 	private slots:
         //右键菜单按钮对应的槽函数
+
+        //删除
 		void slotDeleteAction();
-		void slotAttributeAction();
+        //查看属性
+        void slotAttributeAction();
 //        void slotConfigureAction();
         void slotRouteVisible();
         void slotDelayAction();
@@ -79,7 +84,7 @@ class CTopologyWidget : public QGraphicsView
 	private:
         //拖拽事件
         void dragEnterEvent(QDragEnterEvent *event);
-        void dragMoveEvent(QDragMoveEvent *event);
+        void dragMoveEvent(QDragMoveEvent *event);s
         void dropEvent(QDropEvent *event);
 
         //鼠标事件
@@ -192,8 +197,6 @@ class CTopologyWidget : public QGraphicsView
 	public slots:
 		void zoomIn();
 		void zoomOut();
-        void drawBackGround();
-        void deleteBackground();
 };
 
 #endif
