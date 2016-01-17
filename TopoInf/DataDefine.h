@@ -23,19 +23,24 @@ struct SwitchPortInf{
 
 struct SwitchNode
 {
+    NodeType type;
     QString DPID;
     int SID;
+    int ID;
     QString hardwareDesc;
     int portNum;
+    int level;
     QVector<SwitchPortInf *> portInfList;
 };
 
 struct HostNode
 {
+    NodeType type;
     //
     QString macAddr;
     //
     int HID;
+    int ID;
     //
     int attachSId;
     //
@@ -44,6 +49,8 @@ struct HostNode
     QString userName;
     //
     QString userGroup;
+    //
+    int level;
 };
 
 struct NodeInf{

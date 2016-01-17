@@ -57,14 +57,14 @@ void CSwitherConfigure::SetSwitcherInfo(CSwitcherInfo &_switcherInfo)
     {
         ui.deviceLocation->setCurrentIndex(2);
     }
-    if(!(QString::compare(m_switcherInfo.protocol, "OSPF", Qt::CaseInsensitive)))
-    {
-        ui.protocolComboBox->setCurrentIndex(1);
-    }
-    else
-    {
-        ui.protocolComboBox->setCurrentIndex(0);
-    }
+//    if(!(QString::compare(m_switcherInfo.protocol, "OSPF", Qt::CaseInsensitive)))
+//    {
+//        ui.protocolComboBox->setCurrentIndex(1);
+//    }
+//    else
+//    {
+//        ui.protocolComboBox->setCurrentIndex(0);
+//    }
 	
     int size = m_switcherInfo.LNodes.size();
     ui.tableWidget->setRowCount(size);
@@ -283,7 +283,7 @@ void CSwitherConfigure::on_okButton_clicked()
     m_switcherInfo.name = ui.deviceNameLineEdit->text();
     m_switcherInfo.networkLocation = ui.deviceLocation->currentText();
     m_switcherInfo.portNum = ui.portNumComboBox->currentText().toInt();
-    m_switcherInfo.protocol = ui.protocolComboBox->currentText();
+    //m_switcherInfo.protocol = ui.protocolComboBox->currentText();
 
 
     emit accepted();

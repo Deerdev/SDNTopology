@@ -43,11 +43,11 @@ void CNewSwitcher::setSwitchIDandType(int _switchID)
 
 void CNewSwitcher::okProcess( void )
 {
-    m_switherInfo.switchType = ui.swichType->currentText();
+   // m_switherInfo.type = (ui.swichType->currentText()).toInt();
     m_switherInfo.ID = ui.id->currentText().toInt();
     m_switherInfo.portNum = ui.portnum->currentText().toInt();
     m_switherInfo.name = ui.name->text();
-    m_switherInfo.protocol = ui.protocol->currentText();
+    //m_switherInfo.protocol = ui.protocol->currentText();
     m_switherInfo.networkLocation = ui.address->currentText();
 
 	QString str = m_switherInfo.name;

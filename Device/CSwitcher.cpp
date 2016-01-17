@@ -33,16 +33,17 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
     QBrush t_brush(Qt::white);  //笔刷填充颜色：白色
 	painter->setBrush(t_brush);
 
-//    if(*m_Szoom < 0)
-//    {
-//        painter->translate(50, 50);
-//    }
-
     painter->save();  //保存当前painter状态
 	painter->setRenderHint(QPainter::Antialiasing, true);
     QRectF rectangle(2, 7, m_boundingRect.width() - 4,m_boundingRect.height() - 4);
-    painter->drawRoundedRect(rectangle,20,15);
-//    painter->drawEllipse(2, 2, m_boundingRect.width()-4, m_boundingRect.height() - 20);
+
+    if(m_switcherInfo.type == SWITCH)
+    {
+        painter->drawRoundedRect(rectangle,20,15);
+    }
+    else {
+        painter->drawRoundedRect(rectangle,10,5);
+    }
 	painter->restore();
 
     painter->save();
@@ -53,15 +54,17 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
     radialGrad.setColorAt(0.5, QColor(83,190,249));
     radialGrad.setColorAt(1, QColor(98,176,255));
 
-
     painter->setBrush(QBrush(radialGrad));
 
-
-	//painter->setBrush(t_brush);
-
     QRectF rectangle1(7, 12, m_boundingRect.width() - 14, m_boundingRect.height() - 14);
-    painter->drawRoundedRect(rectangle1,20,15);
-//    painter->drawEllipse(2, -6, m_boundingRect.width() - 4,m_boundingRect.height() - 20);
+    if(m_switcherInfo.type == SWITCH)
+    {
+        painter->drawRoundedRect(rectangle1,20,15);
+    }
+    else {
+        painter->drawRoundedRect(rectangle1,10,5);
+    }
+
 	painter->restore();
 	
 	if(m_switcherInfo.portNum == 32 )
@@ -86,16 +89,6 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 
 
     int t_fontSize = 10;
-
-//    if(*m_Szoom < 0)
-//    {
-//        int tmp = 0 - *m_Szoom;
-//        while(tmp != 0)
-//        {
-//            t_fontSize *= 1.25;
-//            tmp--;
-//        }
-//    }
 	QFont t_font("Times New Roman");
     t_font.setPointSize(t_fontSize);
 	t_font.setBold(true);
@@ -103,8 +96,7 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 
 	qreal t_textHeight = t_textFontM.height();
 
-	QString t_str2 = m_switcherInfo.name;
-	//qreal t_textWidth1 = t_textFontM.width(t_str1);
+    QString t_str2 = m_switcherInfo.name;
 	qreal t_textWidth2 = t_textFontM.width(t_str2);
 
     if(t_textWidth2 > m_boundingRect.width())
@@ -132,8 +124,6 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
         t_fontSize = m_boundingRect.width()/20;
     }
 
-	
-
 	//文字
 	painter->setRenderHint(QPainter::Antialiasing, true);
 	painter->setFont(t_font);
@@ -147,51 +137,55 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 	//交叉线
 	painter->setRenderHint(QPainter::Antialiasing, true);
     t_pen.setWidth(2);
-    if(m_switcherInfo.switchType == "Cisco 7609")
+    if(m_switcherInfo.type == SWITCH)
+    {
         t_pen.setColor(Qt::white);
-    else
+        painter->setPen(t_pen);
+        QPointF t_pnt1(m_boundingRect.width()/8+8,m_boundingRect.height()*3/8+5);
+        QPointF t_pnt2(m_boundingRect.width()*3/8+2,m_boundingRect.height()*3/8+5);
+        QPointF t_pnt3(m_boundingRect.width()*5/8-2,m_boundingRect.height()*3/8+5);
+        QPointF t_pnt4(m_boundingRect.width()*7/8-8,m_boundingRect.height()*3/8+5);
+
+        QPointF t_pnt5(m_boundingRect.width()/8+8,m_boundingRect.height()*5/8+5);
+        QPointF t_pnt6(m_boundingRect.width()*3/8+2,m_boundingRect.height()*5/8+5);
+        QPointF t_pnt7(m_boundingRect.width()*5/8-2,m_boundingRect.height()*5/8+5);
+        QPointF t_pnt8(m_boundingRect.width()*7/8-8,m_boundingRect.height()*5/8+5);
+
+
+        //箭头点坐标
+        QPointF t_pnt11(m_boundingRect.width()/8+8+5,m_boundingRect.height()*3/8-3+5);
+        QPointF t_pnt12(m_boundingRect.width()/8+8+5,m_boundingRect.height()*3/8+3+5);
+
+        QPointF t_pnt41(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*3/8-3+5);
+        QPointF t_pnt42(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*3/8+3+5);
+
+        QPointF t_pnt51(m_boundingRect.width()/8+8+5,m_boundingRect.height()*5/8-3+5);
+        QPointF t_pnt52(m_boundingRect.width()/8+8+5,m_boundingRect.height()*5/8+3+5);
+
+        QPointF t_pnt81(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*5/8-3+5);
+        QPointF t_pnt82(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*5/8+3+5);
+
+        painter->setRenderHint(QPainter::Antialiasing, true);
+        painter->drawLine(t_pnt1,t_pnt2);
+        painter->drawLine(t_pnt3,t_pnt4);
+        painter->drawLine(t_pnt5,t_pnt6);
+        painter->drawLine(t_pnt7,t_pnt8);
+        painter->drawLine(t_pnt2,t_pnt7);
+        painter->drawLine(t_pnt3,t_pnt6);
+
+        painter->drawLine(t_pnt1,t_pnt11);
+        painter->drawLine(t_pnt1,t_pnt12);
+        painter->drawLine(t_pnt4,t_pnt41);
+        painter->drawLine(t_pnt4,t_pnt42);
+        painter->drawLine(t_pnt5,t_pnt51);
+        painter->drawLine(t_pnt5,t_pnt52);
+        painter->drawLine(t_pnt8,t_pnt81);
+        painter->drawLine(t_pnt8,t_pnt82);
+    }
+    else{
         t_pen.setColor(Qt::black);
-	painter->setPen(t_pen);
-    QPointF t_pnt1(m_boundingRect.width()/8+8,m_boundingRect.height()*3/8+5);
-    QPointF t_pnt2(m_boundingRect.width()*3/8+2,m_boundingRect.height()*3/8+5);
-    QPointF t_pnt3(m_boundingRect.width()*5/8-2,m_boundingRect.height()*3/8+5);
-    QPointF t_pnt4(m_boundingRect.width()*7/8-8,m_boundingRect.height()*3/8+5);
+    }
 
-    QPointF t_pnt5(m_boundingRect.width()/8+8,m_boundingRect.height()*5/8+5);
-    QPointF t_pnt6(m_boundingRect.width()*3/8+2,m_boundingRect.height()*5/8+5);
-    QPointF t_pnt7(m_boundingRect.width()*5/8-2,m_boundingRect.height()*5/8+5);
-    QPointF t_pnt8(m_boundingRect.width()*7/8-8,m_boundingRect.height()*5/8+5);
-
-
-	//箭头点坐标
-    QPointF t_pnt11(m_boundingRect.width()/8+8+5,m_boundingRect.height()*3/8-3+5);
-    QPointF t_pnt12(m_boundingRect.width()/8+8+5,m_boundingRect.height()*3/8+3+5);
-
-    QPointF t_pnt41(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*3/8-3+5);
-    QPointF t_pnt42(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*3/8+3+5);
-
-    QPointF t_pnt51(m_boundingRect.width()/8+8+5,m_boundingRect.height()*5/8-3+5);
-    QPointF t_pnt52(m_boundingRect.width()/8+8+5,m_boundingRect.height()*5/8+3+5);
-
-    QPointF t_pnt81(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*5/8-3+5);
-    QPointF t_pnt82(m_boundingRect.width()*7/8-8-5,m_boundingRect.height()*5/8+3+5);
-
-	painter->setRenderHint(QPainter::Antialiasing, true);
-	painter->drawLine(t_pnt1,t_pnt2);
-	painter->drawLine(t_pnt3,t_pnt4);
-	painter->drawLine(t_pnt5,t_pnt6);
-	painter->drawLine(t_pnt7,t_pnt8);
-	painter->drawLine(t_pnt2,t_pnt7);
-	painter->drawLine(t_pnt3,t_pnt6);
-
-	painter->drawLine(t_pnt1,t_pnt11);
-	painter->drawLine(t_pnt1,t_pnt12);
-	painter->drawLine(t_pnt4,t_pnt41);
-	painter->drawLine(t_pnt4,t_pnt42);
-	painter->drawLine(t_pnt5,t_pnt51);
-	painter->drawLine(t_pnt5,t_pnt52);
-	painter->drawLine(t_pnt8,t_pnt81);
-	painter->drawLine(t_pnt8,t_pnt82);
 	
 
 }

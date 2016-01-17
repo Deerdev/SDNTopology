@@ -48,20 +48,8 @@ void Clink::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->setRenderHint(QPainter::Antialiasing, true);
     QPen t_pen(Qt::black);
 
-    if(m_linkInfo.linkType == POS)
-    {
-        t_pen.setColor(PenColor[m_linkInfo.pos_link_num]);
-        t_pen.setStyle(Qt::DashLine);
-    }
-    else if(m_linkInfo.linkType == Ethernet)
-    {
-        t_pen.setColor(PenColor[m_linkInfo.ethernet_link_num]);
-        t_pen.setStyle(Qt::SolidLine);
-    }
-    else
-    {
-        t_pen.setStyle(Qt::DashDotDotLine);
-    }
+    t_pen.setColor(Qt::blue);
+    t_pen.setStyle(Qt::SolidLine);
 
     int bandwidth = m_linkInfo.bandWidth.toInt();
     int penWidth = (bandwidth-minBandwidth)*(maxPenWidth-minPenWidth)/(maxBandwidth - minBandwidth) + minPenWidth;
@@ -82,38 +70,25 @@ void Clink::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
         m_eP = mytoPort->parentItem()->mapToScene(mytoPort->mapToParent(QPointF(posX,0)));
     }
     */
-    if (m_linkInfo.linkType == POS)
+
+
+    if(fabs( m_eP.x() - m_sP.x() ) >= fabs( m_eP.y() - m_sP.y() ) )
     {
-        m_sP= myfromPort->parentItem()->mapToScene(myfromPort->mapToParent(QPointF(0,0)));
-        CSwitcher* swicher = dynamic_cast<CSwitcher*>(mytoPort->parentItem() );
-        CSwitcherInfo swichInfo = swicher->getSwitcherInfo();
-        int id = swichInfo.ID;
-        qDebug()<<id<<endl;
-        m_eP = mytoPort->parentItem()->mapToScene(mytoPort->mapToParent(QPointF(0,0)));
-
+        m_sP= myfromPort->parentItem()->mapToScene(myfromPort->mapToParent(QPointF(0,-10)));
+        m_eP = mytoPort->parentItem()->mapToScene(mytoPort->mapToParent(QPointF(0,-10)));
     }
-    else if(m_linkInfo.linkType == Ethernet)
+    else
     {
-        if(fabs( m_eP.x() - m_sP.x() ) >= fabs( m_eP.y() - m_sP.y() ) )
-        {
-            m_sP= myfromPort->parentItem()->mapToScene(myfromPort->mapToParent(QPointF(0,-10)));
-            m_eP = mytoPort->parentItem()->mapToScene(mytoPort->mapToParent(QPointF(0,-10)));
-        }
-        else
-        {
-            m_sP= myfromPort->parentItem()->mapToScene(myfromPort->mapToParent(QPointF(10,0)));
-            m_eP = mytoPort->parentItem()->mapToScene(mytoPort->mapToParent(QPointF(10,0)));
-        }
-
+        m_sP= myfromPort->parentItem()->mapToScene(myfromPort->mapToParent(QPointF(10,0)));
+        m_eP = mytoPort->parentItem()->mapToScene(mytoPort->mapToParent(QPointF(10,0)));
     }
-
     painter->drawLine(m_sP,m_eP);
 }
 
 void Clink::setID(int _switchID, int _linkswitchID)
 {
     m_linkInfo.s_switchID = _switchID;
-    m_linkInfo.e_switchID = _linkswitchID;
+    m_linkInfo.d_switchID = _linkswitchID;
 }
 
 void Clink::setLinkInfo(CLinkInfo _linkInfo)
