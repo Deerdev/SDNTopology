@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QtCore>
 #include <QFileDialog>
-#include <StructFile.h>
+#include "StructFile.h"
 
 namespace Ui {
 class CEventSchedulDialog;

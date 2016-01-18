@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = NetworkSimulationPlatform
 TEMPLATE = app
 
+INCLUDEPATH += ./TopoInf/
 
 SOURCES += main.cpp\
         NetworkSimulationPlatform.cpp \
@@ -30,7 +31,9 @@ SOURCES += main.cpp\
     Application/COnOffAppTaskDialog.cpp \
     CEventscheduldialog.cpp \
     Application/CBulkAppTaskDialog.cpp \
-    CPortDialog.cpp
+    CPortDialog.cpp \
+    TopoInf/topotest.cpp \
+    Device/chostitem.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
@@ -56,7 +59,10 @@ HEADERS  += NetworkSimulationPlatform.h \
     Application/COnOffAppTaskDialog.h \
     Application/CBulkAppTaskDialog.h \
     CEventscheduldialog.h \
-    CPortDialog.h
+    CPortDialog.h \
+    TopoInf/DataDefine.h \
+    TopoInf/topotest.h \
+    Device/chostitem.h
 
 FORMS    += NetworkSimulationPlatform.ui \
     CSwitherConfigure.ui \
