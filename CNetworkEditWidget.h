@@ -24,11 +24,14 @@
 class QDragEnterEvent;
 class QDropEvent;
 
+class NetworkSimulationPlatform;
+
 class CTopologyWidget : public QGraphicsView
 {
 	Q_OBJECT
 	private:
 		QGraphicsScene *m_scene;
+        NetworkSimulationPlatform *m_platform;
 	public:
         CTopologyWidget(QWidget *parent=0);
 		~CTopologyWidget();
@@ -39,6 +42,12 @@ class CTopologyWidget : public QGraphicsView
 
         //更新拓扑
         void RefreshTopology();
+        //清空画布
+        void clearScene(void);
+
+        void setPlatformPointer(NetworkSimulationPlatform*_platform);
+
+        //=====================================
 		//输入拓扑
         void InputTopology(QString path);
 		//输出拓扑
@@ -53,8 +62,6 @@ class CTopologyWidget : public QGraphicsView
         void eventSchedul();
         //获取连接信息
 		vector<int> GetConnectedInfo(CSwitcherInfo switchInfo, QStringList vName);
-        //清空画布
-        void clearScene(void);
         //设置放图片标签的窗口
         void setLabelWidget(CUnitboxWidget* _unitW);
 
@@ -65,6 +72,8 @@ class CTopologyWidget : public QGraphicsView
 		void slotDeleteAction();
         //查看属性
         void slotAttributeAction();
+
+        //================================
 //        void slotConfigureAction();
         void slotRouteVisible();
         void slotDelayAction();
@@ -109,8 +118,10 @@ class CTopologyWidget : public QGraphicsView
 
         //calculate network id
         QString calculateNetworkID(QString _IP, QString _mask);
-
         QString DecToHex(QString AreaID, QString portID);
+
+        void setSwitchInfTable(const CSwitcherInfo &_switcherInfo);
+        void setHostInfTable(const CSwitcherInfo &_switcherInfo);
 
 	private:
         QString g_projectpath;
@@ -121,7 +132,6 @@ class CTopologyWidget : public QGraphicsView
         CNetworkPort* m_releaseItem;//鼠标释放时的图元
         Clink* link;
 		QPointF m_sceneFormerPoint; //鼠标点击的scene位置  在move中变化
-
 		QString m_name; //拖动的标签名字
 		QPointF m_dropPos;
 

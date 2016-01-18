@@ -1,6 +1,7 @@
 #include "CNetworkEditWidget.h"
 #include <algorithm>
 
+#include "NetworkSimulationPlatform.h"
 #include "topotest.h"
 
 const int MINWIDTH = 40; 
@@ -98,6 +99,11 @@ void CTopologyWidget::clearScene(void)
 
     m_itemGroup = new CItemGroup(0,m_scene);
     drawLegend();
+}
+
+void CTopologyWidget::setPlatformPointer(NetworkSimulationPlatform *_platform)
+{
+    m_platform = _platform;
 }
 
 //画图例
@@ -418,6 +424,16 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
                         }
                     }
                     t_switchItem->setSelectedFlag(true);
+                    CSwitcherInfo t_nodeInf = t_switchItem->getSwitcherInfo();
+                    if (t_nodeInf.type == SWITCH)
+                    {
+                        //创建交换机属性界面
+                        qDebug()<<"in table0";
+                        setSwitchInfTable(t_nodeInf);
+                    }
+                    else{
+                        //创建节点属性界面
+                    }
 
                     CBoundingRectItem* t_brItem = new CBoundingRectItem(t_switchItem,m_scene);
                     //t_brItem->setZValue(100);
@@ -1755,6 +1771,37 @@ QString CTopologyWidget::DecToHex(QString AreaID, QString portID)
     return str;
 }
 
+void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
+{
+    if(m_platform->ui_DeviceInfTable->item(0,0))
+    {
+        m_platform->ui_DeviceInfTable->clear();
+    }
+
+    m_platform->ui_DeviceInfTable->setRowCount(12);
+    m_platform->ui_DeviceInfTable->setColumnCount(2);
+    m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
+    m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
+    m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
+    m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+
+    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("类型: "));
+    newItem00->setTextAlignment(Qt::AlignRight| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(0, 0, newItem00);
+    QTableWidgetItem *newItem01 = new QTableWidgetItem(_switcherInfo.name);
+    newItem01->setTextAlignment(Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(0, 1, newItem01);
+
+
+    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1)+10,\
+                                          m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0)+10);
+}
+
+void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
+{
+
+}
+
 //void CTopologyWidget::InputTopology(QString path)
 //{
 //    this->centerOn(0,0);
@@ -2015,6 +2062,7 @@ QString CTopologyWidget::DecToHex(QString AreaID, QString portID)
 
 void CTopologyWidget::RefreshTopology()
 {
+    m_platform->historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": refreshing topology..."));
     clearScene();
     this->centerOn(0,0);
     topotest topo;
@@ -2126,6 +2174,7 @@ void CTopologyWidget::RefreshTopology()
 
         m_vlink.push_back(t_link);
     }
+    m_platform->historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": refresh finished!"));
 }
 
 void CTopologyWidget::zoomIn()

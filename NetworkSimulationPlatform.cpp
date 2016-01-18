@@ -30,6 +30,13 @@ NetworkSimulationPlatform::~NetworkSimulationPlatform()
 
 }
 
+QString NetworkSimulationPlatform::getSysTime()
+{
+    QDateTime time = QDateTime::currentDateTime();//获取系统现在的时间
+    QString str = time.toString("yyyy-MM-dd hh:mm:ss"); //设置显示格式
+    return str;
+}
+
 /*************************************************
   Function: init
   Description: 初始化界面
@@ -55,8 +62,6 @@ void NetworkSimulationPlatform::init( void )
 	createMenu();
 	//创建工具栏
 	createToolBar();
-	//添加新工具栏
-	createNewTooBar();
 
 	//创建停靠窗口
 	createDockWindow();
@@ -75,17 +80,7 @@ void NetworkSimulationPlatform::init( void )
 
     m_saveTopology = new CWizard;
     m_scene = ui_editWidget->getScene();
-}
-
-/*************************************************
-  Function: createNewTooBar
-  Description: 创建新工具栏
-  Parameter: 无
-  Return: 无
-*************************************************/
-void NetworkSimulationPlatform::createNewTooBar( void )
-{
-
+    ui_editWidget->setPlatformPointer(this);
 }
 
 /*************************************************
@@ -119,7 +114,7 @@ void NetworkSimulationPlatform::createActions( void )
     exitAction = new QAction( tr("退出"), this );
     exitAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/exit.png"));
     exitAction->setShortcut(tr("Ctrl+Q"));
-    connect( exitAction, SIGNAL(triggered()), this, SLOT(close()) );
+    connect( exitAction, SIGNAL(triggered()), this, SLOT(closeSimuWindowSlot()) );
 
     /*清空画布*/
     clearseceneAction = new QAction(tr("清空画布"), this);
@@ -230,6 +225,18 @@ void NetworkSimulationPlatform::zoomOut(void)
 {
 }
 
+void NetworkSimulationPlatform::closeSimuWindowSlot()
+{
+    int ret = QMessageBox::warning(this, tr("关闭程序"),
+                                    tr("确定要关闭程序？"),
+                                    QMessageBox::Yes | QMessageBox::Cancel,
+                                    QMessageBox::Cancel);
+    if (ret == QMessageBox::Yes)
+    {
+        close();
+    }
+}
+
 /*************************************************
   Function: clearScene
   Description: 清空画布
@@ -252,6 +259,19 @@ void NetworkSimulationPlatform::layoutAlgorithm( void )
 {
 	//可以考虑提供多个布局算法
 
+}
+
+void NetworkSimulationPlatform::closeEvent(QCloseEvent *event)
+{
+//    int ret = QMessageBox::warning(this, tr("关闭程序"),
+//                                    tr("确定要关闭程序？"),
+//                                    QMessageBox::Yes | QMessageBox::Cancel,
+//                                    QMessageBox::Cancel);
+//    if (ret == QMessageBox::Yes)
+//    {
+//        close();
+//    }
+    close();
 }
 
 /*************************************************
@@ -379,6 +399,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     ui_historyDock->setMaximumHeight(150);
 
     historyListWidget = new QTextEdit(ui_historyDock);
+    historyListWidget->setReadOnly(true);
     ui_historyDock->setAllowedAreas(Qt::AllDockWidgetAreas);
     ui_historyDock->setWidget(historyListWidget);
     addDockWidget(Qt::BottomDockWidgetArea, ui_historyDock);
@@ -389,12 +410,17 @@ void NetworkSimulationPlatform::createDockWindow( void )
     ui_DeviceInfDock->setMaximumWidth(500);
 
     ui_DeviceDockWidget = new QWidget(ui_DeviceInfDock);
-    ui_DeviceInTable = new QTableWidget(12,2,ui_DeviceDockWidget);
-    ui_DeviceInTable->verticalHeader()->setHidden(true);
-    ui_DeviceInTable->horizontalHeader()->setHidden(true);
-    ui_DeviceInTable->horizontalHeader()->setStretchLastSection(true);
+    ui_DeviceInfTable = new QTableWidget(ui_DeviceDockWidget);
+    QPalette pll = ui_DeviceInfTable->palette();
+
+    pll.setBrush(QPalette::Base,QBrush(QColor(255,255,255,0)));
+
+    ui_DeviceInfTable->setPalette(pll);
+    //ui_DeviceInfTable->verticalHeader()->setHidden(true);
+    //ui_DeviceInfTable->horizontalHeader()->setHidden(true);
+    //ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
     //ui_DeviceInTable->verticalHeader()->setResizeMode(QHeaderView::Stretch);
-    ui_DeviceInTable->resize(2.5*ui_DeviceInTable->columnWidth(0), 12*ui_DeviceInTable->rowHeight(0));
+    //ui_DeviceInfTable->resize(2.5*ui_DeviceInfTable->columnWidth(0), 12*ui_DeviceInfTable->rowHeight(0));
     ui_DeviceInfDock->setAllowedAreas(Qt::AllDockWidgetAreas);
     ui_DeviceInfDock->setWidget(ui_DeviceDockWidget);
     addDockWidget(Qt::RightDockWidgetArea, ui_DeviceInfDock);

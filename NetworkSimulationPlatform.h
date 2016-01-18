@@ -32,6 +32,7 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
 	public:
 		NetworkSimulationPlatform(QWidget *parent = 0, Qt::WFlags flags = 0);
 		~NetworkSimulationPlatform();
+        static QString getSysTime();
 
 	private:
         void init(void);
@@ -42,18 +43,22 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
         void createDockWindow(void);
 
 	private slots:
-		//ÍøÂç±à¼­Ä£¿é²Ûº¯Êý
-        void createNewNetworkItem(void);
         void refreshNetworkItem(void);
+        void clearScene(void);
+        void zoomIn(void);
+        void zoomOut(void);
+        void closeSimuWindowSlot();
+
+
         //void saveItem(void);
        // void startSimulate(void);
         //void exportTopology(void);
         //void importTopology(void);
-        void clearScene(void);
+        //ÍøÂç±à¼­Ä£¿é²Ûº¯Êý
+        void createNewNetworkItem(void);
 		void setFlow(void);
 		void setLink(void);
-		void zoomIn(void);
-		void zoomOut(void);
+
 		void layoutAlgorithm(void);
        // void slotNewFile(void);
         //void slotSaveFile(void);
@@ -61,8 +66,10 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
        // void configTask(void);
         //void setPartitonNum(void);
         //void eventSchedul(void);
+private:
+        void closeEvent ( QCloseEvent * event );
 
-	private:
+private:
         QAction *refreshNetworkItemAction;
         QAction *exitAction;
         QAction *zoomInAction;
@@ -104,11 +111,9 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
         QWidget *ui_PCDevice;
 
         QDockWidget *ui_historyDock;
-        QDockWidget *ui_networkDeviceDock;
+        //QDockWidget *ui_networkDeviceDock;
         QDockWidget *ui_DeviceInfDock;
         QWidget *ui_DeviceDockWidget;
-        QTableWidget *ui_DeviceInTable;
-        QTextEdit *historyListWidget;
 
         QToolBox *ui_networkToolBox;
         QGridLayout* ui_toolBoxGridLayout;
@@ -128,6 +133,10 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
         QString m_projectName;
         bool m_saveFlag;
         int m_partitionNum;
+
+public:
+        QTextEdit *historyListWidget;
+        QTableWidget *ui_DeviceInfTable;
 };
 
 #endif // NETWORKSIMULATIONPLATFORM_H
