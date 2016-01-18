@@ -158,8 +158,8 @@ void CPortDialog::on_OkButton_clicked()
     m_LinkPortInfo.linkType = ui->linktype->currentIndex();
 
     m_linkInfo.bandWidth = ui->bandWidth->currentText();
-    m_linkInfo.linkType = ui->linktype->currentIndex();
-    m_linkInfo.delay = ui->delay->text();
+    //m_linkInfo.linkType = ui->linktype->currentIndex();
+    //m_linkInfo.delay = ui->delay->text();
 
     if(m_ipPond->count(m_PortInfo.IP))
     {

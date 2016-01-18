@@ -80,7 +80,7 @@
               <item>
                <widget class="QLabel" name="label_8">
                 <property name="text">
-                 <string>域ID：</string>
+                 <string>ID：</string>
                 </property>
                </widget>
               </item>

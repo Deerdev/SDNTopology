@@ -32,8 +32,7 @@ SOURCES += main.cpp\
     CEventscheduldialog.cpp \
     Application/CBulkAppTaskDialog.cpp \
     CPortDialog.cpp \
-    TopoInf/topotest.cpp \
-    Device/chostitem.cpp
+    TopoInf/topotest.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
@@ -61,8 +60,7 @@ HEADERS  += NetworkSimulationPlatform.h \
     CEventscheduldialog.h \
     CPortDialog.h \
     TopoInf/DataDefine.h \
-    TopoInf/topotest.h \
-    Device/chostitem.h
+    TopoInf/topotest.h
 
 FORMS    += NetworkSimulationPlatform.ui \
     CSwitherConfigure.ui \

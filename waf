@@ -1,3 +1,0 @@
-cd /home/cc/workspace/ns3/ns-3.19
-./waf --run ConstructNetwork
-./waf --run newTest1

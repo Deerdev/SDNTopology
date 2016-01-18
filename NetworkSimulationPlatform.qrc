@@ -6,11 +6,12 @@
         <file>Resources/save.png</file>
         <file>Resources/single.png</file>
         <file>Resources/switcher.png</file>
-        <file>Resources/zoomIn.png</file>
-        <file>Resources/zoomOut.png</file>
         <file>Resources/double.png</file>
         <file>Resources/open.png</file>
         <file>Resources/pc.png</file>
         <file>Resources/back.jpg</file>
+        <file>Resources/zoomIn.png</file>
+        <file>Resources/zoomOut.png</file>
+        <file>Resources/refresh.png</file>
     </qresource>
 </RCC>

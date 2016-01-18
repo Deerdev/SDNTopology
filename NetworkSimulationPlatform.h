@@ -44,35 +44,38 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
 	private slots:
 		//ÍøÂç±à¼­Ä£¿é²Ûº¯Êý
         void createNewNetworkItem(void);
-		void openNetworkItem(void);
-        void saveItem(void);
-        void startSimulate(void);
-		void exportTopology(void);
-		void importTopology(void);
+        void refreshNetworkItem(void);
+        //void saveItem(void);
+       // void startSimulate(void);
+        //void exportTopology(void);
+        //void importTopology(void);
         void clearScene(void);
 		void setFlow(void);
 		void setLink(void);
 		void zoomIn(void);
 		void zoomOut(void);
 		void layoutAlgorithm(void);
-        void slotNewFile(void);
-        void slotSaveFile(void);
-        void importSNMPTopology(void);
-        void configTask(void);
-        void setPartitonNum(void);
-        void eventSchedul(void);
+       // void slotNewFile(void);
+        //void slotSaveFile(void);
+        //void importSNMPTopology(void);
+       // void configTask(void);
+        //void setPartitonNum(void);
+        //void eventSchedul(void);
 
 	private:
+        QAction *refreshNetworkItemAction;
+        QAction *exitAction;
+        QAction *zoomInAction;
+        QAction *zoomOutAction;
+        QAction *clearseceneAction;
+
+
+
 		QAction *newNetworkItemAction;
-		QAction *openNetworkItemAction;
 		QAction *saveItemAction;
-		QAction *exitAction;
-		QAction *zoomInAction;
-		QAction *zoomOutAction;
 		QAction *layoutAction;
 		QAction *exportTopologyAction;
 		QAction *importTopologyAction;
-        QAction *clearseceneAction;
 		QAction *flowSetAction;
 		QAction *linkSetAction;
         QAction *networkBandAction;
@@ -87,6 +90,9 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
 
         QMenu *menu_startMenu;
         QMenu *menu_networkEditMenu;
+        QMenu *menu_DockShowMenu;
+        QMenu *menu_flowEditMenu;
+
         QMenu *menu_networkStateMenu;
         QMenu *menu_editTopologyMenu;
         QMenu *menu_configNetworkMenu;
@@ -96,9 +102,14 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
         QWidget *ui_networkDeviceWidget;
         QWidget *ui_routerDevice;
         QWidget *ui_PCDevice;
+
         QDockWidget *ui_historyDock;
         QDockWidget *ui_networkDeviceDock;
+        QDockWidget *ui_DeviceInfDock;
+        QWidget *ui_DeviceDockWidget;
+        QTableWidget *ui_DeviceInTable;
         QTextEdit *historyListWidget;
+
         QToolBox *ui_networkToolBox;
         QGridLayout* ui_toolBoxGridLayout;
         CUnitboxWidget* ui_unitboxwidget;

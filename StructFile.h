@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <QList>
+
+#include "DataDefine.h"
+
 using namespace std;
 
 typedef vector<QString> VecQStr;
@@ -55,20 +58,17 @@ struct SNodeStructInfo
 struct CSwitcherInfo
 {
     QString name;//设备名称
+    NodeType type;
+    QString typeName;
     int ID;//域ID
+
+    //交换机信息
     int portNum;//端口数
-    QString protocol; //协议名
+    //QString protocol; //协议名
     QString networkLocation;//网络位置
     QVector<SNodeStructInfo> LNodes;  //已经连接的端口属性
-};
 
-//主机属性
-struct CHostInfo
-{
-    QString name;//设备名称
-    int ID;//域ID
-    QString networkLocation;//网络位置
-    //
+    //主机信息
     QString macAddr;
     //
     int attachSId;
@@ -84,12 +84,12 @@ struct CHostInfo
 struct CLinkInfo
 {
     int s_switchID;
-    int e_switchID;
-    int linkType;//链路类型
+    int d_switchID;
+    //int linkType;//链路类型
     QString bandWidth;//链路带宽
-    QString delay;
-    int pos_link_num;//链路数
-    int ethernet_link_num;
+    //QString delay;
+    //int pos_link_num;//链路数
+    //int ethernet_link_num;
 };
 
 #endif

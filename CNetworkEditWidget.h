@@ -84,7 +84,7 @@ class CTopologyWidget : public QGraphicsView
 	private:
         //拖拽事件
         void dragEnterEvent(QDragEnterEvent *event);
-        void dragMoveEvent(QDragMoveEvent *event);s
+        void dragMoveEvent(QDragMoveEvent *event);
         void dropEvent(QDropEvent *event);
 
         //鼠标事件
