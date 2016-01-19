@@ -352,6 +352,12 @@ void CTopologyWidget::slotSwitchDia()
 //鼠标选中事件，编辑虚线边框
 void CTopologyWidget::mousePressEvent(QMouseEvent *event)
 {
+    //清除属性列表
+    if(m_platform->ui_DeviceInfTable->item(0,0))
+    {
+        m_platform->ui_DeviceInfTable->clear();
+    }
+
     QPointF mouseclicked_pos = mapToScene(event->pos());
     qDebug("%d, %d", event->pos().x(), event->pos().y());
     qDebug("%f, %f", mouseclicked_pos.x(), mouseclicked_pos.y());
@@ -433,6 +439,7 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
                     }
                     else{
                         //创建节点属性界面
+                        setHostInfTable(t_nodeInf);
                     }
 
                     CBoundingRectItem* t_brItem = new CBoundingRectItem(t_switchItem,m_scene);
@@ -1777,29 +1784,115 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
     {
         m_platform->ui_DeviceInfTable->clear();
     }
+    //m_platform->ui_DeviceInfTable->resize(0,0);
 
     m_platform->ui_DeviceInfTable->setRowCount(12);
     m_platform->ui_DeviceInfTable->setColumnCount(2);
     m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
     m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
-    m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
-    m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
 
     QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("类型: "));
-    newItem00->setTextAlignment(Qt::AlignRight| Qt::AlignVCenter);
+    newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(0, 0, newItem00);
-    QTableWidgetItem *newItem01 = new QTableWidgetItem(_switcherInfo.name);
-    newItem01->setTextAlignment(Qt::AlignVCenter);
+    QTableWidgetItem *newItem01 = new QTableWidgetItem(_switcherInfo.typeName);
+    newItem01->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(0, 1, newItem01);
 
+    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("名称: "));
+    newItem10->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(1, 0, newItem10);
+    QTableWidgetItem *newItem11 = new QTableWidgetItem(_switcherInfo.name);
+    newItem11->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(1, 1, newItem11);
 
-    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1)+10,\
-                                          m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0)+10);
+    QTableWidgetItem *newItem20 = new QTableWidgetItem(tr("ID: "));
+    newItem20->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(2, 0, newItem20);
+    QTableWidgetItem *newItem21 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.ID));
+    newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(2, 1, newItem21);
+
+    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("端口数: "));
+    newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(3, 0, newItem30);
+    QTableWidgetItem *newItem31 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.portNum));
+    newItem31->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(3, 1, newItem31);
+
+
+    m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //设置选择的模式为单选择
+    m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //设置选择行为时每次选择一行
+    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //设置不显示格子线
+    m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
+    m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+    m_platform->ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
+    m_platform->ui_DeviceInfTable->verticalHeader()->setStretchLastSection(true);
+
+    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1),\
+                                          m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0));
 }
 
 void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 {
+    if(m_platform->ui_DeviceInfTable->item(0,0))
+    {
+        m_platform->ui_DeviceInfTable->clear();
+    }
 
+    //m_platform->ui_DeviceInfTable->resize(0,0);
+
+    m_platform->ui_DeviceInfTable->setRowCount(12);
+    m_platform->ui_DeviceInfTable->setColumnCount(2);
+    m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
+    m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
+
+
+    m_platform->ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
+    m_platform->ui_DeviceInfTable->verticalHeader()->setStretchLastSection(true);
+
+    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("类型: "));
+    newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(0, 0, newItem00);
+    QTableWidgetItem *newItem01 = new QTableWidgetItem(_switcherInfo.typeName);
+    newItem01->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(0, 1, newItem01);
+
+    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("名称: "));
+    newItem10->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(1, 0, newItem10);
+    QTableWidgetItem *newItem11 = new QTableWidgetItem(_switcherInfo.name);
+    newItem11->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(1, 1, newItem11);
+
+    QTableWidgetItem *newItem20 = new QTableWidgetItem(tr("ID: "));
+    newItem20->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(2, 0, newItem20);
+    QTableWidgetItem *newItem21 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.ID));
+    newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(2, 1, newItem21);
+
+    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("连接的交换机ID: "));
+    newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(3, 0, newItem30);
+    QTableWidgetItem *newItem31 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSId));
+    newItem31->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(3, 1, newItem31);
+
+    QTableWidgetItem *newItem40 = new QTableWidgetItem(tr("交换机端口号: "));
+    newItem40->setTextAlignment(Qt::AlignRight| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(4, 0, newItem40);
+    QTableWidgetItem *newItem41 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSPort));
+    newItem41->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(4, 1, newItem41);
+
+
+    m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //设置选择的模式为单选择
+    m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //设置选择行为时每次选择一行
+    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //设置不显示格子线
+    m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
+    m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1),\
+                                          m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0));
 }
 
 //void CTopologyWidget::InputTopology(QString path)
@@ -2112,6 +2205,8 @@ void CTopologyWidget::RefreshTopology()
             t_switchInfo.name = t_host->userName;
             t_switchInfo.ID = t_host->ID;
             t_switchInfo.portNum = 1;
+            t_switchInfo.attachSId = t_host->attachSId;
+            t_switchInfo.attachSPort = t_host->attachSPort;
             //t_switchInfo.networkLocation = lineList[lineNum];
         }
         else{

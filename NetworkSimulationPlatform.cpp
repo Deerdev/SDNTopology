@@ -121,6 +121,30 @@ void NetworkSimulationPlatform::createActions( void )
     clearseceneAction->setIcon(QIcon(""));
     connect(clearseceneAction, SIGNAL(triggered()), this, SLOT(clearScene()));
 
+    flowShowAction = new QAction(tr("流表查看"), this);
+    flowShowAction->setIcon(QIcon(""));
+    connect(flowShowAction, SIGNAL(triggered()), this, SLOT());
+
+    flowEditAction = new QAction(tr("流表编辑"), this);
+    flowEditAction->setIcon(QIcon(""));
+    connect(flowEditAction, SIGNAL(triggered()), this, SLOT());
+
+    paraTaskShowAction = new QAction(tr("并行任务"), this);
+    paraTaskShowAction->setIcon(QIcon(""));
+    connect(paraTaskShowAction, SIGNAL(triggered()), this, SLOT());
+
+    switchPortInfAction = new QAction(tr("交换机端口信息"), this);
+    switchPortInfAction->setIcon(QIcon(""));
+    connect(switchPortInfAction, SIGNAL(triggered()), this, SLOT());
+
+    logShowAction = new QAction(tr("日志显示"), this);
+    logShowAction->setIcon(QIcon(""));
+    connect(logShowAction, SIGNAL(triggered()), this, SLOT());
+
+    controllerShowAction = new QAction(tr("控制器信息"), this);
+    controllerShowAction->setIcon(QIcon(""));
+    connect(controllerShowAction, SIGNAL(triggered()), this, SLOT());
+
 
 
 
@@ -311,7 +335,7 @@ void NetworkSimulationPlatform::createMenu( void )
     //menu_startMenu->addAction(deleteBackgroundAction);
     menu_startMenu->addAction(exitAction);
 
-    menu_networkEditMenu = QMainWindow::menuBar()->addMenu(tr("编辑画布"));
+    menu_networkEditMenu = QMainWindow::menuBar()->addMenu(tr("编辑"));
     //menu_networkEditMenu->addAction(saveItemAction);
     menu_networkEditMenu->addAction(zoomInAction);
     menu_networkEditMenu->addAction(zoomOutAction);
@@ -319,8 +343,16 @@ void NetworkSimulationPlatform::createMenu( void )
     //menu_networkEditMenu->addAction(importTopologyAction);
     menu_networkEditMenu->addAction(clearseceneAction);
 
-    menu_flowEditMenu = QMainWindow::menuBar()->addMenu(tr("流表编辑"));
-    menu_DockShowMenu = QMainWindow::menuBar()->addMenu(tr("窗口显示"));
+    menu_flowEditMenu = QMainWindow::menuBar()->addMenu(tr("流表"));
+    menu_flowEditMenu->addAction(flowShowAction);
+    menu_flowEditMenu->addAction(flowEditAction);
+    menu_taskShowMenu = QMainWindow::menuBar()->addMenu(tr("任务"));
+    menu_taskShowMenu->addAction(paraTaskShowAction);
+    menu_DockShowMenu = QMainWindow::menuBar()->addMenu(tr("窗口"));
+    menu_infShowMenu = QMainWindow::menuBar()->addMenu(tr("信息"));
+    menu_infShowMenu->addAction(switchPortInfAction);
+    menu_infShowMenu->addAction(logShowAction);
+    menu_infShowMenu->addAction(controllerShowAction);
 
 //    menu_configNetworkMenu = menu_networkEditMenu->addMenu(tr("配置"));
 //    menu_configNetworkMenu->addAction(linkSetAction);
@@ -412,9 +444,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     ui_DeviceDockWidget = new QWidget(ui_DeviceInfDock);
     ui_DeviceInfTable = new QTableWidget(ui_DeviceDockWidget);
     QPalette pll = ui_DeviceInfTable->palette();
-
     pll.setBrush(QPalette::Base,QBrush(QColor(255,255,255,0)));
-
     ui_DeviceInfTable->setPalette(pll);
     //ui_DeviceInfTable->verticalHeader()->setHidden(true);
     //ui_DeviceInfTable->horizontalHeader()->setHidden(true);

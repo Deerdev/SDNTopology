@@ -75,6 +75,13 @@ private:
         QAction *zoomInAction;
         QAction *zoomOutAction;
         QAction *clearseceneAction;
+        QAction *flowShowAction;
+        QAction *flowEditAction;
+
+        QAction *paraTaskShowAction;
+        QAction *switchPortInfAction;
+        QAction *logShowAction;
+        QAction *controllerShowAction;
 
 
 
@@ -99,6 +106,8 @@ private:
         QMenu *menu_networkEditMenu;
         QMenu *menu_DockShowMenu;
         QMenu *menu_flowEditMenu;
+        QMenu *menu_taskShowMenu;
+        QMenu *menu_infShowMenu;
 
         QMenu *menu_networkStateMenu;
         QMenu *menu_editTopologyMenu;
