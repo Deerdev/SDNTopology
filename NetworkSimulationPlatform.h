@@ -49,6 +49,8 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
         void zoomOut(void);
         void closeSimuWindowSlot();
 
+        void showFlowsSlot();
+
 
         //void saveItem(void);
        // void startSimulate(void);

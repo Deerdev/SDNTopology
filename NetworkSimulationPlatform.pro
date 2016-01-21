@@ -32,7 +32,10 @@ SOURCES += main.cpp\
     CEventscheduldialog.cpp \
     Application/CBulkAppTaskDialog.cpp \
     CPortDialog.cpp \
-    TopoInf/topotest.cpp
+    TopoInf/topotest.cpp \
+    SDNNet/showflowsdialog.cpp \
+    SDNNet/addflowdialog.cpp \
+    SDNNet/showsportdialog.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
@@ -60,7 +63,10 @@ HEADERS  += NetworkSimulationPlatform.h \
     CEventscheduldialog.h \
     CPortDialog.h \
     TopoInf/DataDefine.h \
-    TopoInf/topotest.h
+    TopoInf/topotest.h \
+    SDNNet/showflowsdialog.h \
+    SDNNet/addflowdialog.h \
+    SDNNet/showsportdialog.h
 
 FORMS    += NetworkSimulationPlatform.ui \
     CSwitherConfigure.ui \
@@ -73,7 +79,10 @@ FORMS    += NetworkSimulationPlatform.ui \
     COnOffAppTaskDialog.ui \
     CBulkAppTaskDialog.ui \
     CEventscheduldialog.ui \
-    CPortDialog.ui
+    CPortDialog.ui \
+    SDNNet/showflowsdialog.ui \
+    SDNNet/addflowdialog.ui \
+    SDNNet/showsportdialog.ui
 
 
 UI_DIR=./UI

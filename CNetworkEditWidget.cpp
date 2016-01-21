@@ -352,12 +352,6 @@ void CTopologyWidget::slotSwitchDia()
 //鼠标选中事件，编辑虚线边框
 void CTopologyWidget::mousePressEvent(QMouseEvent *event)
 {
-    //清除属性列表
-    if(m_platform->ui_DeviceInfTable->item(0,0))
-    {
-        m_platform->ui_DeviceInfTable->clear();
-    }
-
     QPointF mouseclicked_pos = mapToScene(event->pos());
     qDebug("%d, %d", event->pos().x(), event->pos().y());
     qDebug("%f, %f", mouseclicked_pos.x(), mouseclicked_pos.y());
@@ -408,6 +402,12 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
         }
         else
         {
+//            //清除属性列表
+//            if(m_platform->ui_DeviceInfTable->item(0,0))
+//            {
+//                m_platform->ui_DeviceInfTable->clear();
+//            }
+
             switch(t_item->type())
             {
             case QGraphicsItem::UserType + 1://swicher
@@ -1788,8 +1788,8 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
 
     m_platform->ui_DeviceInfTable->setRowCount(12);
     m_platform->ui_DeviceInfTable->setColumnCount(2);
-    m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
-    m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
+    //m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
+    //m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
 
     QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("类型: "));
     newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
@@ -1823,8 +1823,9 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
     m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //设置选择的模式为单选择
     m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //设置选择行为时每次选择一行
     //m_platform->ui_DeviceInfTable->setShowGrid(false);   //设置不显示格子线
-    m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
-    m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+    //m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
+    //m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+    m_platform->ui_DeviceInfTable->resizeColumnsToContents();
     m_platform->ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
     m_platform->ui_DeviceInfTable->verticalHeader()->setStretchLastSection(true);
 
@@ -1843,8 +1844,8 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 
     m_platform->ui_DeviceInfTable->setRowCount(12);
     m_platform->ui_DeviceInfTable->setColumnCount(2);
-    m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
-    m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
+//    m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
+//    m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
 
 
     m_platform->ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);

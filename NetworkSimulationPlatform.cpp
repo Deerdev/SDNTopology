@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include "CPartitionNumDialog.h"
+#include "SDNNet/showflowsdialog.h"
 
 /*************************************************
   Function: NetworkSimulationPlatform
@@ -127,7 +128,7 @@ void NetworkSimulationPlatform::createActions( void )
 
     flowEditAction = new QAction(tr("流表编辑"), this);
     flowEditAction->setIcon(QIcon(""));
-    connect(flowEditAction, SIGNAL(triggered()), this, SLOT());
+    connect(flowEditAction, SIGNAL(triggered()), this, SLOT(showFlowsSlot()));
 
     paraTaskShowAction = new QAction(tr("并行任务"), this);
     paraTaskShowAction->setIcon(QIcon(""));
@@ -261,6 +262,13 @@ void NetworkSimulationPlatform::closeSimuWindowSlot()
     }
 }
 
+void NetworkSimulationPlatform::showFlowsSlot()
+{
+    ShowFlowsDialog *flowShowWidget = new ShowFlowsDialog(this);
+    if(flowShowWidget->exec() == QDialog::Accepted)
+    {}
+}
+
 /*************************************************
   Function: clearScene
   Description: 清空画布
@@ -344,7 +352,7 @@ void NetworkSimulationPlatform::createMenu( void )
     menu_networkEditMenu->addAction(clearseceneAction);
 
     menu_flowEditMenu = QMainWindow::menuBar()->addMenu(tr("流表"));
-    menu_flowEditMenu->addAction(flowShowAction);
+    //menu_flowEditMenu->addAction(flowShowAction);
     menu_flowEditMenu->addAction(flowEditAction);
     menu_taskShowMenu = QMainWindow::menuBar()->addMenu(tr("任务"));
     menu_taskShowMenu->addAction(paraTaskShowAction);
@@ -446,7 +454,9 @@ void NetworkSimulationPlatform::createDockWindow( void )
     QPalette pll = ui_DeviceInfTable->palette();
     pll.setBrush(QPalette::Base,QBrush(QColor(255,255,255,0)));
     ui_DeviceInfTable->setPalette(pll);
-    //ui_DeviceInfTable->verticalHeader()->setHidden(true);
+    ui_DeviceInfTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui_DeviceInfTable->horizontalHeader()->setHidden(true);
+    ui_DeviceInfTable->verticalHeader()->setHidden(true);
     //ui_DeviceInfTable->horizontalHeader()->setHidden(true);
     //ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
     //ui_DeviceInTable->verticalHeader()->setResizeMode(QHeaderView::Stretch);
