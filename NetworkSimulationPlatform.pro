@@ -93,3 +93,5 @@ RESOURCES += NetworkSimulationPlatform.qrc
 
 OTHER_FILES += \
     Resources/double.PNG
+
+
