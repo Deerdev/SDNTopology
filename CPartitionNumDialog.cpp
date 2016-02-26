@@ -1,4 +1,4 @@
-#include "CPartitionNumDialog.h"
+﻿#include "CPartitionNumDialog.h"
 #include "ui_CPartitionNumDialog.h"
 
 CPartitionNumDialog::CPartitionNumDialog(QWidget *parent) :

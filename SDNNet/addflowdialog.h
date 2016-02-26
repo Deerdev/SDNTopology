@@ -1,4 +1,4 @@
-#ifndef ADDFLOWDIALOG_H
+﻿#ifndef ADDFLOWDIALOG_H
 #define ADDFLOWDIALOG_H
 
 #include <QDialog>

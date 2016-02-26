@@ -1,4 +1,4 @@
-#include "showflowsdialog.h"
+ï»¿#include "showflowsdialog.h"
 #include "ui_showflowsdialog.h"
 #include <QMessageBox>
 #include "addflowdialog.h"
@@ -11,9 +11,9 @@ ShowFlowsDialog::ShowFlowsDialog(NetworkSimulationPlatform *_platform,QWidget *p
     getFlowsFromController();
     ui->flowShowWidget->verticalHeader()->setHidden(true);
 
-    ui->flowShowWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//°´ĞĞÑ¡ÖĞ
-    ui->flowShowWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//²»ÄÜ±à¼­
-    ui->flowShowWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);//¶àÑ¡
+    ui->flowShowWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//æŒ‰è¡Œé€‰ä¸­
+    ui->flowShowWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//ä¸èƒ½ç¼–è¾‘
+    ui->flowShowWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);//å¤šé€‰
 
     ui->flowShowWidget->setSpan(0,0,3,1);
     ui->flowShowWidget->setSpan(3,0,3,1);
@@ -30,26 +30,26 @@ void ShowFlowsDialog::on_addFlowButton_clicked()
     AddFlowDialog *addflowLog = new AddFlowDialog(m_platform);
     if (addflowLog->exec() == QDialog::Accepted)
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"),tr("Ìí¼Ó³É¹¦£¡"),QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"),tr("æ·»åŠ æˆåŠŸï¼"),QMessageBox::Ok);
     }
 }
 
 //get flow
 void ShowFlowsDialog::on_getFlowButton_clicked()
 {
-    QMessageBox::information(this, tr("ÌáÊ¾"),tr("¸üĞÂÍê³É£¡"),QMessageBox::Ok);
+    QMessageBox::information(this, tr("æç¤º"),tr("æ›´æ–°å®Œæˆï¼"),QMessageBox::Ok);
 }
 
 //delete flow
 void ShowFlowsDialog::on_delFlowButton_clicked()
 {
-    QMessageBox::information(this, tr("ÌáÊ¾"),tr("É¾³ı³É¹¦£¡"),QMessageBox::Ok);
+    QMessageBox::information(this, tr("æç¤º"),tr("åˆ é™¤æˆåŠŸï¼"),QMessageBox::Ok);
 }
 
 //clear flow
 void ShowFlowsDialog::on_clearFlowButton_clicked()
 {
-    QMessageBox::information(this, tr("ÌáÊ¾"),tr("Çå³ı³É¹¦£¡"),QMessageBox::Ok);
+    QMessageBox::information(this, tr("æç¤º"),tr("æ¸…é™¤æˆåŠŸï¼"),QMessageBox::Ok);
 }
 
 void ShowFlowsDialog::getFlowsFromController()

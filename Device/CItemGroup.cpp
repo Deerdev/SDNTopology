@@ -1,4 +1,4 @@
-#include "CItemGroup.h"
+﻿#include "CItemGroup.h"
 
 CItemGroup::CItemGroup(QGraphicsItem *parent, QGraphicsScene *scene):QGraphicsItemGroup(parent,scene)
 {

@@ -1,4 +1,4 @@
-#ifndef STRUCTFILE_H
+ï»¿#ifndef STRUCTFILE_H
 #define STRUCTFILE_H
 
 #include <vector>
@@ -24,13 +24,13 @@ enum LinkType
 
 struct SNodeStructInfo
 {
-    QString		nodetype;			//½ÚµãÀàĞÍ
+    QString		nodetype;			//èŠ‚ç‚¹ç±»å‹
     QString networkLocation;
 
-    int Device_ID;//µ±Ç°Éè±¸id
-    int Port_ID;//µ±Ç°¶Ë¿Úid
-    QString name;//µ±Ç°Éè±¸Ãû×Ö
-    QString interfaceName;//µ±Ç°¶Ë¿ÚÃû×Ö
+    int Device_ID;//å½“å‰è®¾å¤‡id
+    int Port_ID;//å½“å‰ç«¯å£id
+    QString name;//å½“å‰è®¾å¤‡åå­—
+    QString interfaceName;//å½“å‰ç«¯å£åå­—
     QString area;
     QString IP;
     QString subnetMask;
@@ -50,25 +50,25 @@ struct SNodeStructInfo
     QString linkPort_remark;
 
     int linkType;
-    int bandWidth;//Á´Â·´ø¿í
+    int bandWidth;//é“¾è·¯å¸¦å®½
     QString delay;
 };
 
-//½»»»»úÊôĞÔ
+//äº¤æ¢æœºå±æ€§
 struct CSwitcherInfo
 {
-    QString name;//Éè±¸Ãû³Æ
+    QString name;//è®¾å¤‡åç§°
     NodeType type;
     QString typeName;
-    int ID;//ÓòID
+    int ID;//åŸŸID
 
-    //½»»»»úĞÅÏ¢
-    int portNum;//¶Ë¿ÚÊı
-    //QString protocol; //Ğ­ÒéÃû
-    QString networkLocation;//ÍøÂçÎ»ÖÃ
-    QVector<SNodeStructInfo> LNodes;  //ÒÑ¾­Á¬½ÓµÄ¶Ë¿ÚÊôĞÔ
+    //äº¤æ¢æœºä¿¡æ¯
+    int portNum;//ç«¯å£æ•°
+    //QString protocol; //åè®®å
+    QString networkLocation;//ç½‘ç»œä½ç½®
+    QVector<SNodeStructInfo> LNodes;  //å·²ç»è¿æ¥çš„ç«¯å£å±æ€§
 
-    //Ö÷»úĞÅÏ¢
+    //ä¸»æœºä¿¡æ¯
     QString macAddr;
     //
     int attachSId;
@@ -80,15 +80,15 @@ struct CSwitcherInfo
     QString userGroup;
 };
 
-//Á´Â·ÊôĞÔ
+//é“¾è·¯å±æ€§
 struct CLinkInfo
 {
     int s_switchID;
     int d_switchID;
-    //int linkType;//Á´Â·ÀàĞÍ
-    QString bandWidth;//Á´Â·´ø¿í
+    //int linkType;//é“¾è·¯ç±»å‹
+    QString bandWidth;//é“¾è·¯å¸¦å®½
     //QString delay;
-    //int pos_link_num;//Á´Â·Êı
+    //int pos_link_num;//é“¾è·¯æ•°
     //int ethernet_link_num;
 };
 

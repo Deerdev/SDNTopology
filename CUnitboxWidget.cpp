@@ -1,4 +1,4 @@
-#include "CUnitboxWidget.h"
+ï»¿#include "CUnitboxWidget.h"
 
 #include <QPainter>
 #include <QWidget>
@@ -17,7 +17,7 @@ CUnitboxWidget::CUnitboxWidget(QWidget *parent /* = 0*/,Qt::WindowFlags f/* = 0*
      QPixmap pm = QPixmap(":/NetworkSimulationPlatform/Resources/switcher.png");
 	int yStart = (size().height() - pm.rect().height()) / 2;
 	m_switchLabel->setName("switcher");
-	m_switchLabel->setToolTip(tr("½»»»»ú"));
+	m_switchLabel->setToolTip(tr("äº¤æ¢æœº"));
 	m_switchLabel->setPixmap(pm);
 	m_switchLabel->move(10, yStart);
 	m_switchLabel->setAlignment(Qt::AlignVCenter);
@@ -25,14 +25,14 @@ CUnitboxWidget::CUnitboxWidget(QWidget *parent /* = 0*/,Qt::WindowFlags f/* = 0*
 	m_switchLabel->setAttribute(Qt::WA_DeleteOnClose);
 
 	m_singleDeviceLabel->setName("singleFIC");
-	m_singleDeviceLabel->setToolTip(tr("µ¥¿ÚÉè±¸"));
+	m_singleDeviceLabel->setToolTip(tr("å•å£è®¾å¤‡"));
     m_singleDeviceLabel->setPixmap(QPixmap(":/NetworkSimulationPlatform/Resources/single.png"));
 	m_singleDeviceLabel->move(50, yStart);
 	m_singleDeviceLabel->show();
 	m_singleDeviceLabel->setAttribute(Qt::WA_DeleteOnClose);
   
 	m_doubleDeviceLabel->setName("doubleFIC");
-	m_doubleDeviceLabel->setToolTip(tr("Ë«¿ÚÉè±¸"));
+	m_doubleDeviceLabel->setToolTip(tr("åŒå£è®¾å¤‡"));
     m_doubleDeviceLabel->setPixmap(QPixmap(":/NetworkSimulationPlatform/Resources/double.png"));
 	m_doubleDeviceLabel->move(90, yStart);
 	m_doubleDeviceLabel->show();

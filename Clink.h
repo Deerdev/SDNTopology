@@ -1,4 +1,4 @@
-#ifndef CLINK_H
+﻿#ifndef CLINK_H
 #define CLINK_H
 
 #include<QGraphicsItem>
@@ -26,7 +26,7 @@ public:
     void setStartPort(CNetworkPort* _s){ myfromPort = _s;}
     void setEndPort(CNetworkPort* _e){ mytoPort = _e;}
 
-    void setSelectedFlag(bool _flag){m_selectedFlag = _flag;}//ѡ�б�־
+    void setSelectedFlag(bool _flag){m_selectedFlag = _flag;}//选中标志
     bool getSelectedFlag(){return m_selectedFlag;}
 
     void setID(int _switchID, int _linkswitchID);

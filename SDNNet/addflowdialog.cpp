@@ -1,4 +1,4 @@
-#include "addflowdialog.h"
+﻿#include "addflowdialog.h"
 #include "ui_addflowdialog.h"
 
 AddFlowDialog::AddFlowDialog(NetworkSimulationPlatform *_platform,QWidget *parent) :

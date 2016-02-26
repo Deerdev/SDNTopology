@@ -1,4 +1,4 @@
-#include "CEventscheduldialog.h"
+﻿#include "CEventscheduldialog.h"
 #include "ui_CEventscheduldialog.h"
 
 CEventSchedulDialog::CEventSchedulDialog(QWidget *parent) :

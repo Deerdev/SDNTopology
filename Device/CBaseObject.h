@@ -1,4 +1,4 @@
-#ifndef _BASEOBJECT_H
+ï»¿#ifndef _BASEOBJECT_H
 #define _BASEOBJECT_H
 
 #include <QGraphicsItem>
@@ -12,37 +12,37 @@ using namespace std;
 
 
 /************************************************************************
-Ä£¿éÃèÊö: ÍøÂç½Úµã»ùÀà
+æ¨¡å—æè¿°: ç½‘ç»œèŠ‚ç‚¹åŸºç±»
 ************************************************************************/
 
 class CBaseObject : public QGraphicsItem
 {
 private:
-	//¶ÔÏóÃû³Æ
+	//å¯¹è±¡åç§°
 	QString                                          m_name;
 
-	//¹¦ÄÜÃèÊö
+	//åŠŸèƒ½æè¿°
 	QString                                          m_description;
 
-	//Éè±¸Î»ÖÃ
+	//è®¾å¤‡ä½ç½®
 	QPointF                                        m_pos;
 
-	//Éè±¸µÄ³¤¶ÈºÍ¿í¶È
+	//è®¾å¤‡çš„é•¿åº¦å’Œå®½åº¦
 	float                                    m_width,m_height;
 public:	
-	//ÉèÖÃ¶ÔÏóÃû³Æ
+	//è®¾ç½®å¯¹è±¡åç§°
 	void SetName(QString name){m_name = name;}
 	
-	//»ñÈ¡¶ÔÏóÃû³Æ
+	//è·å–å¯¹è±¡åç§°
 	QString GetName(){return m_name;} 
 
-	//ÉèÖÃ¶ÔÏóÃû³Æ
+	//è®¾ç½®å¯¹è±¡åç§°
 	void SetDescription(QString des){m_description = des;}
 
-	//»ñÈ¡¶ÔÏóÃû³Æ
+	//è·å–å¯¹è±¡åç§°
 	QString GetDescription(){return m_description;} 
 
-	//»ñÈ¡Éè±¸×ø±ê
+	//è·å–è®¾å¤‡åæ ‡
 	QPointF GetPos() 
 	{
 		QRectF re = boundingRect();
@@ -50,7 +50,7 @@ public:
 		return tp;
 	}
 
-	//»ñÈ¡¿í¶ÈºÍ³¤¶È
+	//è·å–å®½åº¦å’Œé•¿åº¦
 	float GetWid(){m_width = boundingRect().width();  return m_width;}
 	float GetHig(){m_height = boundingRect().height();  return m_height;}
 

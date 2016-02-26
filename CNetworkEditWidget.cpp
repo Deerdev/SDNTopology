@@ -1,4 +1,4 @@
-#include "CNetworkEditWidget.h"
+ï»¿#include "CNetworkEditWidget.h"
 #include <algorithm>
 
 #include "NetworkSimulationPlatform.h"
@@ -17,7 +17,7 @@ CTopologyWidget::CTopologyWidget(QWidget *parent)
     setDragMode(QGraphicsView::RubberBandDrag);
     creatRightMenu();
 
-    //¶Ô»°¿ò
+    //å¯¹è¯æ¡†
     m_switchDia = new CSwitherConfigure;
     m_newSwitcherDia = new CNewSwitcher;
     m_newPortDia = new CPortDialog;
@@ -49,14 +49,14 @@ CTopologyWidget::~CTopologyWidget()
 
 void CTopologyWidget::setLabelWidget(CUnitboxWidget* _unitW)
 {
-    //·ÅÍ¼Æ¬±êÇ©µÄ´°¿Ú
+    //æ”¾å›¾ç‰‡æ ‡ç­¾çš„çª—å£
 	m_unitWidget = _unitW;	
 }
 
-//Çå¿Õ»­²¼²¢³õÊ¼»¯³ÉÔ±±äÁ¿
+//æ¸…ç©ºç”»å¸ƒå¹¶åˆå§‹åŒ–æˆå‘˜å˜é‡
 void CTopologyWidget::clearScene(void)
 {
-    //Çå¿Õ¿òÑ¡×éÍ¼Ôª
+    //æ¸…ç©ºæ¡†é€‰ç»„å›¾å…ƒ
     if (m_itemGroup != NULL)
     {
         QList<QGraphicsItem*> t_childItems = m_itemGroup->childItems();
@@ -106,18 +106,18 @@ void CTopologyWidget::setPlatformPointer(NetworkSimulationPlatform *_platform)
     m_platform = _platform;
 }
 
-//»­Í¼Àı
+//ç”»å›¾ä¾‹
 void CTopologyWidget::drawLegend()
 {
     QFont t_font("Times New Roman");
     t_font.setPointSize(10);
     m_scene->addText("POS", t_font)->setPos(1250, 1410);
     m_scene->addText("Ethernet", t_font)->setPos(1240, 1440);
-    m_scene->addText(tr("Ò»Ìõ"), t_font)->setPos(1400, 1350);
-    m_scene->addText(tr("¶şÌõ"), t_font)->setPos(1400, 1380);
-    m_scene->addText(tr("ÈıÌõ"), t_font)->setPos(1400, 1410);
-    m_scene->addText(tr("ËÄÌõ"), t_font)->setPos(1400, 1440);
-    m_scene->addText(tr("ÎåÌõ"), t_font)->setPos(1400, 1470);
+    m_scene->addText(tr("ä¸€æ¡"), t_font)->setPos(1400, 1350);
+    m_scene->addText(tr("äºŒæ¡"), t_font)->setPos(1400, 1380);
+    m_scene->addText(tr("ä¸‰æ¡"), t_font)->setPos(1400, 1410);
+    m_scene->addText(tr("å››æ¡"), t_font)->setPos(1400, 1440);
+    m_scene->addText(tr("äº”æ¡"), t_font)->setPos(1400, 1470);
     QPen t_pen(Qt::black);
     t_pen.setStyle(Qt::DashLine);
     t_pen.setWidth(2);
@@ -201,7 +201,7 @@ void CTopologyWidget::dropEvent(QDropEvent *event)
 				{                    
                     m_dropPos = mapToScene(event->pos()) - m_unitWidget->getDis();
 
-					//Éú³Éid
+					//ç”Ÿæˆid
 					int id = 1;
 					for (;;id++)
 					{
@@ -214,7 +214,7 @@ void CTopologyWidget::dropEvent(QDropEvent *event)
 						if (i == m_vSwtich.size()) break;
 					}
                     m_newSwitcherDia->setSwitchIDandType(id);
-                    //»­Éè±¸Ç°ÊôĞÔ¶Ô»°¿ò
+                    //ç”»è®¾å¤‡å‰å±æ€§å¯¹è¯æ¡†
 					m_newSwitcherDia->exec();					
 				}				
 			}
@@ -234,7 +234,7 @@ void CTopologyWidget::slotNewRouterDia()
 		{
 			if (m_newSwitcherDia->getSwitcherInfo().ID == m_vSwtich[i].ID)
 			{
-                QMessageBox::information(m_newSwitcherDia,tr("¾¯¸æ"),tr("ÏàÍ¬Ãû³ÆµÄÂ·ÓÉÆ÷ÒÑ¾­´æÔÚ"));
+                QMessageBox::information(m_newSwitcherDia,tr("è­¦å‘Š"),tr("ç›¸åŒåç§°çš„è·¯ç”±å™¨å·²ç»å­˜åœ¨"));
 				return;
 			}
 		}
@@ -243,7 +243,7 @@ void CTopologyWidget::slotNewRouterDia()
 		{
 			if (m_newSwitcherDia->getSwitcherInfo().ID == m_vSwtich[i].ID)
 			{
-                QMessageBox::information(m_newSwitcherDia,tr("¾¯¸æ"),tr("ÏàÍ¬ÓòÃûµÄÂ·ÓÉÆ÷ÒÑ¾­´æÔÚ"));
+                QMessageBox::information(m_newSwitcherDia,tr("è­¦å‘Š"),tr("ç›¸åŒåŸŸåçš„è·¯ç”±å™¨å·²ç»å­˜åœ¨"));
 				return;
 			}
 		}
@@ -253,9 +253,9 @@ void CTopologyWidget::slotNewRouterDia()
         QRectF m_boundingRect = t_switch->boundingRect();
 
         t_switch->setPos(m_dropPos);
-        t_switch->setToolTip(tr("Ãû³Æ: ") + t_switch->getSwitcherInfo().name + "\n"+
-                             tr("ĞÍºÅ:") + t_switch->getSwitcherInfo().type + "\n" +
-                             tr("Î»ÖÃ: ") + t_switch->getSwitcherInfo().networkLocation);
+        t_switch->setToolTip(tr("åç§°: ") + t_switch->getSwitcherInfo().name + "\n"+
+                             tr("å‹å·:") + t_switch->getSwitcherInfo().type + "\n" +
+                             tr("ä½ç½®: ") + t_switch->getSwitcherInfo().networkLocation);
 
         t_port->setPos(m_boundingRect.width()/2, m_boundingRect.height()/2+5);
 		t_switch->setSwitcherInfo(m_newSwitcherDia->getSwitcherInfo());
@@ -282,7 +282,7 @@ void CTopologyWidget::slotSwitchDia()
         {
             if (m_switchDia->GetSwitcherInfo().name == m_vSwtich[i].name)
             {
-                QMessageBox::information(m_switchDia,tr("¾¯¸æ"),tr("ÏàÍ¬Ãû³ÆµÄ½»»»»úÒÑ¾­´æÔÚ"));
+                QMessageBox::information(m_switchDia,tr("è­¦å‘Š"),tr("ç›¸åŒåç§°çš„äº¤æ¢æœºå·²ç»å­˜åœ¨"));
                 return;
             }
         }
@@ -349,7 +349,7 @@ void CTopologyWidget::slotSwitchDia()
 	m_switchDia->close();
 }
 
-//Êó±êÑ¡ÖĞÊÂ¼ş£¬±à¼­ĞéÏß±ß¿ò
+//é¼ æ ‡é€‰ä¸­äº‹ä»¶ï¼Œç¼–è¾‘è™šçº¿è¾¹æ¡†
 void CTopologyWidget::mousePressEvent(QMouseEvent *event)
 {
     QPointF mouseclicked_pos = mapToScene(event->pos());
@@ -375,7 +375,7 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
     //left button pressed
     if(event->button() == Qt::LeftButton)
     { 
-        if(t_backItem != NULL || t_item == NULL) //µã»÷±³¾°»ò¿Õ°×  È¡ÏûÑ¡ÖĞµÄÍ¼Ôª  É¾³ı×ÓÍ¼Ôª
+        if(t_backItem != NULL || t_item == NULL) //ç‚¹å‡»èƒŒæ™¯æˆ–ç©ºç™½  å–æ¶ˆé€‰ä¸­çš„å›¾å…ƒ  åˆ é™¤å­å›¾å…ƒ
         {
             QList<QGraphicsItem*> t_childItems = m_itemGroup->childItems();
             for (int i = 0; i < t_childItems.size(); ++i)
@@ -402,7 +402,7 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
         }
         else
         {
-//            //Çå³ıÊôĞÔÁĞ±í
+//            //æ¸…é™¤å±æ€§åˆ—è¡¨
 //            if(m_platform->ui_DeviceInfTable->item(0,0))
 //            {
 //                m_platform->ui_DeviceInfTable->clear();
@@ -413,9 +413,9 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
             case QGraphicsItem::UserType + 1://swicher
                 t_switchItem = dynamic_cast<CSwitcher*>(t_item);
 
-                if (t_switchItem->getSelectedFlag() == false)  //Ã»±»Ñ¡ÖĞ
+                if (t_switchItem->getSelectedFlag() == false)  //æ²¡è¢«é€‰ä¸­
                 {
-                    if (event->modifiers() != 0x04000000)  //Ã»ÓĞ°´ÏÂctrl¼ü  Çå³ı×éÖĞµÄÍ¼Ôª
+                    if (event->modifiers() != 0x04000000)  //æ²¡æœ‰æŒ‰ä¸‹ctrlé”®  æ¸…é™¤ç»„ä¸­çš„å›¾å…ƒ
                     {
                         QList<QGraphicsItem*> t_itemingroup = m_itemGroup->childItems();
                         for (int i = 0; i < t_itemingroup.size(); ++i)
@@ -433,12 +433,12 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
                     CSwitcherInfo t_nodeInf = t_switchItem->getSwitcherInfo();
                     if (t_nodeInf.type == SWITCH)
                     {
-                        //´´½¨½»»»»úÊôĞÔ½çÃæ
+                        //åˆ›å»ºäº¤æ¢æœºå±æ€§ç•Œé¢
                         qDebug()<<"in table0";
                         setSwitchInfTable(t_nodeInf);
                     }
                     else{
-                        //´´½¨½ÚµãÊôĞÔ½çÃæ
+                        //åˆ›å»ºèŠ‚ç‚¹å±æ€§ç•Œé¢
                         setHostInfTable(t_nodeInf);
                     }
 
@@ -464,7 +464,7 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
                 break;
             }
             case QGraphicsItem::UserType + 3:
-            // ÍÏ¶¯·Å´óÓëËõĞ¡  Ö»Ñ¡ÖĞÒ»¸öÍ¼ÔªµÄÊ±ºò²Å¿É·Å´óËõĞ¡
+            // æ‹–åŠ¨æ”¾å¤§ä¸ç¼©å°  åªé€‰ä¸­ä¸€ä¸ªå›¾å…ƒçš„æ—¶å€™æ‰å¯æ”¾å¤§ç¼©å°
             {
                 QList<QGraphicsItem*> t_groupItems = m_itemGroup->childItems();
                 if (t_smallRectItem != NULL)
@@ -489,7 +489,7 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
                         }
                         for ( int j = 0; j < itemL.size(); j++ )
                         {
-                            if (itemL[j]->contains(itemL[j]->mapFromScene(scenePos)))   //µãÖĞĞ¡¾ØĞÎµÄÊ±ºò ²ÅÎªÕæ
+                            if (itemL[j]->contains(itemL[j]->mapFromScene(scenePos)))   //ç‚¹ä¸­å°çŸ©å½¢çš„æ—¶å€™ æ‰ä¸ºçœŸ
                             {
                                 switch(j)
                                 {
@@ -540,9 +540,9 @@ void CTopologyWidget::mousePressEvent(QMouseEvent *event)
 }
 
 /************************************************************************
-¹¦ÄÜ£ºÊó±êÒÆ¶¯ÊÂ¼ş
-²ÎÊı:   ÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šé¼ æ ‡ç§»åŠ¨äº‹ä»¶
+å‚æ•°:   æ— 
+è¿”å›å€¼ï¼šæ— 
 ************************************************************************/
 void CTopologyWidget::mouseMoveEvent(QMouseEvent *event)
 {
@@ -564,9 +564,9 @@ void CTopologyWidget::mouseMoveEvent(QMouseEvent *event)
 	if (t_groupItems.size() == 1)
 	{
 		QGraphicsRectItem *t_smallRect = dynamic_cast<QGraphicsRectItem*>(t_item);
-		if (t_smallRect != NULL && t_smallRect->parentItem() != NULL) //±íÊ¾¾ØĞÎ¿òĞ¡·½¸ñ±»Ñ¡ÖĞ
+		if (t_smallRect != NULL && t_smallRect->parentItem() != NULL) //è¡¨ç¤ºçŸ©å½¢æ¡†å°æ–¹æ ¼è¢«é€‰ä¸­
 		{
-			cursorShapeChange(nowScenePos,dynamic_cast<CBoundingRectItem*>(t_smallRect->parentItem()));//¹â±êÔÚĞ¡·½¿ò´¦Ê±¸Ä±äĞÎ×´
+			cursorShapeChange(nowScenePos,dynamic_cast<CBoundingRectItem*>(t_smallRect->parentItem()));//å…‰æ ‡åœ¨å°æ–¹æ¡†å¤„æ—¶æ”¹å˜å½¢çŠ¶
 		}
 		else
 		{
@@ -577,7 +577,7 @@ void CTopologyWidget::mouseMoveEvent(QMouseEvent *event)
 
 	if (event->buttons() & Qt::LeftButton)
 	{
-		//ÍÏ¶¯Ñ¡ÖĞµÄÍ¼Ôª
+		//æ‹–åŠ¨é€‰ä¸­çš„å›¾å…ƒ
         if (m_moveitemFlag == true)
 		{
 			if(g_currentState == 1)
@@ -601,28 +601,28 @@ void CTopologyWidget::mouseMoveEvent(QMouseEvent *event)
 				return;
 			}			
 		}
-        //´´½¨ÁÙÊ±ĞéÏß
+        //åˆ›å»ºä¸´æ—¶è™šçº¿
         else if(m_tempadge != NULL)
         {
             QPointF m_portPos = m_pressItem->parentItem()->mapToScene(m_pressItem->mapToParent(QPointF(0,0)));
             m_tempadge->setLine(m_portPos.x(), m_portPos.y(), nowScenePos.x(), nowScenePos.y());
         }
-		//´´½¨¿òÑ¡ĞéÏß¿ò
+		//åˆ›å»ºæ¡†é€‰è™šçº¿æ¡†
 		else if (m_dragRectItem != NULL)
 		{
             if(nowScenePos.x() > m_pressScenePoint_formove.x() && nowScenePos.y() > m_pressScenePoint_formove.y())
                 m_dragRectItem->setRect(0,0,nowScenePos.x() - m_pressScenePoint_formove.x(),nowScenePos.y() - m_pressScenePoint_formove.y());
 		}
-		else if (rect0sele==true||rect1sele==true||rect2sele==true||rect3sele==true||rect4sele==true||rect5sele==true||rect6sele==true||rect7sele==true)//µãÖØĞ¡¾ØĞÎÇÒÍÏ¶¯µÄÊ±ºò
+		else if (rect0sele==true||rect1sele==true||rect2sele==true||rect3sele==true||rect4sele==true||rect5sele==true||rect6sele==true||rect7sele==true)//ç‚¹é‡å°çŸ©å½¢ä¸”æ‹–åŠ¨çš„æ—¶å€™
 		{			
-			CreateMovableRect(nowScenePos);//Êó±êµãÖĞÉ«±í¿éµÄ±ß½çĞ¡¾ØĞÎ²¢ÒÆ¶¯Ê±´´½¨¿ÉÒÆ¶¯µÄĞé¿ò	
+			CreateMovableRect(nowScenePos);//é¼ æ ‡ç‚¹ä¸­è‰²è¡¨å—çš„è¾¹ç•Œå°çŸ©å½¢å¹¶ç§»åŠ¨æ—¶åˆ›å»ºå¯ç§»åŠ¨çš„è™šæ¡†	
             for (int k = 0; k < m_vlink.size();++k)
 			{
                 if (m_vlink[k] !=NULL)
                 {
                     CNetworkPort* t_startPort = m_vlink[k]->getStartPort();
                     CNetworkPort* t_endPort = m_vlink[k]->getEndPort();
-                    if (t_startPort != NULL && t_startPort->pos().x() > 20) //ÓÒ±ß
+                    if (t_startPort != NULL && t_startPort->pos().x() > 20) //å³è¾¹
                     {
                         CSwitcher* temp_switchItem = dynamic_cast<CSwitcher*>(t_startPort->parentItem());
                         if (temp_switchItem != NULL)
@@ -631,7 +631,7 @@ void CTopologyWidget::mouseMoveEvent(QMouseEvent *event)
                             t_startPort->setPos(temp_switchItem->boundingRect().bottomRight().x()-9,t_iniPos.y());
                         }
                     }
-                    if (t_endPort != NULL && t_endPort->pos().x() > 20) //ÓÒ±ß
+                    if (t_endPort != NULL && t_endPort->pos().x() > 20) //å³è¾¹
                     {
                         CSwitcher* temp_switchItem = dynamic_cast<CSwitcher*>(t_endPort->parentItem());
                         if (temp_switchItem != NULL)
@@ -647,7 +647,7 @@ void CTopologyWidget::mouseMoveEvent(QMouseEvent *event)
 	}
 }
 
-//Êó±êÊÍ·ÅÊÂ¼ş
+//é¼ æ ‡é‡Šæ”¾äº‹ä»¶
 void CTopologyWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     bool bIsMoved = false;
@@ -694,7 +694,7 @@ void CTopologyWidget::mouseReleaseEvent(QMouseEvent *event)
                     }
                     if(count >= 5)
                     {
-                        QMessageBox::information(this, tr("ÌáÊ¾"), tr("Á½¸öÉè±¸¼äÁ´Â·Êı²»³¬¹ı5Ìõ£¡"));
+                        QMessageBox::information(this, tr("æç¤º"), tr("ä¸¤ä¸ªè®¾å¤‡é—´é“¾è·¯æ•°ä¸è¶…è¿‡5æ¡ï¼"));
                         return;
                     }
                     int id_s = 1, id_e = 1;
@@ -731,7 +731,7 @@ void CTopologyWidget::mouseReleaseEvent(QMouseEvent *event)
             else if (m_dragRectItem != NULL)
             {
                 QRectF t_rect = m_dragRectItem->sceneBoundingRect().normalized();
-                t_itemlist = m_scene->items(t_rect,Qt::IntersectsItemShape);//·µ»ØĞéÏß¿ò¼ì²âµ½µÄÍ¼Ôª
+                t_itemlist = m_scene->items(t_rect,Qt::IntersectsItemShape);//è¿”å›è™šçº¿æ¡†æ£€æµ‹åˆ°çš„å›¾å…ƒ
                 qDebug("%d", t_itemlist.size());
                 if(t_itemlist.size() <= 1)
                     m_moveitemFlag = false;
@@ -840,8 +840,8 @@ void CTopologyWidget::slotDrawLine()
     //link->getLinkInfo().ethernet_link_num = EthernetCount;
     link->setID(s_switchID, d_switchID);
     QString linkType = "Ethernet";
-    link->setToolTip(tr("ÀàĞÍ:") + linkType + "\n" +
-                     tr("ËÙÂÊ:") + link->getLinkInfo().bandWidth);
+    link->setToolTip(tr("ç±»å‹:") + linkType + "\n" +
+                     tr("é€Ÿç‡:") + link->getLinkInfo().bandWidth);
 
     m_itemGroup->addToGroup(link);
     m_vlink.push_back(link);
@@ -862,10 +862,10 @@ void CTopologyWidget::slotDrawLine()
     }
 }
 
-//Êó±êË«»÷ÊÂ¼ş
+//é¼ æ ‡åŒå‡»äº‹ä»¶
 void CTopologyWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
-	//Ñ¡ÖĞÒ»¸ö½»»»»úÍ¼Ôª»òÕßÒ»¸öÉè±¸Í¼ÔªÊ±ºòµÄË«»÷
+	//é€‰ä¸­ä¸€ä¸ªäº¤æ¢æœºå›¾å…ƒæˆ–è€…ä¸€ä¸ªè®¾å¤‡å›¾å…ƒæ—¶å€™çš„åŒå‡»
 	QList<QGraphicsItem*> t_childItem = m_itemGroup->childItems();
 	if (t_childItem.size() != 1)
 	{
@@ -876,7 +876,7 @@ void CTopologyWidget::mouseDoubleClickEvent(QMouseEvent *event)
 
 	t_switchItem = dynamic_cast<CSwitcher*>(t_childItem[0]);
     t_linkItem = dynamic_cast<Clink*>(t_childItem[0]);
-	if (t_switchItem != NULL)  //½»»»»úÊôĞÔ¶Ô»°¿òÏÔÊ¾
+	if (t_switchItem != NULL)  //äº¤æ¢æœºå±æ€§å¯¹è¯æ¡†æ˜¾ç¤º
 	{
 		m_EditSwitchItem = t_switchItem;
 		m_switchDia->SetSwitcherInfo(t_switchItem->getSwitcherInfo());
@@ -884,13 +884,13 @@ void CTopologyWidget::mouseDoubleClickEvent(QMouseEvent *event)
         m_switchDia->setIPPool(&m_IPPool);
 		m_switchDia->exec(); 
 	}   
-    else if (t_linkItem != NULL)//ÏÔÊ¾Á´Â·Éè±¸ÊôĞÔ¶Ô»°¿ò
+    else if (t_linkItem != NULL)//æ˜¾ç¤ºé“¾è·¯è®¾å¤‡å±æ€§å¯¹è¯æ¡†
     {
-        return;//´ıÌí¼Ó
+        return;//å¾…æ·»åŠ 
     }
 }
 
-//ÓÒ¼ü²Ëµ¥
+//å³é”®èœå•
 void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
 {
 //	m_configuerAct->setEnabled(false);
@@ -902,10 +902,10 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
 	CBoundingRectItem* t_brItem = NULL;
 	t_brItem = dynamic_cast<CBoundingRectItem*>(t_item);
 
-	//µã»÷¿Õ°× »òÕßµã»÷ÒÑ¾­Ñ¡ÖĞµÄÍ¼Ôª  ¸ù¾İÇé¿öÏÔÊ¾²Ëµ¥
+	//ç‚¹å‡»ç©ºç™½ æˆ–è€…ç‚¹å‡»å·²ç»é€‰ä¸­çš„å›¾å…ƒ  æ ¹æ®æƒ…å†µæ˜¾ç¤ºèœå•
 	if (t_item == NULL || (t_brItem != NULL && t_brItem->parentItem() != NULL))
 	{
-		if (t_childItems.size() == 0)  //ÎŞ¼¤»îÍ¼Ôª ÓÒ¼üËùÓĞ°´Å¥ÎŞĞ§
+		if (t_childItems.size() == 0)  //æ— æ¿€æ´»å›¾å…ƒ å³é”®æ‰€æœ‰æŒ‰é’®æ— æ•ˆ
 		{
             m_deleteAct->setEnabled(false);
             m_attributeAct->setEnabled(false);
@@ -914,7 +914,7 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
 			m_rightMenu->exec(event->globalPos());
 			return;
 		}
-        else if (t_childItems.size() == 1)  //½ö½öÒ»¸öµÄÊ±ºò
+        else if (t_childItems.size() == 1)  //ä»…ä»…ä¸€ä¸ªçš„æ—¶å€™
 		{
 //            m_configuerAct->setEnabled(true);
             m_deleteAct->setEnabled(true);
@@ -924,7 +924,7 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
             m_rightMenu->exec(event->globalPos());
 			return;
 		}
-        else if (t_childItems.size() == 2)  //¶àÓàÁ½¸ö¼¤»îÍ¼ÔªÊ±  ½öÉ¾³ı°´Å¥ÓĞĞ§
+        else if (t_childItems.size() == 2)  //å¤šä½™ä¸¤ä¸ªæ¿€æ´»å›¾å…ƒæ—¶  ä»…åˆ é™¤æŒ‰é’®æœ‰æ•ˆ
 		{
 			m_deleteAct->setEnabled(true);
             m_attributeAct->setEnabled(false);
@@ -943,14 +943,14 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
             return;
         }
 
-        //ÓÒ»÷Î´±»Ñ¡ÖĞµÄÍ¼ÔªµÄÇé¿ö £º ´ËÍ¼Ôª±»Ñ¡ÖĞ ÇÒ³öÏÖÏàÓ¦µÄÓÒ¼ü²Ëµ¥
+        //å³å‡»æœªè¢«é€‰ä¸­çš„å›¾å…ƒçš„æƒ…å†µ ï¼š æ­¤å›¾å…ƒè¢«é€‰ä¸­ ä¸”å‡ºç°ç›¸åº”çš„å³é”®èœå•
         CSwitcher* te_switchItem = NULL;
         Clink* te_linkItem = NULL;
         te_switchItem = dynamic_cast<CSwitcher*>(t_item);
         te_linkItem = dynamic_cast<Clink*>(t_item);
-        if (te_switchItem != NULL && te_switchItem->getSelectedFlag() == false)  //µãÖĞ½»»»»ú
+        if (te_switchItem != NULL && te_switchItem->getSelectedFlag() == false)  //ç‚¹ä¸­äº¤æ¢æœº
         {
-            //Çå¿Õgroup
+            //æ¸…ç©ºgroup
             for (int i = 0; i < t_childItems.size(); ++i)
             {
                 if (dynamic_cast<CSwitcher*>(t_childItems[i]) != NULL)
@@ -978,7 +978,7 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
             m_rightMenu->exec(event->globalPos());
             return;
         }
-        else if (te_linkItem != NULL && te_linkItem->getSelectedFlag() == false)  //Ñ¡ÖĞÁ´Â·
+        else if (te_linkItem != NULL && te_linkItem->getSelectedFlag() == false)  //é€‰ä¸­é“¾è·¯
         {
             for (int i = 0; i < t_childItems.size(); ++i)
             {
@@ -994,7 +994,7 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
                 m_itemGroup->removeFromGroup(t_childItems[i]);
             }
             te_linkItem->setSelectedFlag(true);
-            //´ıÌí¼ÓÑ¡¶¨¿ò
+            //å¾…æ·»åŠ é€‰å®šæ¡†
     //		CBoundingRectItem* t_brItem = new CBoundingRectItem(te_deviceItem,m_scene);
     //		t_brItem->setBoundingRect(te_deviceItem->boundingRect());
     //		t_brItem->setParentItem(te_deviceItem);
@@ -1008,11 +1008,11 @@ void CTopologyWidget::contextMenuEvent(QContextMenuEvent * event)
     }
 }
 
-//¼üÅÌÊÂ¼ş  É¾³ı
+//é”®ç›˜äº‹ä»¶  åˆ é™¤
 void CTopologyWidget::keyPressEvent( QKeyEvent * event )
 {
 //	int _key = event->key();
-//	if (_key == 0x01000007)  //delete¼ü
+//	if (_key == 0x01000007)  //deleteé”®
 //	{
 //		slotDeleteAction();
 //	}
@@ -1027,9 +1027,9 @@ void CTopologyWidget::keyPressEvent( QKeyEvent * event )
 }
 
 /**********************************************************
-¹¦ÄÜ£ºÊó±êÒÆÖÁÉ«±í¿éµÄ±ß½çĞ¡¾ØĞÎÖĞ£¬Êó±êÖ¸Õë¸Ä±ä
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šé¼ æ ‡ç§»è‡³è‰²è¡¨å—çš„è¾¹ç•Œå°çŸ©å½¢ä¸­ï¼Œé¼ æ ‡æŒ‡é’ˆæ”¹å˜
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::cursorShapeChange(QPointF _scenePos,CBoundingRectItem* _brItem)
 {
@@ -1050,24 +1050,24 @@ void CTopologyWidget::cursorShapeChange(QPointF _scenePos,CBoundingRectItem* _br
 			itemL.append(_itemL[i]);
 		}
 	}
-	//¸Ä±äÊó±êÖ¸Õë
+	//æ”¹å˜é¼ æ ‡æŒ‡é’ˆ
 	for ( int j = 0; j < itemL.size(); j++ )
 	{
 		if (itemL[j]->contains(itemL[j]->mapFromScene(_scenePos)))
 		{
-			if (j == 0 || j == 3)//Êó±êÔÚ×óÉÏ½ÇºÍÓÒÏÂ½ÇµÄĞ¡¾ØĞÎÖĞ
+			if (j == 0 || j == 3)//é¼ æ ‡åœ¨å·¦ä¸Šè§’å’Œå³ä¸‹è§’çš„å°çŸ©å½¢ä¸­
 			{						
 				setCursor(QCursor(Qt::SizeFDiagCursor)); 
 			}					
-			else if (j == 4 || j == 6)//Êó±êÔÚÉÏ±ßºÍÏÂ±ßµÄĞ¡¾ØĞÎÖĞ
+			else if (j == 4 || j == 6)//é¼ æ ‡åœ¨ä¸Šè¾¹å’Œä¸‹è¾¹çš„å°çŸ©å½¢ä¸­
 			{
 				setCursor(QCursor(Qt::SizeVerCursor));
 			}
-			else if (j == 1 || j == 2)//Êó±êÔÚÓÒÉÏ½ÇºÍ×óÏÂ½ÇµÄĞ¡¾ØĞÎÖĞ
+			else if (j == 1 || j == 2)//é¼ æ ‡åœ¨å³ä¸Šè§’å’Œå·¦ä¸‹è§’çš„å°çŸ©å½¢ä¸­
 			{
 				setCursor(QCursor(Qt::SizeBDiagCursor));
 			}	
-			else if (j == 5 || j == 7)//Êó±êÔÚ×ó±ßºÍÓÒ±ßµÄĞ¡¾ØĞÎÖĞ
+			else if (j == 5 || j == 7)//é¼ æ ‡åœ¨å·¦è¾¹å’Œå³è¾¹çš„å°çŸ©å½¢ä¸­
 			{
 				setCursor(QCursor(Qt::SizeHorCursor));
 			}					
@@ -1075,9 +1075,9 @@ void CTopologyWidget::cursorShapeChange(QPointF _scenePos,CBoundingRectItem* _br
 	}		
 }
 /********************************************************************
-¹¦ÄÜ£ºÊó±êµãÖĞ±ß½çĞ¡¾ØĞÎ²¢ÒÆ¶¯Ê±´´½¨¿ÉÒÆ¶¯µÄĞé¿ò
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šé¼ æ ‡ç‚¹ä¸­è¾¹ç•Œå°çŸ©å½¢å¹¶ç§»åŠ¨æ—¶åˆ›å»ºå¯ç§»åŠ¨çš„è™šæ¡†
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 *********************************************************************/
 void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 {
@@ -1088,7 +1088,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 	}
 	CSwitcher* t_switcherItem = NULL;
 	t_switcherItem = dynamic_cast<CSwitcher*>(t_groupItenList[0]);
-    if (t_switcherItem != NULL)   //Ö»ÓĞÑ¡ÖĞÒ»¸ö½»»»»úÍ¼Ôª
+    if (t_switcherItem != NULL)   //åªæœ‰é€‰ä¸­ä¸€ä¸ªäº¤æ¢æœºå›¾å…ƒ
 	{ 
 		CBoundingRectItem* t_switchBRItem = NULL;
 		for (int i = 0; i < t_switcherItem->childItems().size(); ++i)
@@ -1102,7 +1102,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 		if (t_switchBRItem != NULL)
 		{
 			QList<QGraphicsItem *> itemL = t_switchBRItem->childItems();
-			//ÍÏ¶¯Ğ¡¾ØĞÎÊ±´´½¨¶¯Ì¬¿ò
+			//æ‹–åŠ¨å°çŸ©å½¢æ—¶åˆ›å»ºåŠ¨æ€æ¡†
 			for ( int j = 0; j < itemL.size(); j++ )
 			{			
 				QRectF temR;
@@ -1113,7 +1113,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 				qreal tmpN = temR.topLeft().y();
 				qreal tmpS =  temR.bottomRight().y();
 
-				if (rect0sele)//ÍÏ¶¯×óÉÏ½ÇµÄ¾ØĞÎ
+				if (rect0sele)//æ‹–åŠ¨å·¦ä¸Šè§’çš„çŸ©å½¢
 				{
 					qreal width = tmpE - _scenePos.x();
 					qreal height = tmpS - _scenePos.y();
@@ -1138,7 +1138,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 					t_switchBRItem->drawBoundingItem();
 					break ;	
 				}
-				if (rect3sele)//ÍÏ¶¯ÓÒÏÂ½ÇµÄ¾ØĞÎ
+				if (rect3sele)//æ‹–åŠ¨å³ä¸‹è§’çš„çŸ©å½¢
 				{
 					qreal width = _scenePos.x() - tmpW;
 					qreal height = _scenePos.y() - tmpN;
@@ -1163,7 +1163,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 					t_switchBRItem->drawBoundingItem();
 					break ;	
 				}
-				if (rect1sele)//ÍÏ¶¯ÓÒÉÏ½ÇµÄ¾ØĞÎ
+				if (rect1sele)//æ‹–åŠ¨å³ä¸Šè§’çš„çŸ©å½¢
 				{
 					qreal width =  _scenePos.x() - tmpW;
 					qreal height =  tmpS - _scenePos.y();
@@ -1191,7 +1191,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 
 					break ;						
 				}
-				if (rect2sele)//ÍÏ¶¯×óÏÂ½ÇµÄ¾ØĞÎ
+				if (rect2sele)//æ‹–åŠ¨å·¦ä¸‹è§’çš„çŸ©å½¢
 				{
 					qreal width = tmpE - _scenePos.x();
 					qreal height = _scenePos.y() - tmpN;
@@ -1217,7 +1217,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 					t_switchBRItem->setVisible(true);
 					break ;						
 				}
-				if (rect4sele)//ÍÏ¶¯ÉÏ±ßĞ¡¾ØĞÎ
+				if (rect4sele)//æ‹–åŠ¨ä¸Šè¾¹å°çŸ©å½¢
 				{
 					qreal width = tmpE - tmpW;
 					qreal height = tmpS - _scenePos.y();
@@ -1244,7 +1244,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 					t_switchBRItem->setVisible(true);
 					break ;								
 				}
-				if (rect6sele)//ÍÏ¶¯ÏÂ±ßĞ¡¾ØĞÎ
+				if (rect6sele)//æ‹–åŠ¨ä¸‹è¾¹å°çŸ©å½¢
 				{
 					qreal width = tmpE - tmpW;
 					qreal height = _scenePos.y() - tmpN;
@@ -1270,7 +1270,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 					t_switchBRItem->setVisible(true);
 					break ;							
 				}
-				if (rect5sele)//ÍÏ¶¯×ó±ßĞ¡¾ØĞÎ
+				if (rect5sele)//æ‹–åŠ¨å·¦è¾¹å°çŸ©å½¢
 				{		
 					qreal width =  tmpE - _scenePos.x();
 					qreal height = tmpS - tmpN;
@@ -1296,7 +1296,7 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 					t_switchBRItem->setVisible(true);
 					break ;							
 				}
-				if (rect7sele)//ÍÏ¶¯ÓÒ±ßĞ¡¾ØĞÎ
+				if (rect7sele)//æ‹–åŠ¨å³è¾¹å°çŸ©å½¢
 				{
 					qreal width = _scenePos.x() - tmpW;
 					qreal height = tmpS - tmpN;
@@ -1327,31 +1327,31 @@ void CTopologyWidget::CreateMovableRect(QPointF _scenePos)
 }
 
 /**********************************************************
-¹¦ÄÜ£º´´½¨ÓÒ¼ü²Ëµ¥
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šåˆ›å»ºå³é”®èœå•
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::creatRightMenu()
 {
 	m_rightMenu = new QMenu(this);
 
-    m_copyAct = new QAction(tr("¸´ÖÆ"),this);
-    m_pasteAct = new QAction(tr("Õ³Ìù"),this);
+    m_copyAct = new QAction(tr("å¤åˆ¶"),this);
+    m_pasteAct = new QAction(tr("ç²˜è´´"),this);
     connect(m_copyAct,SIGNAL(triggered() ), this, SLOT(slotCopyAction() ) );
     connect(m_pasteAct, SIGNAL(triggered() ), this, SLOT(slotPasteAction() ) );
 
-    m_deleteAct = new QAction(tr("É¾³ı"),this);
-	m_attributeAct = new QAction(tr("²é¿´ÊôĞÔ"),this);
+    m_deleteAct = new QAction(tr("åˆ é™¤"),this);
+	m_attributeAct = new QAction(tr("æŸ¥çœ‹å±æ€§"),this);
 	connect(m_deleteAct,SIGNAL(triggered()),this,SLOT(slotDeleteAction()));
 	connect(m_attributeAct,SIGNAL(triggered()),this,SLOT(slotAttributeAction()));
 
-//	m_configuerAct = new QAction(tr("ÅäÖÃ²ÎÊı"), this);
+//	m_configuerAct = new QAction(tr("é…ç½®å‚æ•°"), this);
 //	connect(m_configuerAct,SIGNAL(triggered()), this, SLOT(slotConfigureAction()));
 
-    m_routeVisible = new QAction(tr("Â·ÓÉ¿ÉÊÓ»¯"), this);
+    m_routeVisible = new QAction(tr("è·¯ç”±å¯è§†åŒ–"), this);
     connect(m_routeVisible, SIGNAL(triggered()), this, SLOT(slotRouteVisible()));
 
-    m_delayAct = new QAction(tr("¶Ëµ½¶ËÊ±ÑÓ"), this);
+    m_delayAct = new QAction(tr("ç«¯åˆ°ç«¯æ—¶å»¶"), this);
     connect(m_delayAct, SIGNAL(triggered()), this, SLOT(slotDelayAction()));
 
 
@@ -1367,32 +1367,32 @@ void CTopologyWidget::creatRightMenu()
     m_delayAct->setEnabled(false);
 }
 /**********************************************************
-¹¦ÄÜ£º¸´ÖÆÍ¼Ôª
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šå¤åˆ¶å›¾å…ƒ
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::slotCopyAction()
 {
 }
 
 /**********************************************************
-¹¦ÄÜ£ºÕ³ÌùÍ¼Ôª
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šç²˜è´´å›¾å…ƒ
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::slotPasteAction()
 {
 }
 
 /**********************************************************
-¹¦ÄÜ£ºÉ¾³ı°´Å¥
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šåˆ é™¤æŒ‰é’®
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::slotDeleteAction()
 {
 
-	QMessageBox::StandardButton rb = QMessageBox::question(this, tr("É¾³ıÑ¡ÖĞÏî") , tr("ÄúÈ·¶¨ÒªÉ¾³ıÑ¡ÖĞÏîÂğ?") ,QMessageBox::Yes|QMessageBox::No , QMessageBox::Yes);
+	QMessageBox::StandardButton rb = QMessageBox::question(this, tr("åˆ é™¤é€‰ä¸­é¡¹") , tr("æ‚¨ç¡®å®šè¦åˆ é™¤é€‰ä¸­é¡¹å—?") ,QMessageBox::Yes|QMessageBox::No , QMessageBox::Yes);
 
 	if (rb == QMessageBox::No)
 	{
@@ -1414,7 +1414,7 @@ void CTopologyWidget::slotDeleteAction()
 
         if (t_selectedSwitch != NULL)
         {
-            //É¾³ıLinkºÍ¶Ë¿Ú
+            //åˆ é™¤Linkå’Œç«¯å£
             if(! t_selectedSwitch->getSwitcherInfo().LNodes.isEmpty())
             {
                 for(int i = 0; i < t_selectedSwitch->getSwitcherInfo().LNodes.size(); i++)
@@ -1468,13 +1468,13 @@ void CTopologyWidget::slotDeleteAction()
 }
 
 /**********************************************************
-¹¦ÄÜ£ºµ¥¸öÍ¼ÔªÓÒ¼üµÄÊôĞÔ°´Å¥
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šå•ä¸ªå›¾å…ƒå³é”®çš„å±æ€§æŒ‰é’®
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::slotAttributeAction()
 {
-	//Ñ¡ÖĞÒ»¸ö½»»»»úÍ¼Ôª»òÕßÒ»¸öÉè±¸Í¼ÔªÊ±ºòµÄË«»÷
+	//é€‰ä¸­ä¸€ä¸ªäº¤æ¢æœºå›¾å…ƒæˆ–è€…ä¸€ä¸ªè®¾å¤‡å›¾å…ƒæ—¶å€™çš„åŒå‡»
 	QList<QGraphicsItem*> t_childItem = m_itemGroup->childItems();
 	if (t_childItem.size() != 1)
 	{
@@ -1485,7 +1485,7 @@ void CTopologyWidget::slotAttributeAction()
 
     t_switchItem = dynamic_cast<CSwitcher*>(t_childItem[0]);
     t_linkItem = dynamic_cast<Clink*>(t_childItem[0]);
-    if (t_switchItem != NULL)  //½»»»»úÊôĞÔ¶Ô»°¿òÏÔÊ¾
+    if (t_switchItem != NULL)  //äº¤æ¢æœºå±æ€§å¯¹è¯æ¡†æ˜¾ç¤º
     {
         m_EditSwitchItem = t_switchItem;
         m_switchDia->SetSwitcherInfo(t_switchItem->getSwitcherInfo());
@@ -1493,21 +1493,21 @@ void CTopologyWidget::slotAttributeAction()
         m_switchDia->setIPPool(&m_IPPool);
         m_switchDia->exec();
     }   
-    else if (t_linkItem != NULL)//ÏÔÊ¾Á´Â·Éè±¸ÊôĞÔ¶Ô»°¿ò
+    else if (t_linkItem != NULL)//æ˜¾ç¤ºé“¾è·¯è®¾å¤‡å±æ€§å¯¹è¯æ¡†
     {
-        return;//´ıÌí¼Ó
+        return;//å¾…æ·»åŠ 
     }
 }
 
 /**********************************************************
-¹¦ÄÜ£ºµ¥¸öÍ¼ÔªÓÒ¼üµÄÊôĞÔ°´Å¥
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šå•ä¸ªå›¾å…ƒå³é”®çš„å±æ€§æŒ‰é’®
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 //void CTopologyWidget::slotConfigureAction()
 //{
 //	int selected_switchID;
-//	//Ñ¡ÖĞÒ»¸ö½»»»»úÍ¼Ôª»òÕßÒ»¸öÉè±¸Í¼ÔªÊ±ºòµÄË«»÷
+//	//é€‰ä¸­ä¸€ä¸ªäº¤æ¢æœºå›¾å…ƒæˆ–è€…ä¸€ä¸ªè®¾å¤‡å›¾å…ƒæ—¶å€™çš„åŒå‡»
 //	QList<QGraphicsItem*> t_childItem = m_itemGroup->childItems();
 //	if (t_childItem.size() != 1)
 //	{
@@ -1524,9 +1524,9 @@ void CTopologyWidget::slotAttributeAction()
 //    }
 //}
 /**********************************************************
-¹¦ÄÜ£º¶à¸öÍ¼ÔªÓÒ¼üµÄÂ·ÓÉ¿ÉÊÓ»¯°´Å¥
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šå¤šä¸ªå›¾å…ƒå³é”®çš„è·¯ç”±å¯è§†åŒ–æŒ‰é’®
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::slotRouteVisible()
 {
@@ -1549,9 +1549,9 @@ void CTopologyWidget::slotRouteVisible()
     }
 }
 /**********************************************************
-¹¦ÄÜ£º¶à¸öÍ¼ÔªÓÒ¼üµÄ¶Ëµ½¶ËÊ±ÑÓ°´Å¥
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šå¤šä¸ªå›¾å…ƒå³é”®çš„ç«¯åˆ°ç«¯æ—¶å»¶æŒ‰é’®
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::slotDelayAction()
 {
@@ -1577,9 +1577,9 @@ void CTopologyWidget::slotDelayAction()
 }
 
 /**********************************************************
-¹¦ÄÜ£ºÉ¾³ı×ÓÍ¼Ôª
-²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸèƒ½ï¼šåˆ é™¤å­å›¾å…ƒ
+å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 **********************************************************/
 void CTopologyWidget::deleteChildItems(QGraphicsItem* _item)
 {
@@ -1694,7 +1694,7 @@ void CTopologyWidget::deleteChildItems(QGraphicsItem* _item)
 //                out<<t_node.linkPort_remark<<"\n";
 
 //                out<<t_node.linkType<<"\n";
-//                out<<t_node.bandWidth<<"\n";//Á´Â·´ø¿í
+//                out<<t_node.bandWidth<<"\n";//é“¾è·¯å¸¦å®½
 //                out<<t_node.delay<<"\n";
 //            }
 //        }
@@ -1791,14 +1791,14 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
     //m_platform->ui_DeviceInfTable->verticalHeader()->setHidden(true);
     //m_platform->ui_DeviceInfTable->horizontalHeader()->setHidden(true);
 
-    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("ÀàĞÍ: "));
+    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("ç±»å‹: "));
     newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(0, 0, newItem00);
     QTableWidgetItem *newItem01 = new QTableWidgetItem(_switcherInfo.typeName);
     newItem01->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(0, 1, newItem01);
 
-    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("Ãû³Æ: "));
+    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("åç§°: "));
     newItem10->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(1, 0, newItem10);
     QTableWidgetItem *newItem11 = new QTableWidgetItem(_switcherInfo.name);
@@ -1812,7 +1812,7 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
     newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(2, 1, newItem21);
 
-    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("¶Ë¿ÚÊı: "));
+    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("ç«¯å£æ•°: "));
     newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(3, 0, newItem30);
     QTableWidgetItem *newItem31 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.portNum));
@@ -1820,9 +1820,9 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
     m_platform->ui_DeviceInfTable->setItem(3, 1, newItem31);
 
 
-    m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //ÉèÖÃÑ¡ÔñµÄÄ£Ê½Îªµ¥Ñ¡Ôñ
-    m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //ÉèÖÃÑ¡ÔñĞĞÎªÊ±Ã¿´ÎÑ¡ÔñÒ»ĞĞ
-    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //ÉèÖÃ²»ÏÔÊ¾¸ñ×ÓÏß
+    m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //è®¾ç½®é€‰æ‹©çš„æ¨¡å¼ä¸ºå•é€‰æ‹©
+    m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //è®¾ç½®é€‰æ‹©è¡Œä¸ºæ—¶æ¯æ¬¡é€‰æ‹©ä¸€è¡Œ
+    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //è®¾ç½®ä¸æ˜¾ç¤ºæ ¼å­çº¿
     //m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
     //m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
     m_platform->ui_DeviceInfTable->resizeColumnsToContents();
@@ -1851,14 +1851,14 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
     m_platform->ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
     m_platform->ui_DeviceInfTable->verticalHeader()->setStretchLastSection(true);
 
-    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("ÀàĞÍ: "));
+    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("ç±»å‹: "));
     newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(0, 0, newItem00);
     QTableWidgetItem *newItem01 = new QTableWidgetItem(_switcherInfo.typeName);
     newItem01->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(0, 1, newItem01);
 
-    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("Ãû³Æ: "));
+    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("åç§°: "));
     newItem10->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(1, 0, newItem10);
     QTableWidgetItem *newItem11 = new QTableWidgetItem(_switcherInfo.name);
@@ -1872,14 +1872,14 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
     newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(2, 1, newItem21);
 
-    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("Á¬½ÓµÄ½»»»»úID: "));
+    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("è¿æ¥çš„äº¤æ¢æœºID: "));
     newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(3, 0, newItem30);
     QTableWidgetItem *newItem31 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSId));
     newItem31->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(3, 1, newItem31);
 
-    QTableWidgetItem *newItem40 = new QTableWidgetItem(tr("½»»»»ú¶Ë¿ÚºÅ: "));
+    QTableWidgetItem *newItem40 = new QTableWidgetItem(tr("äº¤æ¢æœºç«¯å£å·: "));
     newItem40->setTextAlignment(Qt::AlignRight| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(4, 0, newItem40);
     QTableWidgetItem *newItem41 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSPort));
@@ -1887,9 +1887,9 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
     m_platform->ui_DeviceInfTable->setItem(4, 1, newItem41);
 
 
-    m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //ÉèÖÃÑ¡ÔñµÄÄ£Ê½Îªµ¥Ñ¡Ôñ
-    m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //ÉèÖÃÑ¡ÔñĞĞÎªÊ±Ã¿´ÎÑ¡ÔñÒ»ĞĞ
-    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //ÉèÖÃ²»ÏÔÊ¾¸ñ×ÓÏß
+    m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //è®¾ç½®é€‰æ‹©çš„æ¨¡å¼ä¸ºå•é€‰æ‹©
+    m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //è®¾ç½®é€‰æ‹©è¡Œä¸ºæ—¶æ¯æ¬¡é€‰æ‹©ä¸€è¡Œ
+    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //è®¾ç½®ä¸æ˜¾ç¤ºæ ¼å­çº¿
     m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
     m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
     m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1),\
@@ -1949,7 +1949,7 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 //        t_rect = QRectF(x,y,z,w);
 
 
-//        //½»»»»ú
+//        //äº¤æ¢æœº
 //        if (item_type == 0)
 //        {
 //            CSwitcherInfo t_switchInfo;
@@ -1995,7 +1995,7 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 
 //                if (t_node.IP == networkID )
 //                {
-//                    QMessageBox::information(this, tr("´íÎó"), tr("%1 IPµØÖ·²»ÄÜÎªËùÔÚÍøºÅ£¡").arg(t_node.name),QMessageBox::Ok);
+//                    QMessageBox::information(this, tr("é”™è¯¯"), tr("%1 IPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘å·ï¼").arg(t_node.name),QMessageBox::Ok);
 //                    return;
 //                }
 //                if(!m_IPPool.count(networkID))
@@ -2005,7 +2005,7 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 //                    //full
 //                    if(m_IPPool[networkID] == 2)
 //                    {
-//                        QMessageBox::information(this,tr("´íÎó"),tr("%1 IPµØÖ·ËùÔÚÍøÂçÒÑ±»Ê¹ÓÃ!").arg(t_node.name),QMessageBox::Ok);
+//                        QMessageBox::information(this,tr("é”™è¯¯"),tr("%1 IPåœ°å€æ‰€åœ¨ç½‘ç»œå·²è¢«ä½¿ç”¨!").arg(t_node.name),QMessageBox::Ok);
 //                        return;
 //                    }
 //                    else
@@ -2040,11 +2040,11 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 //                QString desNetworkID = calculateNetworkID(t_node.linkPort_IP, t_node.linkPort_subnetMask);
 //                if(desNetworkID != networkID)
 //                {
-//                    QMessageBox::information(this,tr("´íÎó"),tr("%1 IPµØÖ·Óë¶Ô¶Ë²»ÔÚÍ¬Ò»ÍøÂç!").arg(t_node.linkPort_name),QMessageBox::Ok);
+//                    QMessageBox::information(this,tr("é”™è¯¯"),tr("%1 IPåœ°å€ä¸å¯¹ç«¯ä¸åœ¨åŒä¸€ç½‘ç»œ!").arg(t_node.linkPort_name),QMessageBox::Ok);
 //                }
 //                if (t_node.linkPort_IP == networkID )
 //                {
-//                    QMessageBox::information(this, tr("´íÎó"), tr("%1 IPµØÖ·²»ÄÜÎªËùÔÚÍøºÅ£¡").arg(t_node.linkPort_name),QMessageBox::Ok);
+//                    QMessageBox::information(this, tr("é”™è¯¯"), tr("%1 IPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘å·ï¼").arg(t_node.linkPort_name),QMessageBox::Ok);
 //                }
 
 //                t_node.linkPort_describe = lineList[lineNum];
@@ -2063,9 +2063,9 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 //            }
 //            CSwitcher* t_switch = new CSwitcher(NULL,m_scene);
 //            t_switch->setPos(t_pos);
-//            t_switch->setToolTip(tr("Ãû³Æ: ") + t_switchInfo.name + "\n"+
-//                                 tr("ĞÍºÅ:") + t_switchInfo.switchType + "\n" +
-//                                 tr("Î»ÖÃ: ") + t_switchInfo.networkLocation);
+//            t_switch->setToolTip(tr("åç§°: ") + t_switchInfo.name + "\n"+
+//                                 tr("å‹å·:") + t_switchInfo.switchType + "\n" +
+//                                 tr("ä½ç½®: ") + t_switchInfo.networkLocation);
 //            t_switch->setBoundingRect(t_rect);
 
 //            CNetworkPort *t_port = new CNetworkPort(t_switch, m_scene);
@@ -2079,7 +2079,7 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 //        }
 
 //    }
-//    //½âÎölink
+//    //è§£ælink
 //    int t_linksize = QVariant(lineList[lineNum]).toInt();
 //    lineNum++;
 //    if(t_linksize != 0)
@@ -2124,9 +2124,9 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
 //                t_linkInfo.ethernet_link_num = ethernet_linkNum;
 //                t_link->setLinkInfo(t_linkInfo);
 //                QString linkType = (_linkType == 0)?"POS":"Ethernet";
-//                t_link->setToolTip(tr("ÀàĞÍ:") + linkType + "\n" +
-//                                 tr("ËÙÂÊ:") + _bandWidth + "\n" +
-//                                 tr("Ê±ÑÓ:") + _delay + "\n");
+//                t_link->setToolTip(tr("ç±»å‹:") + linkType + "\n" +
+//                                 tr("é€Ÿç‡:") + _bandWidth + "\n" +
+//                                 tr("æ—¶å»¶:") + _delay + "\n");
 
 //                m_scene->addItem(t_link);
 //                m_itemGroup->addToGroup(t_link);
@@ -2215,8 +2215,8 @@ void CTopologyWidget::RefreshTopology()
         }
         CSwitcher* t_switch = new CSwitcher(NULL,m_scene);
         t_switch->setPos(t_pos);
-        t_switch->setToolTip(tr("Ãû³Æ: ") + t_switchInfo.name + "\n"+
-                             tr("ĞÍºÅ:") + t_switchInfo.typeName);
+        t_switch->setToolTip(tr("åç§°: ") + t_switchInfo.name + "\n"+
+                             tr("å‹å·:") + t_switchInfo.typeName);
         t_switch->setBoundingRect(t_rect);
 
         CNetworkPort *t_port = new CNetworkPort(t_switch, m_scene);
@@ -2251,8 +2251,8 @@ void CTopologyWidget::RefreshTopology()
 
         t_link->setLinkInfo(t_linkInfo);
         QString linkType = "Ethernet";
-        t_link->setToolTip(tr("ÀàĞÍ:") + linkType + "\n" +
-                         tr("ËÙÂÊ:") + t_linkInfo.bandWidth);
+        t_link->setToolTip(tr("ç±»å‹:") + linkType + "\n" +
+                         tr("é€Ÿç‡:") + t_linkInfo.bandWidth);
 
         m_scene->addItem(t_link);
         m_itemGroup->addToGroup(t_link);
@@ -2307,7 +2307,7 @@ void CTopologyWidget::zoomOut()
 //    //vector<vector<int> > adjacentMatrix = dragNetwork.GetAdjacentMatrix();
 //    vector<vector<SRouterInterfaceVec> > interfaceVec = dragNetwork.GetRouterInterfaceVec();
 
-//    //»æÖÆÍØÆË
+//    //ç»˜åˆ¶æ‹“æ‰‘
 //    clearScene();
 
 //    int nodeNum = dragNetwork.GetNodeNum();
@@ -2368,14 +2368,14 @@ void CTopologyWidget::zoomOut()
 //        t_switchInfo.ID = nodeStructVec[i].nID;
 //        t_switchInfo.portNum = 32;
 //        t_switchInfo.protocol = "Default";
-//        t_switchInfo.networkLocation = tr("¹Ç¸É²ã");
+//        t_switchInfo.networkLocation = tr("éª¨å¹²å±‚");
 
 //        for (size_t j = 0; j < interfaceVec[i].size(); j ++)
 //        {
 //            SNodeStructInfo t_node;
 //            t_node.Port_ID = interfaceVec[i][j].interfaceIndex;
 //            t_node.Device_ID = i;
-//            t_node.networkLocation = tr("¹Ç¸É²ã");
+//            t_node.networkLocation = tr("éª¨å¹²å±‚");
 //            t_node.name = QString::fromLocal8Bit(interfaceVec[i][j].routerName.c_str());
 //            t_node.interfaceName = QString::fromLocal8Bit(interfaceVec[i][j].interfaceName.c_str());
 //            t_node.area = "0";
@@ -2388,7 +2388,7 @@ void CTopologyWidget::zoomOut()
 
 //            if (t_node.IP == networkID )
 //            {
-//                QMessageBox::information(this, tr("´íÎó"), tr("%1 IPµØÖ·²»ÄÜÎªËùÔÚÍøºÅ£¡").arg(t_node.name),QMessageBox::Ok);
+//                QMessageBox::information(this, tr("é”™è¯¯"), tr("%1 IPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘å·ï¼").arg(t_node.name),QMessageBox::Ok);
 //            }
 //            if(!m_IPPool.count(networkID))
 //                m_IPPool[networkID] = 1;
@@ -2396,7 +2396,7 @@ void CTopologyWidget::zoomOut()
 //            {
 //                //full
 //                if(m_IPPool[networkID] == 2)
-//                    QMessageBox::information(this,tr("´íÎó"),tr("%1 IPµØÖ·ËùÔÚÍøÂçÒÑ±»Ê¹ÓÃ!").arg(t_node.name),QMessageBox::Ok);
+//                    QMessageBox::information(this,tr("é”™è¯¯"),tr("%1 IPåœ°å€æ‰€åœ¨ç½‘ç»œå·²è¢«ä½¿ç”¨!").arg(t_node.name),QMessageBox::Ok);
 //                else
 //                    m_IPPool[networkID] = 2;
 //            }
@@ -2419,11 +2419,11 @@ void CTopologyWidget::zoomOut()
 //            QString desNetworkID = calculateNetworkID(t_node.linkPort_IP, t_node.linkPort_subnetMask);
 //            if(desNetworkID != networkID)
 //            {
-//                QMessageBox::information(this,tr("´íÎó"),tr("%1 IPµØÖ·Óë¶Ô¶Ë²»ÔÚÍ¬Ò»ÍøÂç!").arg(t_node.linkPort_name),QMessageBox::Ok);
+//                QMessageBox::information(this,tr("é”™è¯¯"),tr("%1 IPåœ°å€ä¸å¯¹ç«¯ä¸åœ¨åŒä¸€ç½‘ç»œ!").arg(t_node.linkPort_name),QMessageBox::Ok);
 //            }
 //            if (t_node.linkPort_IP == networkID )
 //            {
-//                QMessageBox::information(this, tr("´íÎó"), tr("%1 IPµØÖ·²»ÄÜÎªËùÔÚÍøºÅ£¡").arg(t_node.linkPort_name),QMessageBox::Ok);
+//                QMessageBox::information(this, tr("é”™è¯¯"), tr("%1 IPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘å·ï¼").arg(t_node.linkPort_name),QMessageBox::Ok);
 //            }
 
 //            t_node.linkPort_describe = "";
@@ -2448,7 +2448,7 @@ void CTopologyWidget::zoomOut()
 //        //t_vSwitchInOut.push_back(t_switch);
 //        t_vPortInOut.push_back(t_port);
 //    }
-//    //½âÎölink
+//    //è§£ælink
 //    int t_linksize = dragNetwork.GetEdgetNum();
 //    if(t_linksize != 0)
 //    {
@@ -2501,7 +2501,7 @@ QString CTopologyWidget::calculateNetworkID(QString _IP, QString _mask)
     QList<QString> maskList = _mask.split('.');
     if(ipList.size() != 4 || maskList.size() != 4)
     {
-        QMessageBox::critical(this, tr("´íÎó"),tr("IPµØÖ·»ò×ÓÍøÑÚÂë´íÎó!"),QMessageBox::Ok);
+        QMessageBox::critical(this, tr("é”™è¯¯"),tr("IPåœ°å€æˆ–å­ç½‘æ©ç é”™è¯¯!"),QMessageBox::Ok);
         return NULL;
     }
     QString networkID1 = QString::number(ipList[0].toInt() & maskList[0].toInt());

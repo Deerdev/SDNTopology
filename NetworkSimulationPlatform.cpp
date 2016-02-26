@@ -1,4 +1,4 @@
-#include "NetworkSimulationPlatform.h"
+ï»¿#include "NetworkSimulationPlatform.h"
 #include <QSizePolicy>
 #include <unistd.h>
 #include <stdlib.h>
@@ -8,23 +8,23 @@
 
 /*************************************************
   Function: NetworkSimulationPlatform
-  Description: ¹¹Ôìº¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: æž„é€ å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 NetworkSimulationPlatform::NetworkSimulationPlatform(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	setupUi(this);
-	//³õÊ¼»¯½çÃæ
+	//åˆå§‹åŒ–ç•Œé¢
     init();
 }
 
 /*************************************************
   Function: ~NetworkSimulationPlatform
-  Description: Îö¹¹º¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: æžæž„å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 NetworkSimulationPlatform::~NetworkSimulationPlatform()
 {
@@ -33,16 +33,16 @@ NetworkSimulationPlatform::~NetworkSimulationPlatform()
 
 QString NetworkSimulationPlatform::getSysTime()
 {
-    QDateTime time = QDateTime::currentDateTime();//»ñÈ¡ÏµÍ³ÏÖÔÚµÄÊ±¼ä
-    QString str = time.toString("yyyy-MM-dd hh:mm:ss"); //ÉèÖÃÏÔÊ¾¸ñÊ½
+    QDateTime time = QDateTime::currentDateTime();//èŽ·å–ç³»ç»ŸçŽ°åœ¨çš„æ—¶é—´
+    QString str = time.toString("yyyy-MM-dd hh:mm:ss"); //è®¾ç½®æ˜¾ç¤ºæ ¼å¼
     return str;
 }
 
 /*************************************************
   Function: init
-  Description: ³õÊ¼»¯½çÃæ
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: åˆå§‹åŒ–ç•Œé¢
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::init( void )
 {
@@ -53,18 +53,18 @@ void NetworkSimulationPlatform::init( void )
     setCentralWidget(ui_editWidget);
     ui_editWidget->translate(1000,1000);
 
-    setWindowTitle(tr("SDNÍøÂçÍØÆË"));
-    setToolTip(tr("SDNÍøÂçÍØÆË"));
-    setStatusTip(tr("SDNÍøÂçÍØÆË"));
+    setWindowTitle(tr("SDNç½‘ç»œæ‹“æ‰‘"));
+    setToolTip(tr("SDNç½‘ç»œæ‹“æ‰‘"));
+    setStatusTip(tr("SDNç½‘ç»œæ‹“æ‰‘"));
 
-	//´´½¨¶¯×÷
+	//åˆ›å»ºåŠ¨ä½œ
 	createActions();
-	//´´½¨²Ëµ¥
+	//åˆ›å»ºèœå•
 	createMenu();
-	//´´½¨¹¤¾ßÀ¸
+	//åˆ›å»ºå·¥å…·æ 
 	createToolBar();
 
-	//´´½¨Í£¿¿´°¿Ú
+	//åˆ›å»ºåœé çª—å£
 	createDockWindow();
 
     m_currentPath = QDir::currentPath();
@@ -86,63 +86,63 @@ void NetworkSimulationPlatform::init( void )
 
 /*************************************************
   Function: createActions
-  Description: ´´½¨¶¯×÷
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: åˆ›å»ºåŠ¨ä½œ
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::createActions( void )
 {
-	//ÉèÖÃ¸÷¸ö¶¯×÷
-	/*×¢Òâ£º¶¯×÷ÓÃtriggered()´¥·¢£¬buttonÓÃclicked()´¥·¢*/
+	//è®¾ç½®å„ä¸ªåŠ¨ä½œ
+	/*æ³¨æ„ï¼šåŠ¨ä½œç”¨triggered()è§¦å‘ï¼Œbuttonç”¨clicked()è§¦å‘*/
 
-    /*ÉèÖÃ·Å´ó¶¯×÷*/
-    zoomInAction = new QAction( tr("·Å´ó"), this );
+    /*è®¾ç½®æ”¾å¤§åŠ¨ä½œ*/
+    zoomInAction = new QAction( tr("æ”¾å¤§"), this );
     zoomInAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/zoomIn.png"));
     connect( zoomInAction, SIGNAL(triggered()), ui_editWidget, SLOT(zoomIn()) );
 
-    /*ÉèÖÃËõÐ¡¶¯×÷*/
-    zoomOutAction = new QAction( tr("ËõÐ¡"), this );
+    /*è®¾ç½®ç¼©å°åŠ¨ä½œ*/
+    zoomOutAction = new QAction( tr("ç¼©å°"), this );
     zoomOutAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/zoomOut.png"));
     connect( zoomOutAction, SIGNAL(triggered()), ui_editWidget, SLOT(zoomOut()) );
 
-    /*ÉèÖÃ´ò¿ªÒÑÓÐÏîÄ¿¶¯×÷*/
-    refreshNetworkItemAction = new QAction( tr("¸üÐÂÍøÂç"), this );
+    /*è®¾ç½®æ‰“å¼€å·²æœ‰é¡¹ç›®åŠ¨ä½œ*/
+    refreshNetworkItemAction = new QAction( tr("æ›´æ–°ç½‘ç»œ"), this );
     refreshNetworkItemAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/refresh.png"));
     refreshNetworkItemAction->setShortcut(tr("Ctrl+O"));
     connect( refreshNetworkItemAction, SIGNAL(triggered()), this, SLOT( refreshNetworkItem()) );
 
-    /*ÉèÖÃÍË³öÏµÍ³¶¯×÷*/
-    exitAction = new QAction( tr("ÍË³ö"), this );
+    /*è®¾ç½®é€€å‡ºç³»ç»ŸåŠ¨ä½œ*/
+    exitAction = new QAction( tr("é€€å‡º"), this );
     exitAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/exit.png"));
     exitAction->setShortcut(tr("Ctrl+Q"));
     connect( exitAction, SIGNAL(triggered()), this, SLOT(closeSimuWindowSlot()) );
 
-    /*Çå¿Õ»­²¼*/
-    clearseceneAction = new QAction(tr("Çå¿Õ»­²¼"), this);
+    /*æ¸…ç©ºç”»å¸ƒ*/
+    clearseceneAction = new QAction(tr("æ¸…ç©ºç”»å¸ƒ"), this);
     clearseceneAction->setIcon(QIcon(""));
     connect(clearseceneAction, SIGNAL(triggered()), this, SLOT(clearScene()));
 
-    flowShowAction = new QAction(tr("Á÷±í²é¿´"), this);
+    flowShowAction = new QAction(tr("æµè¡¨æŸ¥çœ‹"), this);
     flowShowAction->setIcon(QIcon(""));
     connect(flowShowAction, SIGNAL(triggered()), this, SLOT());
 
-    flowEditAction = new QAction(tr("Á÷±í±à¼­"), this);
+    flowEditAction = new QAction(tr("æµè¡¨ç¼–è¾‘"), this);
     flowEditAction->setIcon(QIcon(""));
     connect(flowEditAction, SIGNAL(triggered()), this, SLOT(showFlowsSlot()));
 
-    paraTaskShowAction = new QAction(tr("²¢ÐÐÈÎÎñ"), this);
+    paraTaskShowAction = new QAction(tr("å¹¶è¡Œä»»åŠ¡"), this);
     paraTaskShowAction->setIcon(QIcon(""));
     connect(paraTaskShowAction, SIGNAL(triggered()), this, SLOT());
 
-    switchPortInfAction = new QAction(tr("½»»»»ú¶Ë¿ÚÐÅÏ¢"), this);
+    switchPortInfAction = new QAction(tr("äº¤æ¢æœºç«¯å£ä¿¡æ¯"), this);
     switchPortInfAction->setIcon(QIcon(""));
     connect(switchPortInfAction, SIGNAL(triggered()), this, SLOT());
 
-    logShowAction = new QAction(tr("ÈÕÖ¾ÏÔÊ¾"), this);
+    logShowAction = new QAction(tr("æ—¥å¿—æ˜¾ç¤º"), this);
     logShowAction->setIcon(QIcon(""));
     connect(logShowAction, SIGNAL(triggered()), this, SLOT());
 
-    controllerShowAction = new QAction(tr("¿ØÖÆÆ÷ÐÅÏ¢"), this);
+    controllerShowAction = new QAction(tr("æŽ§åˆ¶å™¨ä¿¡æ¯"), this);
     controllerShowAction->setIcon(QIcon(""));
     connect(controllerShowAction, SIGNAL(triggered()), this, SLOT());
 
@@ -151,65 +151,65 @@ void NetworkSimulationPlatform::createActions( void )
 
 
     //*****************************************************************************************
-//	/*ÉèÖÃ´´½¨ÐÂÏîÄ¿¶¯×÷*/
-//	newNetworkItemAction = new QAction( tr("´´½¨ÐÂÏîÄ¿"), this );
+//	/*è®¾ç½®åˆ›å»ºæ–°é¡¹ç›®åŠ¨ä½œ*/
+//	newNetworkItemAction = new QAction( tr("åˆ›å»ºæ–°é¡¹ç›®"), this );
 //    newNetworkItemAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/newItem.png"));
 //	newNetworkItemAction->setShortcut(tr("Ctrl+N"));
 //	connect( newNetworkItemAction, SIGNAL(triggered()), this, SLOT(createNewNetworkItem()) );
 
-//	/*ÉèÖÃ±£´æ¶¯×÷*/
-//	saveItemAction = new QAction( tr("±£´æ"), this );
+//	/*è®¾ç½®ä¿å­˜åŠ¨ä½œ*/
+//	saveItemAction = new QAction( tr("ä¿å­˜"), this );
 //    saveItemAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/save.png"));
 //	saveItemAction->setShortcut(tr("Ctrl+S"));
 //	connect( saveItemAction, SIGNAL(triggered()), this, SLOT(saveItem()));
 
-//    /*ÉèÖÃ¿ªÊ¼·ÂÕæ*/
-//    startSimulateAction = new QAction( tr("¿ªÊ¼·ÂÕæ"), this );
+//    /*è®¾ç½®å¼€å§‹ä»¿çœŸ*/
+//    startSimulateAction = new QAction( tr("å¼€å§‹ä»¿çœŸ"), this );
 //    startSimulateAction->setShortcut(tr("Ctrl+S"));
 //    connect(startSimulateAction, SIGNAL(triggered()), this, SLOT(startSimulate()));
 
-//    /*³éÈ¡SNMPÍØÆË*/
-//    importSNMPTopologyAction = new QAction( tr("½âÎöSNMPµ¼ÈëÍØÆË"), this);
+//    /*æŠ½å–SNMPæ‹“æ‰‘*/
+//    importSNMPTopologyAction = new QAction( tr("è§£æžSNMPå¯¼å…¥æ‹“æ‰‘"), this);
 //    connect(importSNMPTopologyAction, SIGNAL(triggered()), this, SLOT(importSNMPTopology()));
 
-//	/*ÉèÖÃ²¼¾ÖËã·¨¶¯×÷*/
-//	layoutAction = new QAction( tr("²¼¾Ö"), this );
+//	/*è®¾ç½®å¸ƒå±€ç®—æ³•åŠ¨ä½œ*/
+//	layoutAction = new QAction( tr("å¸ƒå±€"), this );
 //    layoutAction->setIcon(QIcon(":/NetworkSimulationPlatform/Resources/layout.png"));
 //	connect( layoutAction, SIGNAL(triggered()), this, SLOT(layoutAlgorithm()) );
 
-//	/*ÉèÖÃÁ´Â·ÅäÖÃ¶¯×÷*/
-//	flowSetAction = new QAction( tr("Á´Â·ÅäÖÃ"), this );
+//	/*è®¾ç½®é“¾è·¯é…ç½®åŠ¨ä½œ*/
+//	flowSetAction = new QAction( tr("é“¾è·¯é…ç½®"), this );
 //	flowSetAction->setIcon(QIcon(""));
 //	connect( flowSetAction, SIGNAL(triggered()), this, SLOT(setFlow()) );
-//	/*ÉèÖÃÁ÷Á¿ÅäÖÃ¶¯×÷*/
-//	linkSetAction = new QAction( tr("Á÷Á¿ÅäÖÃ"), this );
+//	/*è®¾ç½®æµé‡é…ç½®åŠ¨ä½œ*/
+//	linkSetAction = new QAction( tr("æµé‡é…ç½®"), this );
 //	linkSetAction->setIcon(QIcon(""));
 //	connect( linkSetAction, SIGNAL(triggered()), this, SLOT(setLink()) );
 //    /**/
-//    configTaskAction = new QAction(tr("ÈÎÎñÅäÖÃ"), this);
+//    configTaskAction = new QAction(tr("ä»»åŠ¡é…ç½®"), this);
 //    configTaskAction->setIcon(QIcon(""));
 //    connect( configTaskAction, SIGNAL(triggered()), this, SLOT(configTask()) );
-//    eventSchedulAction = new QAction(tr("ÊÂ¼þµ÷¶È"), this);
+//    eventSchedulAction = new QAction(tr("äº‹ä»¶è°ƒåº¦"), this);
 //    connect(eventSchedulAction, SIGNAL(triggered() ), this, SLOT(eventSchedul() ) );
 //    /**/
-//    partitionNumAction = new QAction(tr("ÍøÂç»®·ÖÊýÁ¿"),this);
+//    partitionNumAction = new QAction(tr("ç½‘ç»œåˆ’åˆ†æ•°é‡"),this);
 //    partitionNumAction->setIcon(QIcon(""));
 //    connect( partitionNumAction, SIGNAL(triggered()), this, SLOT(setPartitonNum()) );
-//    networkBandAction = new QAction( tr("ÍøÂç´ø¿í"), this);
-//    networkCapacityAction = new QAction( tr("ÍøÂçÍÌÍÂÁ¿"), this);
+//    networkBandAction = new QAction( tr("ç½‘ç»œå¸¦å®½"), this);
+//    networkCapacityAction = new QAction( tr("ç½‘ç»œåžåé‡"), this);
 
 
 }
 
 /*************************************************
   Function: createNewNetworkItem
-  Description: ´´½¨ÐÂÏîÄ¿²Ûº¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: åˆ›å»ºæ–°é¡¹ç›®æ§½å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::createNewNetworkItem( void )
 {
-    //µ¯³ö´´½¨ÐÂÏîÄ¿¶Ô»°¿ò
+    //å¼¹å‡ºåˆ›å»ºæ–°é¡¹ç›®å¯¹è¯æ¡†
     m_newFile = new CWizard;
     connect(m_newFile, SIGNAL(accepted()), this, SLOT(slotNewFile()));
     m_newFile->exec();
@@ -217,34 +217,34 @@ void NetworkSimulationPlatform::createNewNetworkItem( void )
 
 /*************************************************
   Function: openNetworkItem
-  Description: ´ò¿ªÏîÄ¿²Ûº¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: æ‰“å¼€é¡¹ç›®æ§½å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::refreshNetworkItem( void )
 {
-	//µ¯³ö´ò¿ªÏîÄ¿¶Ô»°¿ò
+	//å¼¹å‡ºæ‰“å¼€é¡¹ç›®å¯¹è¯æ¡†
     ui_editWidget->RefreshTopology();
 
 }
 
 /*************************************************
   Function: zoomIn
-  Description: ·Å´óÍØÆË²Ûº¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: æ”¾å¤§æ‹“æ‰‘æ§½å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::zoomIn(void)
 {
-	//×¢Òâ·Å´óµÄÊÇÍ¼Ôª
+	//æ³¨æ„æ”¾å¤§çš„æ˜¯å›¾å…ƒ
 
 }
 
 /*************************************************
   Function: zoomOut
-  Description: ËõÐ¡ÍØÆË²Ûº¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: ç¼©å°æ‹“æ‰‘æ§½å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::zoomOut(void)
 {
@@ -252,8 +252,8 @@ void NetworkSimulationPlatform::zoomOut(void)
 
 void NetworkSimulationPlatform::closeSimuWindowSlot()
 {
-    int ret = QMessageBox::warning(this, tr("¹Ø±Õ³ÌÐò"),
-                                    tr("È·¶¨Òª¹Ø±Õ³ÌÐò£¿"),
+    int ret = QMessageBox::warning(this, tr("å…³é—­ç¨‹åº"),
+                                    tr("ç¡®å®šè¦å…³é—­ç¨‹åºï¼Ÿ"),
                                     QMessageBox::Yes | QMessageBox::Cancel,
                                     QMessageBox::Cancel);
     if (ret == QMessageBox::Yes)
@@ -271,9 +271,9 @@ void NetworkSimulationPlatform::showFlowsSlot()
 
 /*************************************************
   Function: clearScene
-  Description: Çå¿Õ»­²¼
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: æ¸…ç©ºç”»å¸ƒ
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::clearScene(void)
 {
@@ -283,20 +283,20 @@ void NetworkSimulationPlatform::clearScene(void)
 
 /*************************************************
   Function: layoutAlgorithm
-  Description: ²¼¾ÖËã·¨²Ûº¯Êý
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: å¸ƒå±€ç®—æ³•æ§½å‡½æ•°
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::layoutAlgorithm( void )
 {
-	//¿ÉÒÔ¿¼ÂÇÌá¹©¶à¸ö²¼¾ÖËã·¨
+	//å¯ä»¥è€ƒè™‘æä¾›å¤šä¸ªå¸ƒå±€ç®—æ³•
 
 }
 
 void NetworkSimulationPlatform::closeEvent(QCloseEvent *event)
 {
-//    int ret = QMessageBox::warning(this, tr("¹Ø±Õ³ÌÐò"),
-//                                    tr("È·¶¨Òª¹Ø±Õ³ÌÐò£¿"),
+//    int ret = QMessageBox::warning(this, tr("å…³é—­ç¨‹åº"),
+//                                    tr("ç¡®å®šè¦å…³é—­ç¨‹åºï¼Ÿ"),
 //                                    QMessageBox::Yes | QMessageBox::Cancel,
 //                                    QMessageBox::Cancel);
 //    if (ret == QMessageBox::Yes)
@@ -308,9 +308,9 @@ void NetworkSimulationPlatform::closeEvent(QCloseEvent *event)
 
 /*************************************************
   Function: createToolBar
-  Description: ´´½¨¹¤¾ßÀ¸
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: åˆ›å»ºå·¥å…·æ 
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::createToolBar( void )
 {
@@ -323,19 +323,19 @@ void NetworkSimulationPlatform::createToolBar( void )
 	mainToolBar->addSeparator();
 	mainToolBar->addAction(zoomInAction);
 	mainToolBar->addAction(zoomOutAction);
-    //mainToolBar->addAction(layoutAction); //ÍØÆË²¼¾Ö
+    //mainToolBar->addAction(layoutAction); //æ‹“æ‰‘å¸ƒå±€
     //mainToolBar->addAction(configTaskAction);
 }
 
 /*************************************************
   Function: createToolBar
-  Description: ´´½¨¹¤¾ßÀ¸
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: åˆ›å»ºå·¥å…·æ 
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::createMenu( void )
 {
-    menu_startMenu = QMainWindow::menuBar()->addMenu(tr("¿ªÊ¼"));
+    menu_startMenu = QMainWindow::menuBar()->addMenu(tr("å¼€å§‹"));
 
     menu_startMenu->addAction(refreshNetworkItemAction);
     //menu_startMenu->addAction(importSNMPTopologyAction);
@@ -343,7 +343,7 @@ void NetworkSimulationPlatform::createMenu( void )
     //menu_startMenu->addAction(deleteBackgroundAction);
     menu_startMenu->addAction(exitAction);
 
-    menu_networkEditMenu = QMainWindow::menuBar()->addMenu(tr("±à¼­"));
+    menu_networkEditMenu = QMainWindow::menuBar()->addMenu(tr("ç¼–è¾‘"));
     //menu_networkEditMenu->addAction(saveItemAction);
     menu_networkEditMenu->addAction(zoomInAction);
     menu_networkEditMenu->addAction(zoomOutAction);
@@ -351,37 +351,37 @@ void NetworkSimulationPlatform::createMenu( void )
     //menu_networkEditMenu->addAction(importTopologyAction);
     menu_networkEditMenu->addAction(clearseceneAction);
 
-    menu_flowEditMenu = QMainWindow::menuBar()->addMenu(tr("Á÷±í"));
+    menu_flowEditMenu = QMainWindow::menuBar()->addMenu(tr("æµè¡¨"));
     //menu_flowEditMenu->addAction(flowShowAction);
     menu_flowEditMenu->addAction(flowEditAction);
-    menu_taskShowMenu = QMainWindow::menuBar()->addMenu(tr("ÈÎÎñ"));
+    menu_taskShowMenu = QMainWindow::menuBar()->addMenu(tr("ä»»åŠ¡"));
     menu_taskShowMenu->addAction(paraTaskShowAction);
-    menu_DockShowMenu = QMainWindow::menuBar()->addMenu(tr("´°¿Ú"));
-    menu_infShowMenu = QMainWindow::menuBar()->addMenu(tr("ÐÅÏ¢"));
+    menu_DockShowMenu = QMainWindow::menuBar()->addMenu(tr("çª—å£"));
+    menu_infShowMenu = QMainWindow::menuBar()->addMenu(tr("ä¿¡æ¯"));
     menu_infShowMenu->addAction(switchPortInfAction);
     menu_infShowMenu->addAction(logShowAction);
     menu_infShowMenu->addAction(controllerShowAction);
 
-//    menu_configNetworkMenu = menu_networkEditMenu->addMenu(tr("ÅäÖÃ"));
+//    menu_configNetworkMenu = menu_networkEditMenu->addMenu(tr("é…ç½®"));
 //    menu_configNetworkMenu->addAction(linkSetAction);
 //    menu_configNetworkMenu->addAction(flowSetAction);
 //    menu_configNetworkMenu->addAction(partitionNumAction);
 
-    //menu_toolMenu = menu_networkEditMenu->addMenu(tr("¹¤¾ß"));
-//    menu_networkStateMenu = QMainWindow::menuBar()->addMenu(tr("ÍøÂçÔËÐÐ×´Ì¬"));
+    //menu_toolMenu = menu_networkEditMenu->addMenu(tr("å·¥å…·"));
+//    menu_networkStateMenu = QMainWindow::menuBar()->addMenu(tr("ç½‘ç»œè¿è¡ŒçŠ¶æ€"));
 //    menu_networkStateMenu->addAction(networkBandAction);
 //    menu_networkStateMenu->addAction(networkCapacityAction);
 
-//    menu_configTaskMenu = QMainWindow::menuBar()->addMenu(tr("ÈÎÎñ¹ÜÀí"));
+//    menu_configTaskMenu = QMainWindow::menuBar()->addMenu(tr("ä»»åŠ¡ç®¡ç†"));
 //    menu_configTaskMenu->addAction(configTaskAction);
 //    menu_configTaskMenu->addAction(eventSchedulAction);
 }
 
 /*************************************************
   Function: setFlow
-  Description: Á÷Á¿ÅäÖÃ
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: æµé‡é…ç½®
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::setFlow( void )
 {
@@ -390,9 +390,9 @@ void NetworkSimulationPlatform::setFlow( void )
 
 /*************************************************
   Function: setLink
-  Description: Á´Â·ÅäÖÃ
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: é“¾è·¯é…ç½®
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::setLink( void )
 {
@@ -401,40 +401,40 @@ void NetworkSimulationPlatform::setLink( void )
 
 /*************************************************
   Function: createDockWindow
-  Description: ´´½¨Í£¿¿´°¿Ú
-  Parameter: ÎÞ
-  Return: ÎÞ
+  Description: åˆ›å»ºåœé çª—å£
+  Parameter: æ— 
+  Return: æ— 
 *************************************************/
 void NetworkSimulationPlatform::createDockWindow( void )
 {
-//    ui_networkDeviceDock = new QDockWidget(tr("ÍøÂçÉè±¸"), this);
+//    ui_networkDeviceDock = new QDockWidget(tr("ç½‘ç»œè®¾å¤‡"), this);
 //    ui_networkDeviceWidget = new QWidget(ui_networkDeviceDock);
 //    ui_networkToolBox = new QToolBox(ui_networkDeviceWidget);
 //    ui_routerDevice = new QWidget;
 //    ui_PCDevice = new QWidget;
 
-//    ui_networkToolBox->addItem(ui_routerDevice, tr("Â·ÓÉÆ÷"));
-//    ui_networkToolBox->addItem(ui_PCDevice, tr("ÖÕ¶Ë"));
+//    ui_networkToolBox->addItem(ui_routerDevice, tr("è·¯ç”±å™¨"));
+//    ui_networkToolBox->addItem(ui_PCDevice, tr("ç»ˆç«¯"));
 
-//    //ËùÓÐµÄÉè±¸ÔÚCUnitboxwidgetÀàÖÐÌí¼Ó
+//    //æ‰€æœ‰çš„è®¾å¤‡åœ¨CUnitboxwidgetç±»ä¸­æ·»åŠ 
 //    ui_unitboxwidget = new CUnitboxWidget(ui_routerDevice);
 //    ui_editWidget->setLabelWidget(ui_unitboxwidget);
 
-//	//ÉèÖÃÕ¤¸ñ²¼¾Ö
+//	//è®¾ç½®æ …æ ¼å¸ƒå±€
 //    ui_toolBoxGridLayout = new QGridLayout(ui_networkDeviceWidget);
 //    ui_toolBoxGridLayout->setSpacing(6);
 //    ui_toolBoxGridLayout->setMargin(11);
 //    ui_toolBoxGridLayout->addWidget(ui_networkToolBox, 0, 0, 1, 1);
-//    ui_networkDeviceDock->setMinimumWidth(150);//ÉèÖÃ×îÐ¡¿í¶È
+//    ui_networkDeviceDock->setMinimumWidth(150);//è®¾ç½®æœ€å°å®½åº¦
 
-//	/*ÉèÖÃÉè±¸Í£¿¿´°¿ÚÍ£¿¿ÇøÓò*/
+//	/*è®¾ç½®è®¾å¤‡åœé çª—å£åœé åŒºåŸŸ*/
 //    ui_networkDeviceDock->setAllowedAreas(Qt::AllDockWidgetAreas);
 //    ui_networkDeviceDock->setWidget(ui_networkDeviceWidget);
 //    addDockWidget(Qt::RightDockWidgetArea, ui_networkDeviceDock);
 //    menu_toolMenu->addAction(ui_networkDeviceDock->toggleViewAction());
 
-	/*ÉèÖÃ²Ù×÷¼ÇÂ¼Í£¿¿´°¿ÚÍ£¿¿ÇøÓò*/
-    ui_historyDock = new QDockWidget(tr("²Ù×÷¼ÇÂ¼"), this);
+	/*è®¾ç½®æ“ä½œè®°å½•åœé çª—å£åœé åŒºåŸŸ*/
+    ui_historyDock = new QDockWidget(tr("æ“ä½œè®°å½•"), this);
     ui_historyDock->setMinimumHeight(50);
     ui_historyDock->setMaximumHeight(150);
 
@@ -445,7 +445,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     addDockWidget(Qt::BottomDockWidgetArea, ui_historyDock);
     menu_DockShowMenu->addAction(ui_historyDock->toggleViewAction());
 
-    ui_DeviceInfDock = new QDockWidget(tr("Éè±¸ÐÅÏ¢"), this);
+    ui_DeviceInfDock = new QDockWidget(tr("è®¾å¤‡ä¿¡æ¯"), this);
     ui_DeviceInfDock->setMinimumWidth(250);
     ui_DeviceInfDock->setMaximumWidth(500);
 
