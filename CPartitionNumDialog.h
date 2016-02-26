@@ -1,4 +1,4 @@
-﻿#ifndef CPARTITIONNUMDIALOG_H
+#ifndef CPARTITIONNUMDIALOG_H
 #define CPARTITIONNUMDIALOG_H
 
 #include <QDialog>

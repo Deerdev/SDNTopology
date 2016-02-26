@@ -1,4 +1,4 @@
-﻿#ifndef CPORTDIALOG_H
+#ifndef CPORTDIALOG_H
 #define CPORTDIALOG_H
 
 #include <QDialog>

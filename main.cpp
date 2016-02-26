@@ -1,4 +1,4 @@
-ï»¿#include <QtGui/QApplication>
+#include <QtGui/QApplication>
 #include <QTextCodec>
 #include <QTranslator>
 #include "NetworkSimulationPlatform.h"
@@ -6,10 +6,10 @@
 int main(int argc, char *argv[])
 {
 	QTranslator oTranslator;
-    oTranslator.load("qt_zh_CN.qm"); //æ³¨æ„æ­¤å¤„å­—ç¬¦ä¸²ä»¥â€œï¼š/â€å¼€å¤´ï¼Œåæ¥çš„å­—ç¬¦ä¸²æ˜¯åˆšæ‰å¤åˆ¶çš„qmæ–‡ä»¶çš„åå­—
+    oTranslator.load("qt_zh_CN.qm"); //×¢Òâ´Ë´¦×Ö·û´®ÒÔ¡°£º/¡±¿ªÍ·£¬ºó½ÓµÄ×Ö·û´®ÊÇ¸Õ²Å¸´ÖÆµÄqmÎÄ¼şµÄÃû×Ö
 	QApplication a(argc, argv);
 	a.installTranslator(&oTranslator);
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("gbk"));//è®¾ç½®å¯ä»¥æ˜¾ç¤ºä¸­æ–‡
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("gbk"));//ÉèÖÃ¿ÉÒÔÏÔÊ¾ÖĞÎÄ
 
     NetworkSimulationPlatform w;
 	w.showMaximized();

@@ -1,4 +1,4 @@
-﻿#ifndef _UNITBOXWIDGET_H
+#ifndef _UNITBOXWIDGET_H
 #define _UNITBOXWIDGET_H
 
 #include <QDockWidget> 

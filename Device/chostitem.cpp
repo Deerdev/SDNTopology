@@ -1,4 +1,4 @@
-ï»¿#include "CHostItem.h"
+#include "CHostItem.h"
 #include<QFont>
 #include <QFontMetrics>
 #include <QMessageBox>
@@ -30,7 +30,7 @@ void CHostItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 {
     QPen t_pen;
     painter->setPen(t_pen);
-    QBrush t_brush(Qt::white);  //ç¬”åˆ·å¡«å……é¢œè‰²ï¼šç™½è‰²
+    QBrush t_brush(Qt::white);  //±ÊË¢Ìî³äÑÕÉ«£º°×É«
     painter->setBrush(t_brush);
 
 //    if(*m_Szoom < 0)
@@ -38,7 +38,7 @@ void CHostItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 //        painter->translate(50, 50);
 //    }
 
-    painter->save();  //ä¿å­˜å½“å‰painterçŠ¶æ€
+    painter->save();  //±£´æµ±Ç°painter×´Ì¬
     painter->setRenderHint(QPainter::Antialiasing, true);
     QRectF rectangle(2, 7, m_boundingRect.width() - 4,m_boundingRect.height() - 4);
     painter->drawRoundedRect(rectangle,20,15);
@@ -116,7 +116,7 @@ void CHostItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
         t_textHeight = m_boundingRect.height()/4;
     }
 
-    //é™å®šå­—ä½“å¤§å°
+    //ÏŞ¶¨×ÖÌå´óĞ¡
     if (t_textWidth2 < m_boundingRect.width())
     {
         t_fontSize = 10;
@@ -132,7 +132,7 @@ void CHostItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
         t_fontSize = m_boundingRect.width()/20;
     }
 
-    //æ–‡å­—
+    //ÎÄ×Ö
     painter->setRenderHint(QPainter::Antialiasing, true);
     painter->setFont(t_font);
     //QPointF t_text1Pos(m_boundingRect.width()/2 - t_textWidth1/2,m_boundingRect.height()/4 /*- t_textHeight*/);
@@ -142,7 +142,7 @@ void CHostItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 //	painter->drawText(t_text2Pos.x(),t_text2Pos.y(),t_str2);
     painter->drawText(0, 5, t_str2);
 
-    //äº¤å‰çº¿
+    //½»²æÏß
     painter->setRenderHint(QPainter::Antialiasing, true);
     t_pen.setWidth(2);
 
@@ -159,7 +159,7 @@ void CHostItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
     QPointF t_pnt8(m_boundingRect.width()*7/8-8,m_boundingRect.height()*5/8+5);
 
 
-    //ç®­å¤´ç‚¹åæ ‡
+    //¼ıÍ·µã×ø±ê
     QPointF t_pnt11(m_boundingRect.width()/8+8+5,m_boundingRect.height()*3/8-3+5);
     QPointF t_pnt12(m_boundingRect.width()/8+8+5,m_boundingRect.height()*3/8+3+5);
 

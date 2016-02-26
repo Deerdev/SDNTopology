@@ -1,10 +1,10 @@
-ï»¿/************************************************************
-  Copyright (C), 2014-2015, ç”µå­ç§‘æŠ€å¤§å­¦.
+/************************************************************
+  Copyright (C), 2014-2015, µç×Ó¿Æ¼¼´óÑ§.
   FileName: NetworkSimulationPlatform.h
-  Author: ç¨‹è¯š
+  Author: ³Ì³Ï
   Version: 1.0
   Date: 2014.7.14
-  Description: ç¨‹åºä¸»ç•Œé¢   
+  Description: ³ÌĞòÖ÷½çÃæ   
 ***********************************************************/
 
 #ifndef NETWORKSIMULATIONPLATFORM_H
@@ -56,7 +56,7 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
        // void startSimulate(void);
         //void exportTopology(void);
         //void importTopology(void);
-        //ç½‘ç»œç¼–è¾‘æ¨¡å—æ§½å‡½æ•°
+        //ÍøÂç±à¼­Ä£¿é²Ûº¯Êı
         void createNewNetworkItem(void);
 		void setFlow(void);
 		void setLink(void);

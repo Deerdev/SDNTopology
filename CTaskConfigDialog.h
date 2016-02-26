@@ -1,4 +1,4 @@
-﻿#ifndef CTASKCONFIGDIALOG_H
+#ifndef CTASKCONFIGDIALOG_H
 #define CTASKCONFIGDIALOG_H
 
 #include <QDialog>

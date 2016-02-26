@@ -1,4 +1,4 @@
-ï»¿#include "BoundingRectItem.h"
+#include "BoundingRectItem.h"
 #include <QPen>
 #include <QGraphicsRectItem>
 
@@ -105,7 +105,7 @@ void CBoundingRectItem::drawBoundingItem()
 }
 void CBoundingRectItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget  ) 
 {
-	//è™šçº¿è¾¹æ¡†
+	//ÐéÏß±ß¿ò
 //    if(*m_Bzoom < 0)
 //    {
 //        painter->translate(50,50);

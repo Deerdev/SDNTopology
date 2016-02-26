@@ -1,4 +1,4 @@
-﻿#ifndef DATADEFINE_H
+#ifndef DATADEFINE_H
 #define DATADEFINE_H
 
 #include <iostream>

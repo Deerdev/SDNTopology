@@ -1,4 +1,4 @@
-﻿#ifndef CONOFFAPPTASKDIALOG_H
+#ifndef CONOFFAPPTASKDIALOG_H
 #define CONOFFAPPTASKDIALOG_H
 
 #include <QDialog>

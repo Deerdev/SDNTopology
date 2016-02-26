@@ -1,7 +1,7 @@
-ï»¿#ifndef _SWITCHER_H
+#ifndef _SWITCHER_H
 #define _SWITCHER_H
 /************************************************************************
-æ¨¡å—æè¿°:  ä¸»æœºè®¾å¤‡
+Ä£¿éÃèÊö:  Ö÷»úÉè±¸
 ************************************************************************/
 #include "CBaseObject.h"
 #include "../StructFile.h"
@@ -21,13 +21,13 @@ public:
     void mousedoubleclick();
     void setBoundingRect(QRectF _rect){m_boundingRect = _rect;prepareGeometryChange();boundingRect();}
 
-    void setSelectedFlag(bool _flag){m_selectedFlag = _flag;}//é€‰ä¸­æ ‡å¿—
+    void setSelectedFlag(bool _flag){m_selectedFlag = _flag;}//Ñ¡ÖĞ±êÖ¾
     bool getSelectedFlag(){return m_selectedFlag;}
 
     void setSwitcherInfo(const CHostItemInfo &_switcherInfo){m_switcherInfo = _switcherInfo;}
     CHostItemInfo &getSwitcherInfo(){return m_switcherInfo;}
 
-    //æ·»åŠ å·²ç»è¿æ¥çš„èŠ‚ç‚¹
+    //Ìí¼ÓÒÑ¾­Á¬½ÓµÄ½Úµã
     void addLinkedNode(SNodeStructInfo _nodeInfo){m_switcherInfo.LNodes.append(_nodeInfo);}
     void highLightSwitch(CHostItemInfo &_switchInfo);
 //	void hightLightDevice( bool flag = true);

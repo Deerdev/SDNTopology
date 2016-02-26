@@ -1,4 +1,4 @@
-ï»¿#include "CSwitherConfigure.h"
+#include "CSwitherConfigure.h"
 #include <QMessageBox>
 
 CSwitherConfigure::CSwitherConfigure(QWidget *parent)
@@ -8,18 +8,18 @@ CSwitherConfigure::CSwitherConfigure(QWidget *parent)
 
     ui.portNumComboBox->addItem("32");
     ui.portNumComboBox->addItem("48");
-    ui.deviceLocation->addItem(tr("éª¨å¹²å±‚"));
-    ui.deviceLocation->addItem(tr("æ±‡èšå±‚"));
-    ui.deviceLocation->addItem(tr("æ¥å…¥å±‚"));
+    ui.deviceLocation->addItem(tr("¹Ç¸É²ã"));
+    ui.deviceLocation->addItem(tr("»ã¾Û²ã"));
+    ui.deviceLocation->addItem(tr("½ÓÈë²ã"));
     ui.protocolComboBox->addItem("Default");
     ui.protocolComboBox->addItem("OSPF");
     ui.okButton->setFocus();
     ui.tableWidget->verticalHeader()->setResizeMode(QHeaderView::Stretch);
-    ui.tableWidget->setSelectionBehavior ( QAbstractItemView::SelectRows); //è®¾ç½®é€‰æ‹©è¡Œä¸ºï¼Œä»¥è¡Œä¸ºå•ä½
+    ui.tableWidget->setSelectionBehavior ( QAbstractItemView::SelectRows); //ÉèÖÃÑ¡ÔñĞĞÎª£¬ÒÔĞĞÎªµ¥Î»
     //ui.tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
     //ui.tableWidget->verticalHeader()->setHidden(true);
     //ui.tableWidget->setColumnCount(6);
-    //ui.tableWidget->setSelectionMode ( QAbstractItemView::SingleSelection); //è®¾ç½®é€‰æ‹©æ¨¡å¼ï¼Œé€‰æ‹©å•è¡Œ
+    //ui.tableWidget->setSelectionMode ( QAbstractItemView::SingleSelection); //ÉèÖÃÑ¡ÔñÄ£Ê½£¬Ñ¡Ôñµ¥ĞĞ
     //ui.tableWidget->setFocusPolicy(Qt::NoFocus);
 }
 
@@ -30,7 +30,7 @@ CSwitherConfigure::~CSwitherConfigure()
 
 void CSwitherConfigure::SetSwitcherInfo(CSwitcherInfo &_switcherInfo)
 {
-	m_switcherInfo = _switcherInfo;//è®¾ç½®äº¤æ¢æœºå±æ€§
+	m_switcherInfo = _switcherInfo;//ÉèÖÃ½»»»»úÊôĞÔ
     ui.deviceNameLineEdit->setText(m_switcherInfo.name);
 //    ui.deviceLocation->setText(m_switcherInfo.networkLocation);
     ui.id->setText( QVariant(m_switcherInfo.ID).toString());
@@ -45,11 +45,11 @@ void CSwitherConfigure::SetSwitcherInfo(CSwitcherInfo &_switcherInfo)
 	{
         ui.portNumComboBox->setCurrentIndex(1);
 	}
-    if(!(QString::compare(m_switcherInfo.networkLocation, tr("éª¨å¹²å±‚"), Qt::CaseInsensitive)))
+    if(!(QString::compare(m_switcherInfo.networkLocation, tr("¹Ç¸É²ã"), Qt::CaseInsensitive)))
     {
         ui.deviceLocation->setCurrentIndex(0);
     }
-    else if(!(QString::compare(m_switcherInfo.networkLocation, tr("æ±‡èšå±‚"), Qt::CaseInsensitive)))
+    else if(!(QString::compare(m_switcherInfo.networkLocation, tr("»ã¾Û²ã"), Qt::CaseInsensitive)))
     {
         ui.deviceLocation->setCurrentIndex(1);
     }
@@ -79,11 +79,11 @@ void CSwitherConfigure::SetSwitcherInfo(CSwitcherInfo &_switcherInfo)
         else
             ui.tableWidget->setItem(i,4,new QTableWidgetItem("Ethernet"));
         ui.tableWidget->setItem(i,5,new QTableWidgetItem(QVariant(m_switcherInfo.LNodes[i].bandWidth).toString()+"MB/s"));
-        ui.tableWidget->item(i, 2)->setFlags(Qt::NoItemFlags);//å¯¹ç«¯è®¾å¤‡åç§°ç½®ç°ä¸å¯ç¼–è¾‘
+        ui.tableWidget->item(i, 2)->setFlags(Qt::NoItemFlags);//¶Ô¶ËÉè±¸Ãû³ÆÖÃ»Ò²»¿É±à¼­
 
 //        for(int j = 2; j != 5; ++j)
 //        {
-//            ui.tableWidget->item(i, j)->setFlags(ui.tableWidget->item(i, j)->flags() & (~Qt::ItemIsEditable));//ä¸ç½®ç°ä¸”ä¸å¯ç¼–è¾‘
+//            ui.tableWidget->item(i, j)->setFlags(ui.tableWidget->item(i, j)->flags() & (~Qt::ItemIsEditable));//²»ÖÃ»ÒÇÒ²»¿É±à¼­
 //            ui.tableWidget->setItem(i, j, ui.tableWidget->item(i, j));
 //        }
     }
@@ -94,7 +94,7 @@ QString CSwitherConfigure::calculateNetworkID(QString _IP, QString _mask)
     QList<QString> maskList = _mask.split('.');
     if(ipList.size() != 4 || maskList.size() != 4)
     {
-        QMessageBox::critical(this, tr("é”™è¯¯"),tr("IPåœ°å€æˆ–å­ç½‘æ©ç é”™è¯¯!"),QMessageBox::Ok);
+        QMessageBox::critical(this, tr("´íÎó"),tr("IPµØÖ·»ò×ÓÍøÑÚÂë´íÎó!"),QMessageBox::Ok);
         return NULL;
     }
     QString networkID1 = QString::number(ipList[0].toInt() & maskList[0].toInt());
@@ -110,7 +110,7 @@ QString CSwitherConfigure::calculateNetworkBroadcast(QString _IP, QString _mask)
     QList<QString> maskList = _mask.split('.');
     if(ipList.size() != 4 || maskList.size() != 4)
     {
-        QMessageBox::critical(this, tr("é”™è¯¯"),tr("IPåœ°å€æˆ–å­ç½‘æ©ç é”™è¯¯!"),QMessageBox::Ok);
+        QMessageBox::critical(this, tr("´íÎó"),tr("IPµØÖ·»ò×ÓÍøÑÚÂë´íÎó!"),QMessageBox::Ok);
         return NULL;
     }
 
@@ -154,7 +154,7 @@ void CSwitherConfigure::on_okButton_clicked()
     }
     if(ui.deviceNameLineEdit->text() == "")
     {
-        QMessageBox::information(this, tr("æç¤º"), tr("è¯·è¾“å…¥è®¾å¤‡åç§°ï¼"));
+        QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÊäÈëÉè±¸Ãû³Æ£¡"));
         ui.deviceNameLineEdit->setFocus();
         return;
     }
@@ -165,10 +165,10 @@ void CSwitherConfigure::on_okButton_clicked()
     }
     for(int i = 0; i != ui.tableWidget->rowCount(); ++i)
     {
-        //åˆ¤æ–­ç«¯å£æ˜¯å¦ä¸ºç©º
+        //ÅĞ¶Ï¶Ë¿ÚÊÇ·ñÎª¿Õ
         if (ui.tableWidget->item(i, 0)->text() == "")
         {
-            QMessageBox::information(this, tr("æç¤º"), tr("è¯·è¾“å…¥æœ¬ç«¯ç«¯å£ï¼"));
+            QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÊäÈë±¾¶Ë¶Ë¿Ú£¡"));
             ui.tableWidget->setFocus();
             return;
         }
@@ -178,12 +178,12 @@ void CSwitherConfigure::on_okButton_clicked()
         m_switcherInfo.LNodes[0].interfaceName = ui.tableWidget->item(0, 0)->text();
         for(int i = 1; i != ui.tableWidget->rowCount(); ++i)
         {
-            //åˆ¤æ–­æœ¬ç«¯ç«¯å£æ˜¯å¦å·²è¢«ä½¿ç”¨
+            //ÅĞ¶Ï±¾¶Ë¶Ë¿ÚÊÇ·ñÒÑ±»Ê¹ÓÃ
             for(int j = 0; j != i; ++j)
             {
                 if(ui.tableWidget->item(i, 0)->text() == m_switcherInfo.LNodes[j].interfaceName)
                 {
-                    QMessageBox::information(this,tr("æç¤º"),tr("æºç«¯å£") + ui.tableWidget->item(i, 0)->text() + tr("å·²è¢«ä½¿ç”¨,è¯·é‡æ–°è¾“å…¥ï¼"), QMessageBox::Ok);
+                    QMessageBox::information(this,tr("ÌáÊ¾"),tr("Ô´¶Ë¿Ú") + ui.tableWidget->item(i, 0)->text() + tr("ÒÑ±»Ê¹ÓÃ,ÇëÖØĞÂÊäÈë£¡"), QMessageBox::Ok);
                     ui.tableWidget->setFocus();
                     return;
                 }
@@ -194,21 +194,21 @@ void CSwitherConfigure::on_okButton_clicked()
     for(int i = 0; i != ui.tableWidget->rowCount(); ++i)
     {
 
-        //åˆ¤æ–­IPæ˜¯å¦ä¸ºç©º
+        //ÅĞ¶ÏIPÊÇ·ñÎª¿Õ
         if (ui.tableWidget->item(i, 1)->text() == "")
         {
-            QMessageBox::information(this, tr("æç¤º"), tr("è¯·è¾“å…¥æœ¬ç«¯IPï¼"));
+            QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÊäÈë±¾¶ËIP£¡"));
             ui.tableWidget->setFocus();
             return;
         }
         if (ui.tableWidget->item(i, 3)->text() == "")
         {
-            QMessageBox::information(this, tr("æç¤º"), tr("è¯·è¾“å…¥å¯¹IPï¼"));
+            QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÊäÈë¶ÔIP£¡"));
             ui.tableWidget->setFocus();
             return;
         }
 
-        //åˆ¤æ–­IPæ˜¯å¦å¯ç”¨
+        //ÅĞ¶ÏIPÊÇ·ñ¿ÉÓÃ
         QString t_sip = ui.tableWidget->item(i, 1)->text();
         QString t_eip = ui.tableWidget->item(i, 3)->text();
         QString srcNetworkID = calculateNetworkID(t_sip, m_switcherInfo.LNodes[i].subnetMask);
@@ -216,14 +216,14 @@ void CSwitherConfigure::on_okButton_clicked()
         QString networkBroadcast = calculateNetworkBroadcast(t_sip, m_switcherInfo.LNodes[i].subnetMask);
         if(m_ipPond->count(t_sip))
         {
-            QMessageBox::information(this, tr("æç¤º"), "IP(" + t_sip + tr(")å·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"), "IP(" + t_sip + tr(")ÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 1)->text().clear();
             ui.tableWidget->setFocus();
             return;
         }
         if ( srcNetworkID != desNetworkID )
         {
-            QMessageBox::information(this, tr("æç¤º"),"IP(" + t_sip + tr(")ä¸IP(") + t_eip + tr(")ä¸åœ¨åŒä¸€ç½‘ç»œï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"),"IP(" + t_sip + tr(")ÓëIP(") + t_eip + tr(")²»ÔÚÍ¬Ò»ÍøÂç£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 1)->text().clear();
             ui.tableWidget->item(i, 3)->text().clear();
             ui.tableWidget->setFocus();
@@ -231,14 +231,14 @@ void CSwitherConfigure::on_okButton_clicked()
         }
         if (t_sip == srcNetworkID )
         {
-            QMessageBox::information(this, tr("æç¤º"),"IP(" + t_sip + tr(")ä¸ºæ‰€åœ¨ç½‘å·ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"),"IP(" + t_sip + tr(")ÎªËùÔÚÍøºÅ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 1)->text().clear();
             ui.tableWidget->setFocus();
             return;
         }
         if (t_sip == networkBroadcast )
         {
-            QMessageBox::information(this, tr("æç¤º"),"IP(" + t_sip + tr(")ä¸ºæ‰€åœ¨ç½‘ç»œå¹¿æ’­åœ°å€ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"),"IP(" + t_sip + tr(")ÎªËùÔÚÍøÂç¹ã²¥µØÖ·£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 1)->text().clear();
             ui.tableWidget->setFocus();
             return;
@@ -246,7 +246,7 @@ void CSwitherConfigure::on_okButton_clicked()
         m_ipPond->insert(t_sip);
         if(m_ipPond->count(t_eip))
         {
-            QMessageBox::information(this, tr("æç¤º"), "IP(" + t_eip + tr(")å·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"), "IP(" + t_eip + tr(")ÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 3)->text().clear();
             ui.tableWidget->setFocus();
             return;
@@ -254,7 +254,7 @@ void CSwitherConfigure::on_okButton_clicked()
 
 //        if (m_ipPool->count(srcNetworkID))
 //        {
-//            QMessageBox::information(this, tr("æç¤º"),"IP(" + t_sip + tr(")æ‰€åœ¨ç½‘ç»œå·å·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+//            QMessageBox::information(this, tr("ÌáÊ¾"),"IP(" + t_sip + tr(")ËùÔÚÍøÂçºÅÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
 //            ui.tableWidget->item(i, 1)->text().clear();
 //            return;
 //        }
@@ -262,7 +262,7 @@ void CSwitherConfigure::on_okButton_clicked()
 
         if (t_eip == srcNetworkID )
         {
-            QMessageBox::information(this, tr("æç¤º"),"IP(" + t_eip + tr(")ä¸ºæ‰€åœ¨ç½‘å·ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"),"IP(" + t_eip + tr(")ÎªËùÔÚÍøºÅ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 3)->text().clear();
             ui.tableWidget->setFocus();
             return;
@@ -270,7 +270,7 @@ void CSwitherConfigure::on_okButton_clicked()
 
         if (t_eip == networkBroadcast )
         {
-            QMessageBox::information(this, tr("æç¤º"),"IP(" + t_eip + tr(")ä¸ºæ‰€åœ¨ç½‘ç»œå¹¿æ’­åœ°å€ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("ÌáÊ¾"),"IP(" + t_eip + tr(")ÎªËùÔÚÍøÂç¹ã²¥µØÖ·£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
             ui.tableWidget->item(i, 3)->text().clear();
             ui.tableWidget->setFocus();
             return;

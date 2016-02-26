@@ -1,4 +1,4 @@
-ï»¿#include "CNewSwitcher.h"
+#include "CNewSwitcher.h"
 #include <QMessageBox>
 
 CNewSwitcher::CNewSwitcher(QWidget *parent)
@@ -18,9 +18,9 @@ CNewSwitcher::CNewSwitcher(QWidget *parent)
     ui.protocol->addItem("Default");
     ui.protocol->addItem("OSPF");
 
-    ui.address->addItem(tr("éª¨å¹²å±‚"));
-    ui.address->addItem(tr("æ±‡èšå±‚"));
-    ui.address->addItem(tr("æ¥å…¥å±‚"));
+    ui.address->addItem(tr("¹Ç¸É²ã"));
+    ui.address->addItem(tr("»ã¾Û²ã"));
+    ui.address->addItem(tr("½ÓÈë²ã"));
 
 
 	connect( ui.Switch_OK, SIGNAL(clicked()), this ,SLOT(okProcess()) );
@@ -54,19 +54,19 @@ void CNewSwitcher::okProcess( void )
 
     if(str.isEmpty())
     {
-        QMessageBox::information(0,tr("æç¤º"),tr("è¯·é‡æ–°è¾“å…¥äº¤æ¢æœºåç§°ï¼"),QMessageBox::Ok);
+        QMessageBox::information(0,tr("ÌáÊ¾"),tr("ÇëÖØĞÂÊäÈë½»»»»úÃû³Æ£¡"),QMessageBox::Ok);
         return;
     }
     else if(str.size() > 8)
 	{
-		QMessageBox::information(0,tr("æç¤º"),tr("äº¤æ¢æœºåç§°ä¸èƒ½è¶…è¿‡8ä¸ªå­—ç¬¦ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
+		QMessageBox::information(0,tr("ÌáÊ¾"),tr("½»»»»úÃû³Æ²»ÄÜ³¬¹ı8¸ö×Ö·û£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
         ui.name->clear();
         return;
 	}
 
     if(ui.address->currentText().isEmpty())
     {
-        QMessageBox::information(0,tr("æç¤º"),tr("è¯·è¾“å…¥ç½‘ç»œåœ°å€ï¼"),QMessageBox::Ok);
+        QMessageBox::information(0,tr("ÌáÊ¾"),tr("ÇëÊäÈëÍøÂçµØÖ·£¡"),QMessageBox::Ok);
          return;
     }
 

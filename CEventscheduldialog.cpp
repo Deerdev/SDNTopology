@@ -1,4 +1,4 @@
-ï»¿#include "CEventscheduldialog.h"
+#include "CEventscheduldialog.h"
 #include "ui_CEventscheduldialog.h"
 
 CEventSchedulDialog::CEventSchedulDialog(QWidget *parent) :
@@ -26,7 +26,7 @@ void CEventSchedulDialog::setSwichterInfo(vector<CSwitcherInfo> *v_switcherInfo)
     for(unsigned int i = 0; i < (*m_VswitcherInfo).size(); ++i)
         ui->routelist->addItem((*m_VswitcherInfo)[i].name);
 }
-//Ñ¡ÖÐ½»»»»ú£¬ÏÔÊ¾Æä¶Ë¿Ú
+//?????¨¬§¥????
 void CEventSchedulDialog::showPorts()
 {
     ui->portTableWidget->clearContents();

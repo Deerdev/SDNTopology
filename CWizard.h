@@ -1,4 +1,4 @@
-﻿#ifndef CWIZARD_H
+#ifndef CWIZARD_H
 #define CWIZARD_H
 
 #include <QDialog>

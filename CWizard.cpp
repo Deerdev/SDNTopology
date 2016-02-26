@@ -1,4 +1,4 @@
-ï»¿#include "CWizard.h"
+#include "CWizard.h"
 #include <QMessageBox>
 #include <QDir>
 #include <QFileDialog>
@@ -8,13 +8,13 @@ CWizard::CWizard(QWidget *parent)
 {
     ui.setupUi(this);
     ui.lineEdit->setText("CoreNetwork");
-    setWindowTitle(tr("æ–°å»ºé¡¹ç›®çª—å£"));
+    setWindowTitle(tr("ĞÂ½¨ÏîÄ¿´°¿Ú"));
     ui.comboBox->setEditable(true);
     //ui.comboBox->setEditText(QDir::currentPath());
     QFile infile("Config");
     if(!infile.exists())
     {
-        qDebug("Can not find Config fileï¼");
+        qDebug("Can not find Config file£¡");
     }
     if(!infile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -26,7 +26,7 @@ CWizard::CWizard(QWidget *parent)
     infile.close();
 
     ui.comboBox->setEditText(m_filePath + "/data");
-    ui.okButton->setFocus(); //è®¾ç½®é»˜è®¤ç„¦ç‚¹
+    ui.okButton->setFocus(); //ÉèÖÃÄ¬ÈÏ½¹µã
     ui.okButton->setDefault(true);
 
     m_absolutePath = m_filePath + "/data/CoreNetwork";
@@ -37,18 +37,18 @@ CWizard::~CWizard()
 
 }
 
-//ç¡®å®š
+//È·¶¨
 void CWizard::on_okButton_clicked()
 {
 	if (ui.lineEdit->text() == "")
 	{
-		QMessageBox::warning(this, tr("æç¤º"), tr("è¯·è¾“å…¥é¡¹ç›®åï¼"));
+		QMessageBox::warning(this, tr("ÌáÊ¾"), tr("ÇëÊäÈëÏîÄ¿Ãû£¡"));
 		return;
 	}
     m_fileName = ui.lineEdit->text();
 	if (ui.comboBox->currentText() == "")
 	{
-		QMessageBox::warning(this, tr("æç¤º"), tr("è¯·è¾“å…¥è·¯å¾„ï¼"));
+		QMessageBox::warning(this, tr("ÌáÊ¾"), tr("ÇëÊäÈëÂ·¾¶£¡"));
 		return;
 	}
 
@@ -56,13 +56,13 @@ void CWizard::on_okButton_clicked()
      emit accept();
      //close();
 }
- //å–æ¶ˆ
+ //È¡Ïû
 void CWizard::on_cancelButton_clicked()
 {
 	 close();
 }
 
-//æµè§ˆ
+//ä¯ÀÀ
 void CWizard::on_scanButton_clicked()
 {
 	QString directory = QFileDialog::getExistingDirectory(this, tr("Open File"),
