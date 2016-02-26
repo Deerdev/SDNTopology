@@ -1,4 +1,4 @@
-#include "CTaskConfigDialog.h"
+ï»¿#include "CTaskConfigDialog.h"
 #include "ui_CTaskConfigDialog.h"
 #include <QFile>
 #include <QTextStream>
@@ -22,17 +22,17 @@ CTaskConfigDialog::~CTaskConfigDialog()
 void CTaskConfigDialog::init()
 {
     //add app items
-    ui->addTaskComboBox->addItem(tr("´øÓ¦´ğUDPÒµÎñÁ÷Á¿"));
-    ui->addTaskComboBox->addItem(tr("ÆÕÍ¨TCPÒµÎñÁ÷Á¿"));
-    ui->addTaskComboBox->addItem(tr("ºé·ºÁ÷Á¿"));
-    ui->addTaskComboBox->addItem(tr("¶Ëµ½¶ËÊ±ÑÓÌ½²âÈÎÎñ"));
+    ui->addTaskComboBox->addItem(tr("å¸¦åº”ç­”UDPä¸šåŠ¡æµé‡"));
+    ui->addTaskComboBox->addItem(tr("æ™®é€šTCPä¸šåŠ¡æµé‡"));
+    ui->addTaskComboBox->addItem(tr("æ´ªæ³›æµé‡"));
+    ui->addTaskComboBox->addItem(tr("ç«¯åˆ°ç«¯æ—¶å»¶æ¢æµ‹ä»»åŠ¡"));
 
     //init task table
     ui->taskTable->setColumnCount(5);
     QStringList header;
-    header<<tr("Ô´¶Ë")<<tr("Ô´¶ËIP")<<tr("ÖÕ¶Ë")<<tr("ÖÕ¶ËIP")<<tr("ÈÎÎñ");
+    header<<tr("æºç«¯")<<tr("æºç«¯IP")<<tr("ç»ˆç«¯")<<tr("ç»ˆç«¯IP")<<tr("ä»»åŠ¡");
     ui->taskTable->setHorizontalHeaderLabels(header);
-    ui->taskTable->setEditTriggers(QAbstractItemView::NoEditTriggers); //ÉèÖÃ²»¿É±à¼­
+    ui->taskTable->setEditTriggers(QAbstractItemView::NoEditTriggers); //è®¾ç½®ä¸å¯ç¼–è¾‘
     ui->taskTable->setColumnWidth(4, 200);
 
     connect(ui->addTaskComboBox, SIGNAL(activated(int)), this, SLOT(addTask(int)));
@@ -44,12 +44,12 @@ void CTaskConfigDialog::on_saveButton_clicked()
     QFile infile("Config");
     if(!infile.exists())
     {
-        QMessageBox::critical(this, tr("Error"), "Can not find Config file£¡",QMessageBox::Ok);
+        QMessageBox::critical(this, tr("Error"), "Can not find Config fileï¼",QMessageBox::Ok);
         return;
     }
     if(!infile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::critical(this, tr("Error"), "Can not open Config file£¡",QMessageBox::Ok);
+        QMessageBox::critical(this, tr("Error"), "Can not open Config fileï¼",QMessageBox::Ok);
         return;
     }
 
@@ -65,13 +65,13 @@ void CTaskConfigDialog::on_saveButton_clicked()
     }
     if(!outFile.open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        QMessageBox::critical(this, tr("Error"), "Can not write to task file£¡",QMessageBox::Ok);
+        QMessageBox::critical(this, tr("Error"), "Can not write to task fileï¼",QMessageBox::Ok);
         return;
     }
     QTextStream outFileStream(&outFile);
 
     //format:
-    //ÀàĞÍ\t¸öÊı\tÔ´¶Ë\tÔ´IP\tÖÕ¶Ë\tÖÕ¶ËIP\tÈÎÎñ
+    //ç±»å‹\tä¸ªæ•°\tæºç«¯\tæºIP\tç»ˆç«¯\tç»ˆç«¯IP\tä»»åŠ¡
     /*save task*/
     int taskNum = m_task.size();
     for ( int i = 0; i < taskNum; ++i )
@@ -263,7 +263,7 @@ void CTaskConfigDialog::addEchoTask(int index)
     ui->taskTable->insertRow(row);
     if(selectState == 2)
     {
-        ui->taskTable->setItem(row, 0, new QTableWidgetItem(tr("ËùÓĞÔ´¶Ë")));
+        ui->taskTable->setItem(row, 0, new QTableWidgetItem(tr("æ‰€æœ‰æºç«¯")));
         ui->taskTable->setItem(row, 1, new QTableWidgetItem(""));
     }
     else
@@ -286,7 +286,7 @@ void CTaskConfigDialog::addEchoTask(int index)
     ui->taskTable->resizeRowToContents(row);
 
     vector<QString> echoTask;
-    echoTask.push_back("0");//±ê¼ÇÀàĞÍ
+    echoTask.push_back("0");//æ ‡è®°ç±»å‹
     echoTask.push_back(QString::number(selectState));
     echoTask.push_back(echoApp.getMaxPackets());
     echoTask.push_back(echoApp.getInterval());
@@ -326,7 +326,7 @@ void CTaskConfigDialog::addOnOffTask()
     ui->taskTable->insertRow(row);
     if(selectState == 2)
     {
-        ui->taskTable->setItem(row, 0, new QTableWidgetItem(tr("ËùÓĞÔ´¶Ë")));
+        ui->taskTable->setItem(row, 0, new QTableWidgetItem(tr("æ‰€æœ‰æºç«¯")));
         ui->taskTable->setItem(row, 1, new QTableWidgetItem(""));
     }
     else
@@ -349,7 +349,7 @@ void CTaskConfigDialog::addOnOffTask()
     ui->taskTable->resizeRowToContents(row);
 
     vector<QString> onOffTask;
-    onOffTask.push_back("1");//±ê¼ÇÀàĞÍ
+    onOffTask.push_back("1");//æ ‡è®°ç±»å‹
     onOffTask.push_back(QString::number(selectState));
     onOffTask.push_back(onOffApp.getOnInterval());
     onOffTask.push_back(onOffApp.getOffInterval());
@@ -391,7 +391,7 @@ void CTaskConfigDialog::addBulkTask()
     ui->taskTable->insertRow(row);
     if(selectState == 2)
     {
-        ui->taskTable->setItem(row, 0, new QTableWidgetItem(tr("ËùÓĞÔ´¶Ë")));
+        ui->taskTable->setItem(row, 0, new QTableWidgetItem(tr("æ‰€æœ‰æºç«¯")));
         ui->taskTable->setItem(row, 1, new QTableWidgetItem(""));
     }
     else
@@ -414,7 +414,7 @@ void CTaskConfigDialog::addBulkTask()
     ui->taskTable->resizeRowToContents(row);
 
     vector<QString> bulkTask;
-    bulkTask.push_back("2");//±ê¼ÇÀàĞÍ
+    bulkTask.push_back("2");//æ ‡è®°ç±»å‹
     bulkTask.push_back(QString::number(selectState));
     bulkTask.push_back(bulkApp.getPayload());
     bulkTask.push_back(bulkApp.getClientStartTime());

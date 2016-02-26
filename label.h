@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QLabel>
 
 class CLabel : public QLabel

@@ -1,4 +1,4 @@
-#ifndef CEVENTSCHEDULDIALOG_H
+﻿#ifndef CEVENTSCHEDULDIALOG_H
 #define CEVENTSCHEDULDIALOG_H
 
 #include <QDialog>

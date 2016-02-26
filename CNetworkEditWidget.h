@@ -1,4 +1,4 @@
-#ifndef _NETWORKTOPLOGYWIDGET_H
+ï»¿#ifndef _NETWORKTOPLOGYWIDGET_H
 #define _NETWORKTOPLOGYWIDGET_H
 
 #include <QDockWidget> 
@@ -40,37 +40,37 @@ class CTopologyWidget : public QGraphicsView
 		QAction *getActionm_deleteAct() {return m_deleteAct;}
 		QAction *getActionm_configuerAct() {return m_configuerAct;}
 
-        //¸üĞÂÍØÆË
+        //æ›´æ–°æ‹“æ‰‘
         void RefreshTopology();
-        //Çå¿Õ»­²¼
+        //æ¸…ç©ºç”»å¸ƒ
         void clearScene(void);
 
         void setPlatformPointer(NetworkSimulationPlatform*_platform);
 
         //=====================================
-		//ÊäÈëÍØÆË
+		//è¾“å…¥æ‹“æ‰‘
         void InputTopology(QString path);
-		//Êä³öÍØÆË
+		//è¾“å‡ºæ‹“æ‰‘
         void OutputTopology(QString path);
-        //Êä³ö½ÚµãÎ»ÖÃ
+        //è¾“å‡ºèŠ‚ç‚¹ä½ç½®
         void OutputPosition(QString path);
-        //½âÎöSNMP¹¹½¨ÍøÂçÍØÆË
+        //è§£æSNMPæ„å»ºç½‘ç»œæ‹“æ‰‘
         void ConstructTopology(const QString& _path);
-        //ÅäÖÃÈÎÎñ
+        //é…ç½®ä»»åŠ¡
         void configTask();
-        //ÊÂ¼şµ÷¶È
+        //äº‹ä»¶è°ƒåº¦
         void eventSchedul();
-        //»ñÈ¡Á¬½ÓĞÅÏ¢
+        //è·å–è¿æ¥ä¿¡æ¯
 		vector<int> GetConnectedInfo(CSwitcherInfo switchInfo, QStringList vName);
-        //ÉèÖÃ·ÅÍ¼Æ¬±êÇ©µÄ´°¿Ú
+        //è®¾ç½®æ”¾å›¾ç‰‡æ ‡ç­¾çš„çª—å£
         void setLabelWidget(CUnitboxWidget* _unitW);
 
 	private slots:
-        //ÓÒ¼ü²Ëµ¥°´Å¥¶ÔÓ¦µÄ²Ûº¯Êı
+        //å³é”®èœå•æŒ‰é’®å¯¹åº”çš„æ§½å‡½æ•°
 
-        //É¾³ı
+        //åˆ é™¤
 		void slotDeleteAction();
-        //²é¿´ÊôĞÔ
+        //æŸ¥çœ‹å±æ€§
         void slotAttributeAction();
 
         //================================
@@ -91,12 +91,12 @@ class CTopologyWidget : public QGraphicsView
 		void SendSwitchID(int);
 
 	private:
-        //ÍÏ×§ÊÂ¼ş
+        //æ‹–æ‹½äº‹ä»¶
         void dragEnterEvent(QDragEnterEvent *event);
         void dragMoveEvent(QDragMoveEvent *event);
         void dropEvent(QDropEvent *event);
 
-        //Êó±êÊÂ¼ş
+        //é¼ æ ‡äº‹ä»¶
         void mousePressEvent(QMouseEvent *event);
         void mouseMoveEvent(QMouseEvent *event);
         void mouseReleaseEvent(QMouseEvent *event);
@@ -105,15 +105,15 @@ class CTopologyWidget : public QGraphicsView
 
         void contextMenuEvent(QContextMenuEvent * event);
 
-        //¼üÅÌÊÂ¼ş
+        //é”®ç›˜äº‹ä»¶
         void keyPressEvent( QKeyEvent * event );
-        //Êó±ê±äĞÎ
+        //é¼ æ ‡å˜å½¢
         void cursorShapeChange(QPointF _scenePos,CBoundingRectItem* _brItem);
-        //Êó±êµãÖĞ±ß½çĞ¡¾ØĞÎ²¢ÒÆ¶¯Ê±´´½¨¿ÉÒÆ¶¯µÄĞé¿ò
+        //é¼ æ ‡ç‚¹ä¸­è¾¹ç•Œå°çŸ©å½¢å¹¶ç§»åŠ¨æ—¶åˆ›å»ºå¯ç§»åŠ¨çš„è™šæ¡†
         void CreateMovableRect(QPointF _scenePos);
-        //´´½¨ÓÒ¼ü²Ëµ¥
+        //åˆ›å»ºå³é”®èœå•
         void creatRightMenu();
-        //É¾³ı×ÓÍ¼Ôª
+        //åˆ é™¤å­å›¾å…ƒ
         void deleteChildItems(QGraphicsItem*);
 
         //calculate network id
@@ -126,31 +126,31 @@ class CTopologyWidget : public QGraphicsView
 	private:
         QString g_projectpath;
 
-        CUnitboxWidget* m_unitWidget; //·ÅÍ¼Æ¬±êÇ©µÄ´°¿Ú
-        QPointF m_pressScenePoint_formove;//Êó±êµã»÷µÄsceneÎ»ÖÃ
-        CNetworkPort* m_pressItem;//Êó±êµã»÷µÄÍ¼Ôª
-        CNetworkPort* m_releaseItem;//Êó±êÊÍ·ÅÊ±µÄÍ¼Ôª
+        CUnitboxWidget* m_unitWidget; //æ”¾å›¾ç‰‡æ ‡ç­¾çš„çª—å£
+        QPointF m_pressScenePoint_formove;//é¼ æ ‡ç‚¹å‡»çš„sceneä½ç½®
+        CNetworkPort* m_pressItem;//é¼ æ ‡ç‚¹å‡»çš„å›¾å…ƒ
+        CNetworkPort* m_releaseItem;//é¼ æ ‡é‡Šæ”¾æ—¶çš„å›¾å…ƒ
         Clink* link;
-		QPointF m_sceneFormerPoint; //Êó±êµã»÷µÄsceneÎ»ÖÃ  ÔÚmoveÖĞ±ä»¯
-		QString m_name; //ÍÏ¶¯µÄ±êÇ©Ãû×Ö
+		QPointF m_sceneFormerPoint; //é¼ æ ‡ç‚¹å‡»çš„sceneä½ç½®  åœ¨moveä¸­å˜åŒ–
+		QString m_name; //æ‹–åŠ¨çš„æ ‡ç­¾åå­—
 		QPointF m_dropPos;
 
-        //½»»»»ú³¤¿í
-        double m_sWidth;   //½»»»»ú¿í¶È
-        double m_sHeight;   //½»»»»ú¸ß¶È
-        double m_width;       //Éè±¸¿í¶È¼Ólink¿í¶È
-        double m_linkLen;   //linkµÄ³¤¶È
-		double m_dWidth;  //Éè±¸¿í¶È
+        //äº¤æ¢æœºé•¿å®½
+        double m_sWidth;   //äº¤æ¢æœºå®½åº¦
+        double m_sHeight;   //äº¤æ¢æœºé«˜åº¦
+        double m_width;       //è®¾å¤‡å®½åº¦åŠ linkå®½åº¦
+        double m_linkLen;   //linkçš„é•¿åº¦
+		double m_dWidth;  //è®¾å¤‡å®½åº¦
 
-        QGraphicsPixmapItem *m_backItem; //±³¾°Í¼Ôª
+        QGraphicsPixmapItem *m_backItem; //èƒŒæ™¯å›¾å…ƒ
 
 		CItemGroup* m_itemGroup;
 		bool m_moveitemFlag;  //
 
-		QGraphicsRectItem* m_dragRectItem;  //¿òÑ¡µÄ¾ØĞÎ¿ò
-        QGraphicsLineItem* m_tempadge;   //ÁÙÊ±ĞéÏß
+		QGraphicsRectItem* m_dragRectItem;  //æ¡†é€‰çš„çŸ©å½¢æ¡†
+        QGraphicsLineItem* m_tempadge;   //ä¸´æ—¶è™šçº¿
 
-		//²Ëµ¥ºÍ°´Å¥
+		//èœå•å’ŒæŒ‰é’®
 		QMenu *m_rightMenu;
 		QMenu *m_rightMenu0;
 		QAction *m_linkAct;
@@ -165,41 +165,41 @@ class CTopologyWidget : public QGraphicsView
 		QAction *m_configuerAct;
         QAction *m_routeVisible;
         QAction *m_delayAct;
-		QAction *m_onlineAct;//ÉÏÏß
-		QAction *m_offlineAct;//ÏÂÏß
-		QAction *m_deviceStatus;//Éè±¸×´Ì¬
+		QAction *m_onlineAct;//ä¸Šçº¿
+		QAction *m_offlineAct;//ä¸‹çº¿
+		QAction *m_deviceStatus;//è®¾å¤‡çŠ¶æ€
 
-        //Ìí¼ÓÍ¼ÔªµÄ¶Ô»°¿ò
+        //æ·»åŠ å›¾å…ƒçš„å¯¹è¯æ¡†
 		CNewSwitcher* m_newSwitcherDia;
         CPortDialog* m_newPortDia;
 
  		CSwitcher* m_EditSwitchItem;
         CNetworkPort* m_EditPortItem;
 
-		//ÒÑ¾­ÓÃ¹ıµÄ½ÚµãÓò
+		//å·²ç»ç”¨è¿‡çš„èŠ‚ç‚¹åŸŸ
 		QVector<int> m_usedPortID;
 
-        //ÓÒ¼üÊôĞÔ¶Ô»°¿ò
+        //å³é”®å±æ€§å¯¹è¯æ¡†
  		CSwitherConfigure *m_switchDia;
 
 		vector<CSwitcherInfo> m_vSwtich;
 
-		//µ¼Èëµ¼³öÊ¹ÓÃ
+		//å¯¼å…¥å¯¼å‡ºä½¿ç”¨
  		vector<CSwitcher*> t_vSwitchInOut;
  		vector<CNetworkPort*> t_vPortInOut;
 
-        //IPµØÖ·³Ø
+        //IPåœ°å€æ± 
         set<QString> t_IPPond;
         map<QString,int> m_IPPool;
 
-		//±êÊ¶ÊÇ·ñÏÔÊ¾¶Ë¿ÚĞÅÏ¢
+		//æ ‡è¯†æ˜¯å¦æ˜¾ç¤ºç«¯å£ä¿¡æ¯
 		bool m_vShowFlag;
 		vector<QGraphicsTextItem*> t_vTextItems;
 
 		vector <int> m_vDeviceNums;
 
         QVector<Clink *>  m_vlink;
-		bool rect0sele,rect1sele,rect2sele,rect3sele,rect4sele,rect5sele,rect6sele,rect7sele;//Ñ¡ÖĞºóµÄ8¸öĞ¡¾ØĞÎµÄÑ¡ÖĞ×´Ì¬
+		bool rect0sele,rect1sele,rect2sele,rect3sele,rect4sele,rect5sele,rect6sele,rect7sele;//é€‰ä¸­åçš„8ä¸ªå°çŸ©å½¢çš„é€‰ä¸­çŠ¶æ€
 	private:
 		int m_zoom;
         bool resize;

@@ -1,4 +1,4 @@
-#ifndef CECHOAPPTASKDIALOG_H
+﻿#ifndef CECHOAPPTASKDIALOG_H
 #define CECHOAPPTASKDIALOG_H
 
 #include <QDialog>

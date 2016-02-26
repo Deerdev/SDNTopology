@@ -1,4 +1,4 @@
-#ifndef CSWITHERCONFIGURE_H
+ï»¿#ifndef CSWITHERCONFIGURE_H
 #define CSWITHERCONFIGURE_H
 
 #include<QDialog>
@@ -19,9 +19,9 @@ public:
     void setIPpond(set<QString> *_ipPond){m_ipPond = _ipPond;}
     void setIPPool(map<QString,int> *_ipPool){m_ipPool = _ipPool;}
 	void SetSwitcherInfo(CSwitcherInfo &_switcherInfo);
-    //void SetPortConnection(vector<pair<int,int> > &_vPortConnection){m_PortConnection = _vPortConnection;}//ÉèÖÃ½»»»»ú½Ó¿Ú
-	CSwitcherInfo GetSwitcherInfo(){return m_switcherInfo;}//·µ»Ø½»»»»úÊôĞÔ
-    vector<SNodeStructInfo> GetSwitchDeletePortsInfo(){return m_deletePortsInfo;}//·µ»Ø½»»»»úÉ¾³ı¶Ë¿Ú
+    //void SetPortConnection(vector<pair<int,int> > &_vPortConnection){m_PortConnection = _vPortConnection;}//è®¾ç½®äº¤æ¢æœºæ¥å£
+	CSwitcherInfo GetSwitcherInfo(){return m_switcherInfo;}//è¿”å›äº¤æ¢æœºå±æ€§
+    vector<SNodeStructInfo> GetSwitchDeletePortsInfo(){return m_deletePortsInfo;}//è¿”å›äº¤æ¢æœºåˆ é™¤ç«¯å£
 
 private:
     QString calculateNetworkID(QString _IP, QString _mask);
@@ -32,8 +32,8 @@ private:
     vector<SNodeStructInfo> m_deletePortsInfo;
     set<QString> *m_ipPond;
     map<QString, int>* m_ipPool;
-    vector<QString> m_vDeleteInterfaceName;//´æ·ÅÉ¾³ıµÄÁ´½ÓµÄ¶Ë¿ÚÃû
-    //vector<pair<int,int> >  m_PortConnection;//Ç°Ãæ
+    vector<QString> m_vDeleteInterfaceName;//å­˜æ”¾åˆ é™¤çš„é“¾æ¥çš„ç«¯å£å
+    //vector<pair<int,int> >  m_PortConnection;//å‰é¢
 
 private slots:
     void on_cancelButton_clicked();

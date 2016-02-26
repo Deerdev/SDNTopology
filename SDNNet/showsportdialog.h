@@ -1,4 +1,4 @@
-#ifndef SHOWSPORTDIALOG_H
+﻿#ifndef SHOWSPORTDIALOG_H
 #define SHOWSPORTDIALOG_H
 
 #include <QDialog>

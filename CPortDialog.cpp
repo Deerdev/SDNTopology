@@ -1,4 +1,4 @@
-#include "CPortDialog.h"
+ï»¿#include "CPortDialog.h"
 #include "ui_CPortDialog.h"
 
 QString EthernetBandwidth[] = {"1000","100"};
@@ -9,7 +9,7 @@ CPortDialog::CPortDialog(QWidget *parent) :
     ui(new Ui::CPortDialog)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("ĞÂ½¨Á´½Ó´°¿Ú"));
+    setWindowTitle(tr("æ–°å»ºé“¾æ¥çª—å£"));
 
     ui->mask1->setValue(255);
     ui->mask2->setValue(255);
@@ -24,7 +24,7 @@ CPortDialog::CPortDialog(QWidget *parent) :
         ui->bandWidth->addItem(POSBandwidth[i]);
     }
 
-    ui->OkButton->setFocus(); //ÉèÖÃÄ¬ÈÏ½¹µã
+    ui->OkButton->setFocus(); //è®¾ç½®é»˜è®¤ç„¦ç‚¹
     ui->OkButton->setDefault(true);
 
     connect(ui->linktype, SIGNAL(currentIndexChanged(int)), this, SLOT(changeLink(int)));
@@ -73,13 +73,13 @@ void CPortDialog::on_OkButton_clicked()
 {
     if (ui->srcInterface->text() == "")
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÊäÈë±¾¶Ë¶Ë¿Ú£¡"));
+        QMessageBox::information(this, tr("æç¤º"), tr("è¯·è¾“å…¥æœ¬ç«¯ç«¯å£ï¼"));
         ui->srcInterface->setFocus();
         return;
     }
     else if (ui->desInterface->text() == "")
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÊäÈë¶Ô¶Ë¶Ë¿Ú£¡"));
+        QMessageBox::information(this, tr("æç¤º"), tr("è¯·è¾“å…¥å¯¹ç«¯ç«¯å£ï¼"));
         ui->desInterface->setFocus();
         return;
     }
@@ -89,7 +89,7 @@ void CPortDialog::on_OkButton_clicked()
         {
             if(ui->srcInterface->text() == v_ports[i].interfaceName)
             {
-                QMessageBox::information(this, tr("ÌáÊ¾"), tr("¶Ë¿Ú") + ui->srcInterface->text() + tr("ÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"));
+                QMessageBox::information(this, tr("æç¤º"), tr("ç«¯å£") + ui->srcInterface->text() + tr("å·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"));
                 ui->srcInterface->setText("Interface" + QVariant(m_PortInfo.Port_ID).toString());
                 ui->srcInterface->setFocus();
                 return;
@@ -99,7 +99,7 @@ void CPortDialog::on_OkButton_clicked()
         {
             if(ui->desInterface->text() == link_v_ports[j].interfaceName)
             {
-                QMessageBox::information(this, tr("ÌáÊ¾"), tr("¶Ô¶Ë¶Ë¿ÚÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"));
+                QMessageBox::information(this, tr("æç¤º"), tr("å¯¹ç«¯ç«¯å£å·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"));
                 ui->desInterface->setText("Interface" + QVariant(m_PortInfo.linkPort_ID).toString());
                 ui->desInterface->setFocus();
                 return;
@@ -163,12 +163,12 @@ void CPortDialog::on_OkButton_clicked()
 
     if(m_ipPond->count(m_PortInfo.IP))
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("±¾¶ËIPÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("æœ¬ç«¯IPå·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
         return;
     }
     else if(m_ipPond->count(m_PortInfo.linkPort_IP) || m_PortInfo.IP == m_PortInfo.linkPort_IP)
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("¶Ô¶ËIPÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("å¯¹ç«¯IPå·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
         return;
     }
     else
@@ -180,34 +180,34 @@ void CPortDialog::on_OkButton_clicked()
 
         if (m_ipPool->count(srcNetworkID))
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("IPËùÔÚÍøÂçºÅÒÑ±»Ê¹ÓÃ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("IPæ‰€åœ¨ç½‘ç»œå·å·²è¢«ä½¿ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
             return;
         }
         if ( srcNetworkID != desNetworkID )
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("Ô´¶ËIPÓëÖÕ¶ËIP²»ÔÚÍ¬Ò»ÍøÂç£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("æºç«¯IPä¸ç»ˆç«¯IPä¸åœ¨åŒä¸€ç½‘ç»œï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
             return;
         }
         if (m_PortInfo.IP == srcNetworkID )
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("Ô´IPµØÖ·²»ÄÜÎªËùÔÚÍøºÅ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("æºIPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘å·ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
             return;
         }
         if (m_PortInfo.linkPort_IP == srcNetworkID )
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("¶Ô¶ËIPµØÖ·²»ÄÜÎªËùÔÚÍøºÅ£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("å¯¹ç«¯IPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘å·ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
             return;
         }
 
         if (m_PortInfo.IP == networkBroadcast )
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("Ô´IPµØÖ·²»ÄÜÎªËùÔÚÍøÂç¹ã²¥µØÖ·£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("æºIPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘ç»œå¹¿æ’­åœ°å€ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
             return;
         }
 
         if (m_PortInfo.linkPort_IP == networkBroadcast )
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("¶Ô¶ËIPµØÖ·²»ÄÜÎªËùÔÚÍøÂç¹ã²¥µØÖ·£¬ÇëÖØĞÂÊäÈë£¡"),QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("å¯¹ç«¯IPåœ°å€ä¸èƒ½ä¸ºæ‰€åœ¨ç½‘ç»œå¹¿æ’­åœ°å€ï¼Œè¯·é‡æ–°è¾“å…¥ï¼"),QMessageBox::Ok);
             return;
         }
         m_ipPond->insert(m_PortInfo.IP);
@@ -277,7 +277,7 @@ QString CPortDialog::calculateNetworkID(QString _IP, QString _mask)
     QList<QString> maskList = _mask.split('.');
     if(ipList.size() != 4 || maskList.size() != 4)
     {
-        QMessageBox::critical(this, tr("´íÎó"),tr("IPµØÖ·»ò×ÓÍøÑÚÂë´íÎó!"),QMessageBox::Ok);
+        QMessageBox::critical(this, tr("é”™è¯¯"),tr("IPåœ°å€æˆ–å­ç½‘æ©ç é”™è¯¯!"),QMessageBox::Ok);
         return NULL;
     }
     QString networkID1 = QString::number(ipList[0].toInt() & maskList[0].toInt());
@@ -293,7 +293,7 @@ QString CPortDialog::calculateNetworkBroadcast(QString _IP, QString _mask)
     QList<QString> maskList = _mask.split('.');
     if(ipList.size() != 4 || maskList.size() != 4)
     {
-        QMessageBox::critical(this, tr("´íÎó"),tr("IPµØÖ·»ò×ÓÍøÑÚÂë´íÎó!"),QMessageBox::Ok);
+        QMessageBox::critical(this, tr("é”™è¯¯"),tr("IPåœ°å€æˆ–å­ç½‘æ©ç é”™è¯¯!"),QMessageBox::Ok);
         return NULL;
     }
 

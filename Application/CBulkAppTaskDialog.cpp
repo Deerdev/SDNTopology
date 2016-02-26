@@ -1,4 +1,4 @@
-#include "CBulkAppTaskDialog.h"
+ï»¿#include "CBulkAppTaskDialog.h"
 #include "ui_CBulkAppTaskDialog.h"
 #include <QComboBox>
 
@@ -271,9 +271,9 @@ void CBulkAppTaskDialog::initSelectTableWidget()
 {
     ui->selectTableWidget->setColumnCount(4);
     QStringList header;
-    header<<tr("Ô´¶Ë")<<tr("Ô´¶ËIP")<<tr("ÖÕ¶Ë")<<tr("ÖÕ¶ËIP");
+    header<<tr("æºç«¯")<<tr("æºç«¯IP")<<tr("ç»ˆç«¯")<<tr("ç»ˆç«¯IP");
     ui->selectTableWidget->setHorizontalHeaderLabels(header);
-    ui->selectTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //ÉèÖÃ²»¿É±à¼­
+    ui->selectTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //è®¾ç½®ä¸å¯ç¼–è¾‘
     ui->selectTableWidget->setColumnWidth(SrcDevice, 100);
     ui->selectTableWidget->setColumnWidth(SrcIP, 120);
     ui->selectTableWidget->setColumnWidth(DesDevice, 100);
@@ -303,7 +303,7 @@ void CBulkAppTaskDialog::on_addTaskButton_clicked()
     {
         if(ui->selectTableWidget->item(i,0)->text() == ui->srcDeviceComboBox->currentText())
         {
-            QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÒÑÅäÖÃ¹ıÏàÍ¬ÈÎÎñ!"), QMessageBox::Ok);
+            QMessageBox::information(this, tr("æç¤º"), tr("å·²é…ç½®è¿‡ç›¸åŒä»»åŠ¡!"), QMessageBox::Ok);
             return ;
         }
     }
@@ -347,43 +347,43 @@ bool CBulkAppTaskDialog::validParameter()
 
     if (srcDevice == desDevice)
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÑ¡Ôñ²»Í¬Éè±¸!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("è¯·é€‰æ‹©ä¸åŒè®¾å¤‡!"), QMessageBox::Ok);
         return false;
     }
 
     if (ui->srcIPComboBox->currentText().isEmpty() && !m_selectAll )
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÑ¡Ôñ¿Í»§¶ËIP!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("è¯·é€‰æ‹©å®¢æˆ·ç«¯IP!"), QMessageBox::Ok);
         return false;
     }
 
     if (ui->desIPComboBox->currentText().isEmpty() )
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("ÇëÑ¡Ôñ·şÎñÆ÷IP!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("è¯·é€‰æ‹©æœåŠ¡å™¨IP!"), QMessageBox::Ok);
         return false;
     }
 
     if (ui->clientStartTimeSpinBox->text().toFloat() > ui->clientEndTimeSpinBox->text().toFloat())
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("¿Í»§¶ËÆğÊ¼Ê±¼ä²»ÄÜ³¬¹ıÖÕÖ¹Ê±¼ä!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("å®¢æˆ·ç«¯èµ·å§‹æ—¶é—´ä¸èƒ½è¶…è¿‡ç»ˆæ­¢æ—¶é—´!"), QMessageBox::Ok);
         return false;
     }
 
     if (ui->severStartTimeSpinBox->text().toFloat() > ui->severEndTimeSpinBox->text().toFloat())
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("·şÎñÆ÷ÆğÊ¼Ê±¼ä²»ÄÜ³¬¹ıÖÕÖ¹Ê±¼ä!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("æœåŠ¡å™¨èµ·å§‹æ—¶é—´ä¸èƒ½è¶…è¿‡ç»ˆæ­¢æ—¶é—´!"), QMessageBox::Ok);
         return false;
     }
 
     if (ui->clientStartTimeSpinBox->text().toFloat() == ui->clientEndTimeSpinBox->text().toFloat())
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("¿Í»§¶ËÆğÊ¼Ê±¼ä²»ÄÜÏàµÈ!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("å®¢æˆ·ç«¯èµ·å§‹æ—¶é—´ä¸èƒ½ç›¸ç­‰!"), QMessageBox::Ok);
         return false;
     }
 
     if (ui->severStartTimeSpinBox->text().toFloat() == ui->severEndTimeSpinBox->text().toFloat())
     {
-        QMessageBox::information(this, tr("ÌáÊ¾"), tr("·şÎñÆ÷ÆğÊ¼Ê±¼ä²»ÄÜÏàµÈ!"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("æç¤º"), tr("æœåŠ¡å™¨èµ·å§‹æ—¶é—´ä¸èƒ½ç›¸ç­‰!"), QMessageBox::Ok);
         return false;
     }
 

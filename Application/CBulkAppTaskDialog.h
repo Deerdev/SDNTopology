@@ -1,4 +1,4 @@
-#ifndef CBULKAPPTASKDIALOG_H
+﻿#ifndef CBULKAPPTASKDIALOG_H
 #define CBULKAPPTASKDIALOG_H
 
 #include <QDialog>
