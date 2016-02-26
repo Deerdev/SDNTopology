@@ -1,4 +1,4 @@
-ï»¿#ifndef STRUCTDEFINE_H
+#ifndef STRUCTDEFINE_H
 #define STRUCTDEFINE_H
 
 #include <string>
@@ -31,42 +31,42 @@ struct RouterInfo
     string Mask;
 };
 
-//å®šä¹‰è§†å›¾æ˜¾ç¤ºèŒƒå›´
+//¶¨ÒåÊÓÍ¼ÏÔÊ¾·¶Î§
 struct SViewRange
 {
 	int w;
 	int h;
-	int d;			//è§†å›¾æ˜¾ç¤ºèŒƒå›´çš„å®½ï¼Œé«˜ï¼Œæ·±åº¦
+	int d;			//ÊÓÍ¼ÏÔÊ¾·¶Î§µÄ¿í£¬¸ß£¬Éî¶È
 };
 
-//å®šä¹‰ä¸‰ç»´ç©ºé—´åæ ‡ç‚¹ç»“æ„
+//¶¨ÒåÈıÎ¬¿Õ¼ä×ø±êµã½á¹¹
 struct SPoint3
 {
-	double x,y,z;			//ç‚¹çš„ä¸‰ç»´åæ ‡
-    SPoint3(){ x = y = z = 0; }	//é»˜è®¤æ„é€ å‡½æ•°
+	double x,y,z;			//µãµÄÈıÎ¬×ø±ê
+    SPoint3(){ x = y = z = 0; }	//Ä¬ÈÏ¹¹Ôìº¯Êı
 	SPoint3(float _x, float _y, float _z){
-		x=_x,y=_y,z=_z;}          //æ„é€ å‡½æ•°
+		x=_x,y=_y,z=_z;}          //¹¹Ôìº¯Êı
 };
 
-//å®šä¹‰èŠ‚ç‚¹ç»“æ„
+//¶¨Òå½Úµã½á¹¹
 struct SNodeStruct
 {
-	string nName;			//èŠ‚ç‚¹åå­—
-	size_t nID;				//èŠ‚ç‚¹id
-	SPoint3	 point;			//èŠ‚ç‚¹çš„ä¸‰ç»´ç©ºé—´åæ ‡
+	string nName;			//½ÚµãÃû×Ö
+	size_t nID;				//½Úµãid
+	SPoint3	 point;			//½ÚµãµÄÈıÎ¬¿Õ¼ä×ø±ê
 };
 
-//å®šä¹‰è¾¹ç»“æ„
+//¶¨Òå±ß½á¹¹
 struct SEdgeStruct
 {
-	size_t eStartNode;		//è¾¹èµ·å§‹ç«¯ç‚¹ç´¢å¼•
-	size_t eEndNode;		//è¾¹ç»ˆæ­¢ç«¯ç‚¹ç´¢å¼•
+	size_t eStartNode;		//±ßÆğÊ¼¶ËµãË÷Òı
+	size_t eEndNode;		//±ßÖÕÖ¹¶ËµãË÷Òı
     int eEdgeIndex;
 };
 
 struct SRouterInterfaceVec
 {
-    size_t eEndNode;		//è¾¹ç»ˆæ­¢ç«¯ç‚¹ç´¢å¼•
+    size_t eEndNode;		//±ßÖÕÖ¹¶ËµãË÷Òı
 
     int interfaceIndex;
     string routerName;
@@ -81,14 +81,14 @@ struct SRouterInterfaceVec
     string Mask;
 };
 
-//å®šä¹‰ç¤¾å›¢ç»“æ„
+//¶¨ÒåÉçÍÅ½á¹¹
 struct SCommunityStruct
 {
-	vector<SNodeStruct> cNodes;			//ç¤¾å›¢ä¸­çš„æ‰€æœ‰èŠ‚ç‚¹
-	vector<SEdgeStruct> cEdges;			//ç¤¾å›¢ä¸­çš„æ‰€æœ‰è¾¹
+	vector<SNodeStruct> cNodes;			//ÉçÍÅÖĞµÄËùÓĞ½Úµã
+	vector<SEdgeStruct> cEdges;			//ÉçÍÅÖĞµÄËùÓĞ±ß
 };
 
-//å¸ƒå±€èŒƒå›´ï¼ˆé•¿ã€å®½ã€é«˜ï¼‰
+//²¼¾Ö·¶Î§£¨³¤¡¢¿í¡¢¸ß£©
 struct SPlacementRange
 {
 	double length;
@@ -97,7 +97,7 @@ struct SPlacementRange
 	SPlacementRange() { length = 1.0; width = 1.0; height = 1.0; }
 };
 
-//èŠ‚ç‚¹ç§»åŠ¨åæ ‡
+//½ÚµãÒÆ¶¯×ø±ê
 struct SDisplacement
 {
 	double d_x;

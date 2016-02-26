@@ -1,5 +1,5 @@
-ï»¿/****************************
-èŠ‚ç‚¹å¸ƒå±€ç®—æ³•æ¨¡å—
+/****************************
+½Úµã²¼¾ÖËã·¨Ä£¿é
 ****************************/
 #ifndef PLACEMENTALGORITHM_H
 #define PLACEMENTALGORITHM_H
@@ -13,21 +13,21 @@ public:
 	CPlacement();
 	~CPlacement();
 
-	//åŠ›å¼•å¯¼å¸ƒå±€
+	//Á¦Òıµ¼²¼¾Ö
 	void ForceDirected2D( vector<SNodeStruct>& _vNodes, vector<SEdgeStruct> & _vEdges );
 
-	//è®¾ç½®æ¸©åº¦å‚æ•°
+	//ÉèÖÃÎÂ¶È²ÎÊı
 	void SetTemperature(double temp) { m_temperature = temp; }
 
 private:
     int m_fixedNodes;
-    double m_para_k;		//åŠ›å¼•å¯¼ç®—æ³•ä¸­çš„å‚æ•°kï¼Œå¼•åŠ›æ–¥åŠ›å‡½æ•°å‚æ•°
-    double m_temperature;	//æ¸©åº¦å‚æ•°
-    unsigned short m_iterNum;		//è¿­ä»£æ¬¡æ•°
-    SPlacementRange m_range;		//å¸ƒå±€èŒƒå›´
-    vector<SDisplacement> m_vDisplacement;//èŠ‚ç‚¹ç§»åŠ¨åæ ‡é›†åˆ
+    double m_para_k;		//Á¦Òıµ¼Ëã·¨ÖĞµÄ²ÎÊık£¬ÒıÁ¦³âÁ¦º¯Êı²ÎÊı
+    double m_temperature;	//ÎÂ¶È²ÎÊı
+    unsigned short m_iterNum;		//µü´ú´ÎÊı
+    SPlacementRange m_range;		//²¼¾Ö·¶Î§
+    vector<SDisplacement> m_vDisplacement;//½ÚµãÒÆ¶¯×ø±ê¼¯ºÏ
 	
-	//èŠ‚ç‚¹ä½ç½®åˆå§‹åŒ–ä¸ºéšæœºåæ ‡
+	//½ÚµãÎ»ÖÃ³õÊ¼»¯ÎªËæ»ú×ø±ê
 	void PosInitialize(vector<SNodeStruct> &vNodes);
 
 };

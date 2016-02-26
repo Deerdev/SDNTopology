@@ -1,4 +1,4 @@
-ï»¿#include "DragNetwork.h"
+#include "DragNetwork.h"
 
 DragNetwork::DragNetwork(const string &_filePath)
 {
@@ -118,7 +118,7 @@ void DragNetwork::OutputFile( const string& _fileName )
 		m_routerInfoVec[i].desRouterName = m_IP_Router[m_routerInfoVec[i].desInterfaceIP];
 		m_routerInfoVec[i].desInterfaceName = m_IP_Interface[m_routerInfoVec[i].desInterfaceIP];
 
-		outFile<<"éª¨å¹²ç½‘"<<"\t"
+		outFile<<"¹Ç¸ÉÍø"<<"\t"
 			<<m_routerInfoVec[i].routerName<<"\t"
 			<<"0"<<"\t"
 			<<m_routerInfoVec[i].interfaceIP<<"\t"

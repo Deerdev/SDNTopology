@@ -1,4 +1,4 @@
-Ôªø#include <math.h>
+#include <math.h>
 #include <time.h>
 //#include <QProgressDialog>
 //#include <QApplication>
@@ -18,8 +18,8 @@ CPlacement::~CPlacement()
 
 void CPlacement::ForceDirected2D( vector<SNodeStruct>& _vNodes, vector<SEdgeStruct> & _vEdges )
 {
-	//ËøõÂ∫¶Êù°
-	//QProgressDialog *vProgress = new QProgressDialog( QObject::tr("Ê≠£Âú®ËøõË°åÂäõÂØºÂºïÂ∏ÉÂ±Ä¬∑¬∑¬∑"), QObject::tr("..."), 0, m_iterNum-1);
+	//Ω¯∂»Ãı
+	//QProgressDialog *vProgress = new QProgressDialog( QObject::tr("’˝‘⁄Ω¯––¡¶µº“˝≤ºæ÷°§°§°§"), QObject::tr("..."), 0, m_iterNum-1);
 	//vProgress->setWindowModality( Qt::ApplicationModal );
 	//vProgress->setValue(0);
 	//qApp->processEvents();
@@ -50,7 +50,7 @@ void CPlacement::ForceDirected2D( vector<SNodeStruct>& _vNodes, vector<SEdgeStru
 
 */
 
-	//ÂØπÁ§æÂõ¢‰ª£Ë°®ËäÇÁÇπËøõË°åÂ∏ÉÂ±Ä
+	//∂‘…ÁÕ≈¥˙±ÌΩ⁄µ„Ω¯––≤ºæ÷
 	m_vDisplacement.clear();
 	m_vDisplacement.resize(_vNodes.size());
 	PosInitialize(_vNodes);
@@ -74,7 +74,7 @@ void CPlacement::ForceDirected2D( vector<SNodeStruct>& _vNodes, vector<SEdgeStru
 			m_vDisplacement[j].d_y = 0.0;
 		}
 
-		//node Êñ•Âäõ
+		//node ≥‚¡¶
 		for ( size_t j = 0; j < nodeSize; ++j )
 		{
 			SPoint3 &point_1 = _vNodes[j].point;
@@ -97,7 +97,7 @@ void CPlacement::ForceDirected2D( vector<SNodeStruct>& _vNodes, vector<SEdgeStru
 			}
 		}
 
-		//edge ÂºïÂäõ
+		//edge “˝¡¶
 		for ( size_t j = 0; j < edgeSize; ++j )
 		{
 			const SEdgeStruct &t_edge = _vEdges[j];
@@ -141,7 +141,7 @@ void CPlacement::PosInitialize(vector<SNodeStruct> &vNodes)
 	//0-1000
 	vector<SNodeStruct>::iterator iter = vNodes.begin();
 
-	//ÈöèÂç≥ÁßçÂ≠ê
+	//ÀÊº¥÷÷◊”
 	//srand((unsigned)time(NULL));
 	for ( ; iter != vNodes.end(); ++iter )
 	{
