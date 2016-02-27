@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     TopoInf/topotest.cpp \
     SDNNet/showflowsdialog.cpp \
     SDNNet/addflowdialog.cpp \
-    SDNNet/showsportdialog.cpp
+    SDNNet/showsportdialog.cpp \
+    SDNCurl/sdncurl.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
@@ -66,7 +67,8 @@ HEADERS  += NetworkSimulationPlatform.h \
     TopoInf/topotest.h \
     SDNNet/showflowsdialog.h \
     SDNNet/addflowdialog.h \
-    SDNNet/showsportdialog.h
+    SDNNet/showsportdialog.h \
+    SDNCurl/sdncurl.h
 
 FORMS    += NetworkSimulationPlatform.ui \
     CSwitherConfigure.ui \
@@ -93,5 +95,22 @@ RESOURCES += NetworkSimulationPlatform.qrc
 
 OTHER_FILES += \
     Resources/double.PNG
+#-------------------linux curl-------------------------
+INCLUDEPATH += /usr/local/curl/include/curl/
 
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/curl/lib/release/ -lcurl
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/curl/lib/debug/ -lcurl
+else:unix: LIBS += -L$$PWD/../../../../usr/local/curl/lib/ -lcurl
+
+INCLUDEPATH += $$PWD/../../../../usr/local/curl/include
+DEPENDPATH += $$PWD/../../../../usr/local/curl/include
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/lib/i386-linux-gnu/release/ -lqjson
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/lib/i386-linux-gnu/debug/ -lqjson
+else:unix: LIBS += -L$$PWD/../../../../usr/lib/i386-linux-gnu/ -lqjson
+
+INCLUDEPATH += $$PWD/../../../../usr/lib/i386-linux-gnu
+DEPENDPATH += $$PWD/../../../../usr/lib/i386-linux-gnu
+
+INCLUDEPATH += $$PWD/../../../../usr/include/qjson/
 

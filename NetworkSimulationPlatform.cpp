@@ -335,7 +335,8 @@ void NetworkSimulationPlatform::createToolBar( void )
 *************************************************/
 void NetworkSimulationPlatform::createMenu( void )
 {
-    menu_startMenu = QMainWindow::menuBar()->addMenu(tr("开始"));
+    //menu_startMenu = QMainWindow::menuBar()->addMenu("开始");
+    menu_startMenu = QMainWindow::menuBar()->addMenu(QObject::tr("开始"));
 
     menu_startMenu->addAction(refreshNetworkItemAction);
     //menu_startMenu->addAction(importSNMPTopologyAction);
