@@ -1,6 +1,6 @@
 #include "sdncurl.h"
 #include <stdlib.h>
-#include <string>
+//#include <string>
 #include <memory.h>
 #include <QVector>
 
@@ -76,115 +76,110 @@ bool SDNCurl::getFlows(char *filename)
     return true;
 }
 
-bool SDNCurl::addFlows()
+bool SDNCurl::addFlows( QList<QString> &_sjsonVec)
 {
     char cJsonData[1024];
     memset(cJsonData, 0, sizeof(cJsonData));
-    QVector<std::string> t_sjsonVec;
-    std::string strJson;
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
+//    strJson += "\"name\" : \"flow-mod-1\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"1\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=flood\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
-    strJson += "\"name\" : \"flow-mod-1\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"1\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=flood\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
+//    strJson += "\"name\" : \"flow-mod-2\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"2\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=flood\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
-    strJson += "\"name\" : \"flow-mod-2\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"2\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=flood\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
+//    strJson += "\"name\" : \"flow-mod-3\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"3\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=flood\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
-    strJson += "\"name\" : \"flow-mod-3\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"3\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=flood\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
+//    strJson += "\"name\" : \"flow-mod-8\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"3\",";
+//    strJson += "\"active\" : \"false\",";
+//    strJson += "\"actions\" : \"output=2\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
-    strJson += "\"name\" : \"flow-mod-8\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"3\",";
-    strJson += "\"active\" : \"false\",";
-    strJson += "\"actions\" : \"output=2\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
-
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
-    strJson += "\"name\" : \"flow-mod-9\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"2\",";
-    strJson += "\"active\" : \"false\",";
-    strJson += "\"actions\" : \"output=3\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:01\",";
+//    strJson += "\"name\" : \"flow-mod-9\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"2\",";
+//    strJson += "\"active\" : \"false\",";
+//    strJson += "\"actions\" : \"output=3\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
 
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:02\",";
-    strJson += "\"name\" : \"flow-mod-4\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"1\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=flood\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:02\",";
+//    strJson += "\"name\" : \"flow-mod-4\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"1\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=flood\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:02\",";
-    strJson += "\"name\" : \"flow-mod-5\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"2\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=1\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
-
-
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:03\",";
-    strJson += "\"name\" : \"flow-mod-6\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"1\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=flood\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
-
-    strJson = "{";
-    strJson += "\"switch\" : \"00:00:00:00:00:00:00:03\",";
-    strJson += "\"name\" : \"flow-mod-7\",";
-    strJson += "\"cookie\" : \"0\",";
-    strJson += "\"priority\" : \"32768\",";
-    strJson += "\"in_port\" : \"2\",";
-    strJson += "\"active\" : \"true\",";
-    strJson += "\"actions\" : \"output=1\"";
-    strJson += "}";
-    t_sjsonVec.append(strJson);
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:02\",";
+//    strJson += "\"name\" : \"flow-mod-5\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"2\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=1\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
 
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:03\",";
+//    strJson += "\"name\" : \"flow-mod-6\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"1\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=flood\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
+
+//    strJson = "{";
+//    strJson += "\"switch\" : \"00:00:00:00:00:00:00:03\",";
+//    strJson += "\"name\" : \"flow-mod-7\",";
+//    strJson += "\"cookie\" : \"0\",";
+//    strJson += "\"priority\" : \"32768\",";
+//    strJson += "\"in_port\" : \"2\",";
+//    strJson += "\"active\" : \"true\",";
+//    strJson += "\"actions\" : \"output=1\"";
+//    strJson += "}";
+//    t_sjsonVec.append(strJson);
 
 
 //    strJson = "{";
@@ -286,11 +281,12 @@ bool SDNCurl::addFlows()
 //    t_sjsonVec.append(strJson);
 
 
-    for(int i=0; i<t_sjsonVec.size();++i)
+    for(int i=0; i<_sjsonVec.size();++i)
     {
         memset(cJsonData, 0, sizeof(cJsonData));
+        std::string cstrJson = _sjsonVec.at(i).toStdString();
 
-        strcpy(cJsonData, t_sjsonVec.at(i).c_str());
+        strcpy(cJsonData, cstrJson.c_str());
 
         CURL *pCurl = NULL;
         CURLcode res;
@@ -323,12 +319,10 @@ bool SDNCurl::addFlows()
         qDebug()<<"add success:"<<i;
     }
 
-
-
     return true;
 }
 
-bool SDNCurl::deleteFlow()
+bool SDNCurl::deleteFlow(std::string _flowName)
 {
     char cJsonData[1024];
     memset(cJsonData, 0, sizeof(cJsonData));

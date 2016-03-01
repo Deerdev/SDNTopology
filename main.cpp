@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     //QTextCodec::setCodecForTr(QTextCodec::codecForName("gbk"));//设置可以显示中文
 
     NetworkSimulationPlatform w;
-	w.showMaximized();
+    //w.showMaximized();
+    w.show();
 	return a.exec();
 }
