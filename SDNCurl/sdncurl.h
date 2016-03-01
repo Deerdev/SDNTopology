@@ -15,10 +15,11 @@ class SDNCurl
 //    Q_OBJECT
 public:
     SDNCurl();
-    bool getFlows(char *filename);
+    bool getFlows(QString &_flowsStr, QString _DPID = "all");
     bool addFlows(QList<QString> &_sjsonVec);
-    bool deleteFlow(std::string);
+    bool deleteFlow(QString);
     bool getTopo(QString &_TopoStr);
+    bool getSwitchesInf(QString &_switchInf);
     static size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp );
 
 private:

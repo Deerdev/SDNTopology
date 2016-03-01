@@ -2,6 +2,7 @@
 #define SHOWFLOWSDIALOG_H
 
 #include <QDialog>
+#include "SDNCurl/sdncurl.h"
 
 class NetworkSimulationPlatform;
 
@@ -29,8 +30,12 @@ private slots:
 
 private:
     void getFlowsFromController();
+    void getDeviceName();
     Ui::ShowFlowsDialog *ui;
     NetworkSimulationPlatform *m_platform;
+    SDNCurl *m_curl;
+    int m_switchNum;
+    QVector<QString> m_switchNames;
 };
 
 #endif // SHOWFLOWSDIALOG_H
