@@ -297,6 +297,7 @@ bool SDNCurl::addFlows( QList<QString> &_sjsonVec)
         std::string cstrJson = _sjsonVec.at(i).toStdString();
 
         strcpy(cJsonData, cstrJson.c_str());
+        qDebug()<<"liubiao: "<<_sjsonVec.at(i);
 
         CURL *pCurl = NULL;
         CURLcode res;
@@ -309,7 +310,7 @@ bool SDNCurl::addFlows( QList<QString> &_sjsonVec)
         {
             // 设置超时时间为1秒
             //curl_easy_setopt(pCurl, CURLOPT_TIMEOUT, 1);
-            curl_easy_setopt(pCurl, CURLOPT_URL, "http://192.168.1.145:8080/wm/staticflowpusher/json");
+            curl_easy_setopt(pCurl, CURLOPT_URL, "http://127.0.0.1:8080/wm/staticflowpusher/json");
             // 设置http发送的内容类型为JSON
             curl_slist *headers = curl_slist_append(NULL, "Content-Type:application/json;charset=UTF-8");
             curl_easy_setopt(pCurl, CURLOPT_HTTPHEADER, headers);
@@ -345,6 +346,7 @@ bool SDNCurl::deleteFlow(QString _flowName)
     CURL *pCurl;
     CURLcode res;
 
+    curl_global_init(CURL_GLOBAL_ALL);
     pCurl = curl_easy_init();
     if(pCurl) {
         curl_easy_setopt(pCurl, CURLOPT_VERBOSE, 1L);
@@ -352,7 +354,7 @@ bool SDNCurl::deleteFlow(QString _flowName)
         //curl_easy_setopt(pCurl, CURLOPT_WRITEFUNCTION,&http_callback);
         curl_easy_setopt(pCurl, CURLOPT_URL,"http://127.0.0.1:8080/wm/staticflowpusher/json");
         // 设置http发送的内容类型为JSON
-        curl_slist *headers = curl_slist_append(NULL, "Content-Type:application/json;charset=UTF-8");
+        curl_slist *headers = curl_slist_append(NULL, "Accept: Agent-007");
         curl_easy_setopt(pCurl, CURLOPT_HTTPHEADER, headers);
         curl_easy_setopt(pCurl,CURLOPT_POSTFIELDS,cJsonData);
         res = curl_easy_perform(pCurl);
@@ -361,9 +363,11 @@ bool SDNCurl::deleteFlow(QString _flowName)
         {
             printf("curl_easy_perform() failed:%s\n", curl_easy_strerror(res));
         }
+        qDebug()<<"delete success!";
         curl_easy_cleanup(pCurl);
     }
 
+    curl_global_cleanup();
     return true;
 }
 
@@ -443,6 +447,46 @@ bool SDNCurl::getSwitchesInf(QString &_switchInf)
     curl_global_cleanup();
 
     qDebug()<<_switchInf;
+    qDebug()<<"get success!";
+    return true;
+}
+
+bool SDNCurl::getHostDevices(QString &_hostInf)
+{
+    CURL *curl;
+    CURLcode res;
+    int  wr_error;
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();    // 初始化
+    if (curl)
+    {
+        curl_slist *headers = curl_slist_append(NULL, "Accept: Agent-007");
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+        //curl_easy_setopt(curl, CURLOPT_PROXY, "10.99.60.201:8080");// 代理
+        //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);// 改协议头
+
+        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8080/wm/device/");
+        curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&wr_error);
+        curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, SDNCurl::write_data );
+
+
+        res = curl_easy_perform(curl);   // 执行
+        if (res != CURLE_OK)
+        {
+            printf("curl_easy_perform() failed:%s\n", curl_easy_strerror(res));
+        }
+
+        curl_easy_cleanup(curl);
+        _hostInf = QString(QLatin1String(SDNCurl::wr_buf));
+        memset(SDNCurl::wr_buf,0,MAX_BUFSIZE);
+        SDNCurl::wr_index=0;
+    }
+    curl_global_cleanup();
+
+    qDebug()<<_hostInf;
     qDebug()<<"get success!";
     return true;
 }

@@ -16,36 +16,6 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QTableWidget" name="flowShowWidget">
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>交换机名称</string>
@@ -58,17 +28,7 @@
      </column>
      <column>
       <property name="text">
-       <string>匹配</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>操作</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>生效</string>
+       <string>流表内容</string>
       </property>
      </column>
     </widget>

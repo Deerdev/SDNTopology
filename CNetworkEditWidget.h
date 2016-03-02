@@ -21,8 +21,11 @@
 #include "CTaskConfigDialog.h"
 #include "CEventscheduldialog.h"
 
+#include "DataDefine.h"
+
 class QDragEnterEvent;
 class QDropEvent;
+class SDNCurl;
 
 class NetworkSimulationPlatform;
 
@@ -120,8 +123,10 @@ class CTopologyWidget : public QGraphicsView
         QString calculateNetworkID(QString _IP, QString _mask);
         QString DecToHex(QString AreaID, QString portID);
 
+        //---new---ldq---
         void setSwitchInfTable(const CSwitcherInfo &_switcherInfo);
         void setHostInfTable(const CSwitcherInfo &_switcherInfo);
+        bool getSwitchHostDevice();
 
 	private:
         QString g_projectpath;
@@ -204,6 +209,18 @@ class CTopologyWidget : public QGraphicsView
 		int m_zoom;
         bool resize;
         void drawLegend();
+
+
+         //---new---ldq---
+        SDNCurl *m_curl;
+
+        QMap<int, SwitchNode*> m_switchmap;//交换机节点map
+        QMap<int, HostNode*> m_hostmap;//主机节点Map
+        QMap<int , int> m_id2Dpid;//id和交换机的DPID关联
+        int m_id;//id编号起始值
+        QVector<NodeInf> m_nodelist;//存储交换机和主机节点
+        QVector<LinkInf> m_linkList;//边连接关系
+
 	public slots:
 		void zoomIn();
 		void zoomOut();

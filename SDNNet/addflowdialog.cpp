@@ -19,6 +19,8 @@ AddFlowDialog::~AddFlowDialog()
 {
     m_jsonVec.clear();
     delete ui;
+    if(m_curl)
+        delete m_curl;
 }
 
 void AddFlowDialog::on_submitButton_clicked()//提交流表
@@ -96,6 +98,7 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
 //    strJson += "}";
     //t_sjsonVec.append(strJson);
 
+    m_jsonVec.clear();
     accept();
 }
 

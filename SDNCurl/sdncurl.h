@@ -20,6 +20,7 @@ public:
     bool deleteFlow(QString);
     bool getTopo(QString &_TopoStr);
     bool getSwitchesInf(QString &_switchInf);
+    bool getHostDevices(QString &_hostInf);
     static size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp );
 
 private:

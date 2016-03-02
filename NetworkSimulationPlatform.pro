@@ -97,6 +97,7 @@ OTHER_FILES += \
     Resources/double.PNG
 #-------------------linux curl-------------------------
 INCLUDEPATH += /usr/local/curl/include/curl/
+INCLUDEPATH += /usr/include/qjson/
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/curl/lib/release/ -lcurl
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/curl/lib/debug/ -lcurl
