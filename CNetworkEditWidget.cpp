@@ -6,6 +6,7 @@
 //************QJson*****
 #include "parser.h"
 #include "serializer.h"
+#include "SDNCurl/sdncurl.h"
 
 const int MINWIDTH = 40; 
 int g_currentState = 1;
@@ -1929,9 +1930,31 @@ bool CTopologyWidget::getSwitchHostDevice()
        qDebug()<<t_sName;
        t_switchNames.append(t_sName);
     }
+    //图元id清空
+    m_id = 0;
+    for(int i=0; i<t_switchNames.size();++i)
+    {
+        struct SwitchNode *t_node1 = new SwitchNode;
+        t_node1->type = SWITCH;
+        t_node1->DPID = t_switchNames.at(i);
+        t_node1->SID = t_switchNames.at(i).right(2).toInt();
+        t_node1->ID = m_id++;
+        t_node1->hardwareDesc = t_switchNames.at(i);
+        t_node1->portNum = 3;
+        t_node1->level = 1;
+        t_node1->portInfList.clear();
+
+        NodeInf t_nInf1;
+        t_nInf1.type = SWITCH;
+        t_nInf1.pNode = t_node1;
+        m_switchIDmap.insert(t_node1->ID,t_node1);
+        m_switchSIDmap.insert(t_node1->SID, t_node1);
+        m_switchNameMap.insert(t_node1->DPID,t_node1);
+        m_nodelist.append(t_nInf1);
+    }
 
     //处理host
-    QVariantList t_hDevicesList = parser.parse(json.toUtf8(), &ok).toList();
+    QVariantList t_hDevicesList = parser.parse(t_hostDevices.toUtf8(), &ok).toList();
     if (!ok) {
         qFatal("An error occurred during parsing");
         exit (1);
@@ -1948,52 +1971,155 @@ bool CTopologyWidget::getSwitchHostDevice()
         QVariantList t_attachSList = t_deviceMap["attachmentPoint"].toList();
         //qDebug() << t_attachSList.size();
         //qDebug() << t_attachSList;
+
+        QString t_attachSDPID;
+        int t_sid;
+        int t_attachSPortNum;
         for(int j=0; j<t_attachSList.size(); ++j)
         {
             QVariantMap t_attachMap = t_attachSList.at(j).toMap();
             qDebug() << t_attachMap.size();
             qDebug() << t_attachMap;
             //连接的交换机DPID
-            QString t_attachSDPID = t_attachMap["switchDPID"].toString();
+            t_attachSDPID = t_attachMap["switchDPID"].toString();
             //连接的交换机端口
-            int t_attachSPortNum = t_attachMap["port"].toInt();
+            t_attachSPortNum = t_attachMap["port"].toInt();
             qDebug() << t_attachSDPID;
             qDebug() << t_attachSPortNum;
+
+            if(t_attachSDPID.isEmpty())
+            {
+                t_sid = -1;
+                t_attachSPortNum = -1;
+            }
+            else{
+                t_sid = t_attachSDPID.right(2).toInt();
+            }
+
         }
         //host的mac地址
         QString t_hostMac = t_deviceMap["mac"].toList().at(0).toString();
         qDebug() << t_hostMac;
+
+        HostNode *t_h1 = new HostNode;
+        t_h1->type = HOST;
+        t_h1->macAddr = t_hostMac;
+        t_h1->ID = m_id++;
+        t_h1->switchDPID = t_attachSDPID;
+        t_h1->attachSId = t_sid;
+        t_h1->attachSPort = t_attachSPortNum;
+        t_h1->userName = "host";
+        t_h1->userGroup = "group";
+        t_h1->level = 0;
+
+        NodeInf t_nInf;
+        t_nInf.type = HOST;
+        t_nInf.pNode = t_h1;
+        m_nodelist.append(t_nInf);
+
+        if(!t_h1->switchDPID.isEmpty())//防止为空
+        {
+            LinkInf t_link;
+            t_link.src_nodeId=m_switchNameMap[t_h1->switchDPID]->ID;
+            t_link.src_port = t_h1->attachSPort;
+            t_link.des_nodeId=t_h1->ID;
+            t_link.des_port = 0;
+            m_linkList.append(t_link);
+        }
     }
 
+    return true;
+}
 
+bool CTopologyWidget::getTopoLinks()
+{
+    QString t_topoStr;//拓扑curl信息
+    m_curl->getTopo(t_topoStr);
+    if(t_topoStr.isEmpty())
+        return false;
 
+    QJson::Parser parser;
+    bool ok;
+    QVariantList t_topoList = parser.parse(t_topoStr.toUtf8(), &ok).toList();
+    if (!ok) {
+        qFatal("An error occurred during parsing");
+        exit (1);
+    }
 
+//    qDebug() << t_topoList.size();
+//    qDebug() << t_topoList;
+
+    for(int i=0; i<t_topoList.size(); ++i)
+    {
+        QVariantMap t_linkMap = t_topoList.at(i).toMap();
+        qDebug() << t_linkMap.size();
+        qDebug() << t_linkMap;
+
+        QString t_dstSwitch = t_linkMap["dst-switch"].toString();
+        int t_dstPort = t_linkMap["dst-port"].toInt();
+        QString t_srcSwitch = t_linkMap["src-switch"].toString();
+        int t_srcPort = t_linkMap["src-port"].toInt();
+        qDebug() << t_dstSwitch << ":"<<t_dstPort<<" - "<<t_srcSwitch<<":"<<t_srcPort;
+
+        LinkInf t_link;
+        t_link.src_nodeId=m_switchNameMap[t_srcSwitch]->ID;
+        t_link.src_port = t_srcPort;
+        t_link.des_nodeId= m_switchNameMap[t_dstSwitch]->ID;;
+        t_link.des_port = t_dstPort;
+        m_linkList.append(t_link);
+    }
 
     return true;
 }
 
 void CTopologyWidget::RefreshTopology()
 {
+    if(!getSwitchHostDevice())
+        return;
+    if(!getTopoLinks())
+        return;
+
+    if(!m_nodelist.isEmpty())
+    {
+        for (int i = 0; i < m_nodelist.size(); i++)
+        {
+            if (m_nodelist[i].type == SWITCH)
+            {
+                SwitchNode *t_switch = (SwitchNode *)(m_nodelist[i].pNode);
+                delete t_switch;
+             }
+
+            else if (m_nodelist[i].type == HOST)
+            {
+                HostNode *t_host = (HostNode *)(m_nodelist[i].pNode);
+                delete t_host;
+            }
+        }
+        m_nodelist.clear();
+    }
+    if(!m_linkList.isEmpty())
+    {
+        m_linkList.clear();
+    }
+
     m_platform->historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": refreshing topology..."));
     clearScene();
     this->centerOn(0,0);
-    topotest topo;
-
 
     QPointF t_pos;
     QRectF t_rect;
     double oriX = 600;
     double oriY = 350;
 
-    for (int i = 0; i < topo.m_nodelist.size(); i++)
+    for (int i = 0; i < m_nodelist.size(); i++)
     {
         double x,y,width,height;
         x=y=0.0;
         CSwitcherInfo t_switchInfo;
 
-        if (topo.m_nodelist[i].type == SWITCH)
+        if (m_nodelist[i].type == SWITCH)
         {
-            SwitchNode *t_switch = (SwitchNode *)(topo.m_nodelist[i].pNode);
+            SwitchNode *t_switch = (SwitchNode *)(m_nodelist[i].pNode);
 
             t_pos.setX(oriX + 100*(t_switch->level));
             t_pos.setY(oriY + 100*(t_switch->level));
@@ -2009,9 +2135,9 @@ void CTopologyWidget::RefreshTopology()
             //t_switchInfo.networkLocation = lineList[lineNum];
         }
 
-        else if (topo.m_nodelist[i].type == HOST)
+        else if (m_nodelist[i].type == HOST)
         {
-            HostNode *t_host = (HostNode *)(topo.m_nodelist[i].pNode);
+            HostNode *t_host = (HostNode *)(m_nodelist[i].pNode);
 
             t_pos.setX(oriX + 100*(t_host->level));
             t_pos.setY(oriY + 100*(t_host->level));
@@ -2047,11 +2173,11 @@ void CTopologyWidget::RefreshTopology()
         t_vPortInOut.push_back(t_port);
     }
 
-    for(int i=0; i < topo.m_linkList.size();++i)
+    for(int i=0; i < m_linkList.size();++i)
     {
-        int s_swichID = topo.m_linkList[i].src_nodeId;
+        int s_swichID = m_linkList[i].src_nodeId;
 
-        int d_swichID = topo.m_linkList[i].des_nodeId;
+        int d_swichID = m_linkList[i].des_nodeId;
         int ss_ID = 0, dd_ID = 0;
         for(size_t i = 0; i < t_vPortInOut.size(); i++)
         {

@@ -127,6 +127,7 @@ class CTopologyWidget : public QGraphicsView
         void setSwitchInfTable(const CSwitcherInfo &_switcherInfo);
         void setHostInfTable(const CSwitcherInfo &_switcherInfo);
         bool getSwitchHostDevice();
+        bool getTopoLinks();
 
 	private:
         QString g_projectpath;
@@ -214,7 +215,9 @@ class CTopologyWidget : public QGraphicsView
          //---new---ldq---
         SDNCurl *m_curl;
 
-        QMap<int, SwitchNode*> m_switchmap;//交换机节点map
+        QMap<QString,SwitchNode*> m_switchNameMap;
+        QMap<int, SwitchNode*> m_switchIDmap;//交换机节点map
+        QMap<int, SwitchNode*> m_switchSIDmap;//交换机节点map
         QMap<int, HostNode*> m_hostmap;//主机节点Map
         QMap<int , int> m_id2Dpid;//id和交换机的DPID关联
         int m_id;//id编号起始值

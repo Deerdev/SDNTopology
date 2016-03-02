@@ -39,6 +39,8 @@ struct HostNode
     //
     QString macAddr;
     //
+    QString switchDPID;
+    //
     int HID;
     int ID;
     //
