@@ -7,7 +7,7 @@
 #include <QObject>
 #include <QList>
 
-#define MAX_BUFSIZE 1024
+#define MAX_BUFSIZE 4096
 class QString;
 
 class SDNCurl

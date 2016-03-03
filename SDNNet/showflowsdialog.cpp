@@ -23,16 +23,20 @@ ShowFlowsDialog::ShowFlowsDialog(NetworkSimulationPlatform *_platform,QWidget *p
     ui->flowShowWidget->setRowCount(12);
     ui->flowShowWidget->setColumnCount(3);
 
+    QFont serifFont("Ubuntu", 13);
     QTableWidgetItem *HeaderItem0 = new QTableWidgetItem(QString(tr("交换机")));
     HeaderItem0->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    HeaderItem0->setFont(serifFont);
     ui->flowShowWidget->setHorizontalHeaderItem(0,HeaderItem0);
 
     QTableWidgetItem *HeaderItem1 = new QTableWidgetItem(QString(tr("流表名字")));
     HeaderItem1->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    HeaderItem1->setFont(serifFont);
     ui->flowShowWidget->setHorizontalHeaderItem(1,HeaderItem1);
 
     QTableWidgetItem *HeaderItem2 = new QTableWidgetItem(QString(tr("流表内容")));
     HeaderItem2->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    HeaderItem2->setFont(serifFont);
     ui->flowShowWidget->setHorizontalHeaderItem(2,HeaderItem2);
 //    ui->flowShowWidget->setSpan(0,0,3,1);
 //    ui->flowShowWidget->setSpan(3,0,3,1);

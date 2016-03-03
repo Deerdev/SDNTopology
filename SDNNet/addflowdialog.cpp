@@ -84,7 +84,7 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
         strJson = strJson + "\"actions\" :" + t_s10;
     }
     strJson = strJson +"}";
-    qDebug()<< strJson;
+    //qDebug()<< strJson;
 
     m_jsonVec.append(strJson);
     m_curl->addFlows(m_jsonVec);
@@ -161,7 +161,7 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
         strJson = strJson + "\"actions\" :" + t_s10;
     }
     strJson = strJson +"}";
-    qDebug()<< strJson;
+    //qDebug()<< strJson;
 
 
     m_jsonVec.append(strJson);

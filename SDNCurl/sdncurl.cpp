@@ -59,13 +59,10 @@ bool SDNCurl::getFlows(QString &_flowsStr, QString _DPID)
         curl_slist *headers = curl_slist_append(NULL, "Accept: Agent-007");
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
-        //curl_easy_setopt(curl, CURLOPT_PROXY, "10.99.60.201:8080");// 代理
-        //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);// 改协议头
-
         curl_easy_setopt(curl, CURLOPT_URL, t_url.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&wr_error);
-        curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, SDNCurl::write_data );
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, SDNCurl::write_data );
 
 
         res = curl_easy_perform(curl);   // 执行
