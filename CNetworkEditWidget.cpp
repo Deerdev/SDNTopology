@@ -1835,8 +1835,8 @@ void CTopologyWidget::setSwitchInfTable(const CSwitcherInfo &_switcherInfo)
     m_platform->ui_DeviceInfTable->horizontalHeader()->setStretchLastSection(true);
     m_platform->ui_DeviceInfTable->verticalHeader()->setStretchLastSection(true);
 
-    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1),\
-                                          m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0));
+    //m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1),\
+                                         // m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0));
 }
 
 void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
@@ -1871,35 +1871,55 @@ void CTopologyWidget::setHostInfTable(const CSwitcherInfo &_switcherInfo)
     newItem11->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(1, 1, newItem11);
 
-    QTableWidgetItem *newItem20 = new QTableWidgetItem(tr("ID: "));
+    QTableWidgetItem *newItem20 = new QTableWidgetItem(tr("MAC: "));
     newItem20->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(2, 0, newItem20);
-    QTableWidgetItem *newItem21 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.ID));
+    QTableWidgetItem *newItem21 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.macAddr));
     newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(2, 1, newItem21);
 
-    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("连接的交换机ID: "));
+    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("ID: "));
     newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(3, 0, newItem30);
-    QTableWidgetItem *newItem31 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSId));
+    QTableWidgetItem *newItem31 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.ID));
     newItem31->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(3, 1, newItem31);
 
-    QTableWidgetItem *newItem40 = new QTableWidgetItem(tr("交换机端口号: "));
-    newItem40->setTextAlignment(Qt::AlignRight| Qt::AlignVCenter);
+    QTableWidgetItem *newItem40 = new QTableWidgetItem(tr("连接交换机DPID: "));
+    newItem40->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(4, 0, newItem40);
-    QTableWidgetItem *newItem41 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSPort));
+    QTableWidgetItem *newItem41 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSDPID));
     newItem41->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     m_platform->ui_DeviceInfTable->setItem(4, 1, newItem41);
+
+    QTableWidgetItem *newItem50 = new QTableWidgetItem(tr("连接的交换机ID: "));
+    newItem50->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(5, 0, newItem50);
+    QTableWidgetItem *newItem51 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSId));
+    newItem51->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(5, 1, newItem51);
+
+    QTableWidgetItem *newItem60 = new QTableWidgetItem(tr("交换机端口号: "));
+    newItem60->setTextAlignment(Qt::AlignRight| Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(6, 0, newItem60);
+    QTableWidgetItem *newItem61 = new QTableWidgetItem(QString("%1").arg(_switcherInfo.attachSPort));
+    newItem61->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    m_platform->ui_DeviceInfTable->setItem(6, 1, newItem61);
 
 
     m_platform->ui_DeviceInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //设置选择的模式为单选择
     m_platform->ui_DeviceInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //设置选择行为时每次选择一行
     //m_platform->ui_DeviceInfTable->setShowGrid(false);   //设置不显示格子线
-    m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
-    m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
-    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+ m_platform->ui_DeviceInfTable->columnWidth(1),\
+
+    //m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
+    //m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+    m_platform->ui_DeviceInfTable->resizeColumnsToContents();
+    //m_platform->ui_DeviceInfTable->resizeRowsToContents();
+    qDebug()<<"width0: "<<m_platform->ui_DeviceInfTable->columnWidth(0);
+    qDebug()<<"width1: "<<m_platform->ui_DeviceInfTable->columnWidth(1);
+    m_platform->ui_DeviceInfTable->resize(m_platform->ui_DeviceInfTable->columnWidth(0)+m_platform->ui_DeviceInfTable->columnWidth(1)+10,\
                                           m_platform->ui_DeviceInfTable->rowCount()*m_platform->ui_DeviceInfTable->rowHeight(0));
+
 }
 
 bool CTopologyWidget::getSwitchHostDevice()
@@ -1941,7 +1961,7 @@ bool CTopologyWidget::getSwitchHostDevice()
         t_node1->ID = m_id++;
         t_node1->hardwareDesc = t_switchNames.at(i);
         t_node1->portNum = 3;
-        t_node1->level = 1;
+        t_node1->level = 2;
         t_node1->portInfList.clear();
 
         NodeInf t_nInf1;
@@ -2012,13 +2032,13 @@ bool CTopologyWidget::getSwitchHostDevice()
         t_h1->userGroup = "group";
         t_h1->level = 0;
 
-        NodeInf t_nInf;
-        t_nInf.type = HOST;
-        t_nInf.pNode = t_h1;
-        m_nodelist.append(t_nInf);
-
         if(!t_h1->switchDPID.isEmpty())//防止为空
         {
+            NodeInf t_nInf;
+            t_nInf.type = HOST;
+            t_nInf.pNode = t_h1;
+            m_nodelist.append(t_nInf);
+
             LinkInf t_link;
             t_link.src_nodeId=m_switchNameMap[t_h1->switchDPID]->ID;
             t_link.src_port = t_h1->attachSPort;
@@ -2113,6 +2133,8 @@ void CTopologyWidget::RefreshTopology()
     double oriX = 600;
     double oriY = 350;
 
+    int ms=0,mh=0;
+
     for (int i = 0; i < m_nodelist.size(); i++)
     {
         double x,y,width,height;
@@ -2123,7 +2145,7 @@ void CTopologyWidget::RefreshTopology()
         {
             SwitchNode *t_switch = (SwitchNode *)(m_nodelist[i].pNode);
 
-            t_pos.setX(oriX + 100*(t_switch->level));
+            t_pos.setX(oriX + 100*ms);
             t_pos.setY(oriY + 100*(t_switch->level));
             width = 60;
             height = 60;
@@ -2134,6 +2156,7 @@ void CTopologyWidget::RefreshTopology()
             t_switchInfo.name = t_switch->DPID;
             t_switchInfo.ID = t_switch->ID;
             t_switchInfo.portNum = t_switch->portNum;
+            ms++;
             //t_switchInfo.networkLocation = lineList[lineNum];
         }
 
@@ -2141,7 +2164,7 @@ void CTopologyWidget::RefreshTopology()
         {
             HostNode *t_host = (HostNode *)(m_nodelist[i].pNode);
 
-            t_pos.setX(oriX + 100*(t_host->level));
+            t_pos.setX(oriX + 100*mh);
             t_pos.setY(oriY + 100*(t_host->level));
             width = 50;
             height = 50;
@@ -2154,6 +2177,9 @@ void CTopologyWidget::RefreshTopology()
             t_switchInfo.portNum = 1;
             t_switchInfo.attachSId = t_host->attachSId;
             t_switchInfo.attachSPort = t_host->attachSPort;
+            t_switchInfo.attachSDPID = t_host->switchDPID;
+            t_switchInfo.macAddr = t_host->macAddr;
+            mh++;
             //t_switchInfo.networkLocation = lineList[lineNum];
         }
         else{

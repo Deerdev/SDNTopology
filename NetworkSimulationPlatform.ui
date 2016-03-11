@@ -16,6 +16,11 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="font">
+   <font>
+    <family>文泉驿微米黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>NetworkSimulationPlatform</string>
   </property>
@@ -26,7 +31,7 @@
      <x>0</x>
      <y>0</y>
      <width>473</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

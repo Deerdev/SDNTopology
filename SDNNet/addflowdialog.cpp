@@ -2,6 +2,7 @@
 #include <QString>
 #include "ui_addflowdialog.h"
 #include "SDNCurl/sdncurl.h"
+#include "NetworkSimulationPlatform.h"
 
 #include <QDebug>
 #include <iostream>
@@ -28,16 +29,21 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
     QString t_s1 = ui->DPIDLineEdit->text();
     QString t_s2 = ui->flowNameLineEdit->text();
     QString t_s3 = ui->inPortLineEdit->text();
-    QString t_s4 = ui->srcMACLineEdit->text();
-    QString t_s5 = ui->desMACLineEdit->text();
-    QString t_s6 = ui->srcIPLineEdit->text();
-    QString t_s7 = ui->desIPLineEdit->text();
-    QString t_s8 = ui->priorityLineEdit->text();
-    QString t_s9 = ui->activeComboBox->currentText();
-    QString t_s10 = ui->actionLineEdit->text();
+    QString t_s4 = ui->ethTypeLineEdit->text();
+    QString t_s5 = ui->srcMACLineEdit->text();
+    QString t_s6 = ui->desMACLineEdit->text();
+    QString t_s7 = ui->srcIPLineEdit->text();
+    QString t_s8 = ui->desIPLineEdit->text();
+    QString t_s9 = ui->IPprotoLineEdit->text();
+    QString t_s10 = ui->priorityLineEdit->text();
+    QString t_s11 = ui->activeComboBox->currentText();
+    QString t_s12 = ui->actionLineEdit->text();
+    QString t_s13 = ui->IPTosLineEdit->text();
+    QString t_s14 = ui->srcPortLineEdit->text();
+    QString t_s15 = ui->dstPortLineEdit->text();
+    QString t_s16 = ui->vlanIDLineEdit->text();
+    QString t_s17 = ui->vlanIDPriorityLineEdit->text();
     //QString t_s9 = ui->activeComboBox()->currentText();
-
-    qDebug()  <<t_s1<<" "<<t_s8 << " "<<t_s9;
 
     QString strJson;
     strJson = "{";
@@ -57,31 +63,59 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
     }
     if(!t_s4.isEmpty())
     {
-        strJson = strJson + "\"eth_src\" :" + t_s4 + ",";
+        strJson = strJson + "\"eth_type\" :" + t_s4 + ",";
     }
     if(!t_s5.isEmpty())
     {
-        strJson = strJson + "\"eth_dst\" :" + t_s5 + ",";
+        strJson = strJson + "\"eth_src\" :" + t_s5 + ",";
     }
     if(!t_s6.isEmpty())
     {
-        strJson = strJson + "\"ipv4_src\" :" + t_s6 + ",";
+        strJson = strJson + "\"eth_dst\" :" + t_s6 + ",";
     }
     if(!t_s7.isEmpty())
     {
-        strJson = strJson + "\"ipv4_dst\" :" + t_s7 + ",";
+        strJson = strJson + "\"ipv4_src\" :" + t_s7 + ",";
     }
     if(!t_s8.isEmpty())
     {
-        strJson = strJson + "\"priority\" :" + t_s8 + ",";
+        strJson = strJson + "\"ipv4_dst\" :" + t_s8 + ",";
     }
     if(!t_s9.isEmpty())
     {
-        strJson = strJson + "\"active\" :" + "\"" + t_s9 + "\"" + ",";
+        strJson = strJson + "\"ip_proto\" :" + t_s9 + ",";
     }
     if(!t_s10.isEmpty())
     {
-        strJson = strJson + "\"actions\" :" + t_s10;
+        strJson = strJson + "\"priority\" :" + t_s10 + ",";
+    }
+    if(!t_s11.isEmpty())
+    {
+        strJson = strJson + "\"active\" :" + "\"" + t_s11 + "\"" + ",";
+    }
+    if(!t_s12.isEmpty())
+    {
+        strJson = strJson + "\"actions\" :" + t_s12 + ",";
+    }
+    if(!t_s13.isEmpty())
+    {
+        strJson = strJson + "\"ip_tos\" :" + t_s13 + ",";
+    }
+    if(!t_s14.isEmpty())
+    {
+        strJson = strJson + "\"tcp_src\" :" + t_s14 + ",";
+    }
+    if(!t_s15.isEmpty())
+    {
+        strJson = strJson + "\"tcp_dst\" :" + t_s15 + ",";
+    }
+    if(!t_s16.isEmpty())
+    {
+        strJson = strJson + "\"eth_vlan_vid\" :" + t_s16 + ",";
+    }
+    if(!t_s17.isEmpty())
+    {
+        strJson = strJson + "\"eth_vlan_pcp\" :" + t_s17;
     }
     strJson = strJson +"}";
     //qDebug()<< strJson;
@@ -99,6 +133,7 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
     //t_sjsonVec.append(strJson);
 
     m_jsonVec.clear();
+    m_platform->historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": add flows success!"));
     accept();
 }
 
@@ -107,13 +142,20 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
     QString t_s1 = ui->DPIDLineEdit->text();
     QString t_s2 = ui->flowNameLineEdit->text();
     QString t_s3 = ui->inPortLineEdit->text();
-    QString t_s4 = ui->srcMACLineEdit->text();
-    QString t_s5 = ui->desMACLineEdit->text();
-    QString t_s6 = ui->srcIPLineEdit->text();
-    QString t_s7 = ui->desIPLineEdit->text();
-    QString t_s8 = ui->priorityLineEdit->text();
-    QString t_s9 = ui->activeComboBox->currentText();
-    QString t_s10 = ui->actionLineEdit->text();
+    QString t_s4 = ui->ethTypeLineEdit->text();
+    QString t_s5 = ui->srcMACLineEdit->text();
+    QString t_s6 = ui->desMACLineEdit->text();
+    QString t_s7 = ui->srcIPLineEdit->text();
+    QString t_s8 = ui->desIPLineEdit->text();
+    QString t_s9 = ui->IPprotoLineEdit->text();
+    QString t_s10 = ui->priorityLineEdit->text();
+    QString t_s11 = ui->activeComboBox->currentText();
+    QString t_s12 = ui->actionLineEdit->text();
+    QString t_s13 = ui->IPTosLineEdit->text();
+    QString t_s14 = ui->srcPortLineEdit->text();
+    QString t_s15 = ui->dstPortLineEdit->text();
+    QString t_s16 = ui->vlanIDLineEdit->text();
+    QString t_s17 = ui->vlanIDPriorityLineEdit->text();
     //QString t_s9 = ui->activeComboBox()->currentText();
 
     QString strJson;
@@ -134,31 +176,59 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
     }
     if(!t_s4.isEmpty())
     {
-        strJson = strJson + "\"eth_src\" :" + t_s4 + ",";
+        strJson = strJson + "\"eth_type\" :" + t_s4 + ",";
     }
     if(!t_s5.isEmpty())
     {
-        strJson = strJson + "\"eth_dst\" :" + t_s5 + ",";
+        strJson = strJson + "\"eth_src\" :" + t_s5 + ",";
     }
     if(!t_s6.isEmpty())
     {
-        strJson = strJson + "\"ipv4_src\" :" + t_s6 + ",";
+        strJson = strJson + "\"eth_dst\" :" + t_s6 + ",";
     }
     if(!t_s7.isEmpty())
     {
-        strJson = strJson + "\"ipv4_dst\" :" + t_s7 + ",";
+        strJson = strJson + "\"ipv4_src\" :" + t_s7 + ",";
     }
     if(!t_s8.isEmpty())
     {
-        strJson = strJson + "\"priority\" :" + t_s8 + ",";
+        strJson = strJson + "\"ipv4_dst\" :" + t_s8 + ",";
     }
     if(!t_s9.isEmpty())
     {
-        strJson = strJson + "\"active\" :" + "\"" + t_s9 + "\"" + ",";
+        strJson = strJson + "\"ip_proto\" :" + t_s9 + ",";
     }
     if(!t_s10.isEmpty())
     {
-        strJson = strJson + "\"actions\" :" + t_s10;
+        strJson = strJson + "\"priority\" :" + t_s10 + ",";
+    }
+    if(!t_s11.isEmpty())
+    {
+        strJson = strJson + "\"active\" :" + "\"" + t_s11 + "\"" + ",";
+    }
+    if(!t_s12.isEmpty())
+    {
+        strJson = strJson + "\"actions\" :" + t_s12 + ",";
+    }
+    if(!t_s13.isEmpty())
+    {
+        strJson = strJson + "\"ip_tos\" :" + t_s13 + ",";
+    }
+    if(!t_s14.isEmpty())
+    {
+        strJson = strJson + "\"tcp_src\" :" + t_s14 + ",";
+    }
+    if(!t_s15.isEmpty())
+    {
+        strJson = strJson + "\"tcp_dst\" :" + t_s15 + ",";
+    }
+    if(!t_s16.isEmpty())
+    {
+        strJson = strJson + "\"eth_vlan_vid\" :" + t_s16 + ",";
+    }
+    if(!t_s17.isEmpty())
+    {
+        strJson = strJson + "\"eth_vlan_pcp\" :" + t_s17;
     }
     strJson = strJson +"}";
     //qDebug()<< strJson;

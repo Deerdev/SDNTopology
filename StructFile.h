@@ -71,6 +71,8 @@ struct CSwitcherInfo
     //主机信息
     QString macAddr;
     //
+    QString attachSDPID;
+    //
     int attachSId;
     //
     int attachSPort;

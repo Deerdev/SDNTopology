@@ -278,7 +278,8 @@ void NetworkSimulationPlatform::showFlowsSlot()
 void NetworkSimulationPlatform::clearScene(void)
 {
    ui_editWidget->clearScene();
-   historyListWidget->clear();
+   historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": clear Scene!"));
+   //historyListWidget->clear();
 }
 
 /*************************************************
@@ -447,7 +448,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     menu_DockShowMenu->addAction(ui_historyDock->toggleViewAction());
 
     ui_DeviceInfDock = new QDockWidget(tr("设备信息"), this);
-    ui_DeviceInfDock->setMinimumWidth(250);
+    ui_DeviceInfDock->setMinimumWidth(150);
     ui_DeviceInfDock->setMaximumWidth(500);
 
     ui_DeviceDockWidget = new QWidget(ui_DeviceInfDock);
@@ -455,7 +456,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     QPalette pll = ui_DeviceInfTable->palette();
     pll.setBrush(QPalette::Base,QBrush(QColor(255,255,255,0)));
     ui_DeviceInfTable->setPalette(pll);
-    ui_DeviceInfTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //ui_DeviceInfTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui_DeviceInfTable->horizontalHeader()->setHidden(true);
     ui_DeviceInfTable->verticalHeader()->setHidden(true);
     //ui_DeviceInfTable->horizontalHeader()->setHidden(true);

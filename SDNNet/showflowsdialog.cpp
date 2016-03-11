@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include "addflowdialog.h"
+#include "NetworkSimulationPlatform.h"
 //************QJson*****
 #include "parser.h"
 #include "serializer.h"
@@ -42,7 +43,7 @@ ShowFlowsDialog::ShowFlowsDialog(NetworkSimulationPlatform *_platform,QWidget *p
 //    ui->flowShowWidget->setSpan(3,0,3,1);
 
     getDeviceName();
-    getFlowsFromController();
+    //getFlowsFromController();
 }
 
 ShowFlowsDialog::~ShowFlowsDialog()
@@ -79,7 +80,10 @@ void ShowFlowsDialog::on_delFlowButton_clicked()
     if(t_name.isEmpty())
         return;
     if(m_curl->deleteFlow(t_name))
+    {
         QMessageBox::information(this, tr("提示"),tr("删除成功！"),QMessageBox::Ok);
+        m_platform->historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": delete flow(name: ")+t_name+tr(")"));
+    }
 }
 
 //clear flow
@@ -173,6 +177,7 @@ void ShowFlowsDialog::getFlowsFromController()
         ui->flowShowWidget->setSpan(rowbegin,0,rowSpanCount,1);
         rowbegin += rowSpanCount;
     }
+    m_platform->historyListWidget->append(NetworkSimulationPlatform::getSysTime()+tr(": get Flows!"));
 }
 
 void ShowFlowsDialog::getDeviceName()
