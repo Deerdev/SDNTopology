@@ -11,9 +11,17 @@ AddFlowDialog::AddFlowDialog(NetworkSimulationPlatform *_platform,QWidget *paren
     QDialog(parent),m_platform(_platform),
     ui(new Ui::AddFlowDialog)
 {
+    //this->resize(322,368);
     ui->setupUi(this);
     m_jsonVec.clear();
     m_curl = new SDNCurl();
+    ui->pushButton->setFlat(TRUE);
+    ui->pushButton->setStyleSheet("* { background-color: rgba(0,125,0,0) }");
+
+    Qt::WindowFlags flags = 0;
+    flags |= Qt::WindowMinimizeButtonHint;
+    setWindowFlags(flags); // 设置禁止最大化
+    setFixedSize(316,368); // 禁止改变窗口大小
 }
 
 AddFlowDialog::~AddFlowDialog()
@@ -93,10 +101,7 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
     {
         strJson = strJson + "\"active\" :" + "\"" + t_s11 + "\"" + ",";
     }
-    if(!t_s12.isEmpty())
-    {
-        strJson = strJson + "\"actions\" :" + t_s12 + ",";
-    }
+
     if(!t_s13.isEmpty())
     {
         strJson = strJson + "\"ip_tos\" :" + t_s13 + ",";
@@ -115,7 +120,12 @@ void AddFlowDialog::on_submitButton_clicked()//提交流表
     }
     if(!t_s17.isEmpty())
     {
-        strJson = strJson + "\"eth_vlan_pcp\" :" + t_s17;
+        strJson = strJson + "\"eth_vlan_pcp\" :" + t_s17 + ",";
+    }
+
+    if(!t_s12.isEmpty())
+    {
+        strJson = strJson + "\"actions\" :" + t_s12;
     }
     strJson = strJson +"}";
     //qDebug()<< strJson;
@@ -160,6 +170,7 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
 
     QString strJson;
     strJson = "{";
+
 
     if(!t_s1.isEmpty())
     {
@@ -206,10 +217,7 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
     {
         strJson = strJson + "\"active\" :" + "\"" + t_s11 + "\"" + ",";
     }
-    if(!t_s12.isEmpty())
-    {
-        strJson = strJson + "\"actions\" :" + t_s12 + ",";
-    }
+
     if(!t_s13.isEmpty())
     {
         strJson = strJson + "\"ip_tos\" :" + t_s13 + ",";
@@ -228,7 +236,12 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
     }
     if(!t_s17.isEmpty())
     {
-        strJson = strJson + "\"eth_vlan_pcp\" :" + t_s17;
+        strJson = strJson + "\"eth_vlan_pcp\" :" + t_s17 + ",";
+    }
+
+    if(!t_s12.isEmpty())
+    {
+        strJson = strJson + "\"actions\" :" + t_s12;
     }
     strJson = strJson +"}";
     //qDebug()<< strJson;
@@ -240,4 +253,21 @@ void AddFlowDialog::on_addAgainButton_clicked()//继续添加流表
 void AddFlowDialog::on_cancelButton_clicked()//取消流表
 {
     close();
+}
+
+void AddFlowDialog::on_pushButton_clicked()
+{
+    //qDebug()<<this->width();
+    if(this->width()<500)
+    {
+        setFixedSize(655,368);
+        //this->resize(649,368);
+        ui->pushButton->setText("<<");
+    }
+    else if(this->width()>500)
+    {
+        setFixedSize(316,368);
+        //this->resize(322,368);
+        ui->pushButton->setText(">>");
+    }
 }

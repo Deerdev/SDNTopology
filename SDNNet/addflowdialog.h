@@ -25,6 +25,8 @@ private slots:
 
     void on_cancelButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::AddFlowDialog *ui;
     NetworkSimulationPlatform *m_platform;

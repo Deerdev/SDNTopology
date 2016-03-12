@@ -2028,7 +2028,7 @@ bool CTopologyWidget::getSwitchHostDevice()
         t_h1->switchDPID = t_attachSDPID;
         t_h1->attachSId = t_sid;
         t_h1->attachSPort = t_attachSPortNum;
-        t_h1->userName = "host";
+        t_h1->userName = t_hostMac;
         t_h1->userGroup = "group";
         t_h1->level = 0;
 
@@ -2172,7 +2172,7 @@ void CTopologyWidget::RefreshTopology()
 
             t_switchInfo.type = t_host->type;
             t_switchInfo.typeName = "Host";
-            t_switchInfo.name = t_host->userName;
+            t_switchInfo.name = t_host->macAddr;
             t_switchInfo.ID = t_host->ID;
             t_switchInfo.portNum = 1;
             t_switchInfo.attachSId = t_host->attachSId;
