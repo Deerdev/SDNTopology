@@ -36,7 +36,9 @@ SOURCES += main.cpp\
     SDNNet/showflowsdialog.cpp \
     SDNNet/addflowdialog.cpp \
     SDNNet/showsportdialog.cpp \
-    SDNCurl/sdncurl.cpp
+    SDNCurl/sdncurl.cpp \
+    SDNNet/sdnserver.cpp \
+    SDNNet/serverprocess.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
@@ -68,7 +70,9 @@ HEADERS  += NetworkSimulationPlatform.h \
     SDNNet/showflowsdialog.h \
     SDNNet/addflowdialog.h \
     SDNNet/showsportdialog.h \
-    SDNCurl/sdncurl.h
+    SDNCurl/sdncurl.h \
+    SDNNet/sdnserver.h \
+    SDNNet/serverprocess.h
 
 FORMS    += NetworkSimulationPlatform.ui \
     CSwitherConfigure.ui \
