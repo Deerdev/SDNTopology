@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = NetworkSimulationPlatform
 TEMPLATE = app
@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     SDNNet/showsportdialog.cpp \
     SDNCurl/sdncurl.cpp \
     SDNNet/sdnserver.cpp \
-    SDNNet/serverprocess.cpp
+    SDNNet/serverprocess.cpp \
+    TopoInf/DataDefine.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
