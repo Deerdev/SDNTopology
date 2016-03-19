@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CCDialog</class>
+ <widget class="QDialog" name="CCDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>386</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>320</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>341</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Adobe 楷体 Std R</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>您好，欢迎使用该局域网聊天及文件传送软件，软件使用
+说明简要概括如下：
+
+1、在“信息输入”框内输入您要发给对方的信息内容，然
+后按“发送”即可将信息显示在“信息显示”窗口
+，并且发送到对方的电脑上；
+
+2、如果需要使用文件收发功能，需要先得到服务器端
+的IP和端口号的信息，缺省值为本机回环地址：
+127.0.0.1，端口号为：5555。然后服务器端需要先打
+开“开始监听”按钮，然后客户端打开“建立会话”按
+钮，在状态栏显示：“当前状态：等待消息输入或文件
+传输!”即表示连接成功。
+
+3、这时候就可以收发文件了。默认的文件保存路径是
+程序所在目录下。
+
+更多的功能后期添加。如果建议或意见，请联系
+zouxy09@qq.com。
+Enjoy yourself！</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

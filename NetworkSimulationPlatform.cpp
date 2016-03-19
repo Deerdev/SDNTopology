@@ -5,6 +5,9 @@
 #include <fstream>
 #include "CPartitionNumDialog.h"
 #include "SDNNet/showflowsdialog.h"
+#include "SDNNet/parahostdlg.h"
+#include "SDNNet/weightinfo.h"
+#include "SDNNet/smainwindow.h"
 
 /*************************************************
   Function: NetworkSimulationPlatform
@@ -132,11 +135,11 @@ void NetworkSimulationPlatform::createActions( void )
 
     paraTaskShowAction = new QAction(tr("并行任务"), this);
     paraTaskShowAction->setIcon(QIcon(""));
-    connect(paraTaskShowAction, SIGNAL(triggered()), this, SLOT());
+    connect(paraTaskShowAction, SIGNAL(triggered()), this, SLOT(paraHostSlot()));
 
     switchPortInfAction = new QAction(tr("交换机端口信息"), this);
     switchPortInfAction->setIcon(QIcon(""));
-    connect(switchPortInfAction, SIGNAL(triggered()), this, SLOT());
+    connect(switchPortInfAction, SIGNAL(triggered()), this, SLOT(weightInfoSlot()));
 
     logShowAction = new QAction(tr("日志显示"), this);
     logShowAction->setIcon(QIcon(""));
@@ -144,7 +147,7 @@ void NetworkSimulationPlatform::createActions( void )
 
     controllerShowAction = new QAction(tr("控制器信息"), this);
     controllerShowAction->setIcon(QIcon(""));
-    connect(controllerShowAction, SIGNAL(triggered()), this, SLOT());
+    connect(controllerShowAction, SIGNAL(triggered()), this, SLOT(serverDlgSlot()));
 
 
 
@@ -267,6 +270,30 @@ void NetworkSimulationPlatform::showFlowsSlot()
     ShowFlowsDialog *flowShowWidget = new ShowFlowsDialog(this);
     if(flowShowWidget->exec() == QDialog::Accepted)
     {}
+}
+
+void NetworkSimulationPlatform::paraHostSlot()
+{
+    ParaHostDlg *flowShowWidget = new ParaHostDlg(this);
+    if(flowShowWidget->exec() == QDialog::Accepted)
+    {
+
+    }
+}
+
+void NetworkSimulationPlatform::weightInfoSlot()
+{
+    WeightInfo *weightInfo = new WeightInfo(this);
+    if(weightInfo->exec() == QDialog::Accepted)
+    {
+
+    }
+}
+
+void NetworkSimulationPlatform::serverDlgSlot()
+{
+    SMainWindow *t_win = new SMainWindow;
+    t_win->show();
 }
 
 /*************************************************
@@ -441,7 +468,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     ui_historyDock->setMaximumHeight(150);
 
     historyListWidget = new QTextEdit(ui_historyDock);
-    historyListWidget->setReadOnly(true);
+    //historyListWidget->setReadOnly(true);
     ui_historyDock->setAllowedAreas(Qt::AllDockWidgetAreas);
     ui_historyDock->setWidget(historyListWidget);
     addDockWidget(Qt::BottomDockWidgetArea, ui_historyDock);

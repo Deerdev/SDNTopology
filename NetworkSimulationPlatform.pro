@@ -39,7 +39,12 @@ SOURCES += main.cpp\
     SDNCurl/sdncurl.cpp \
     SDNNet/sdnserver.cpp \
     SDNNet/serverprocess.cpp \
-    TopoInf/DataDefine.cpp
+    TopoInf/DataDefine.cpp \
+    SDNNet/parahostdlg.cpp \
+    SDNNet/weightinfo.cpp \
+    SDNNet/smainwindow.cpp \
+    SDNNet/ccdialog.cpp \
+    SDNNet/hismesdialog.cpp
 
 HEADERS  += NetworkSimulationPlatform.h \
     StructFile.h \
@@ -73,7 +78,12 @@ HEADERS  += NetworkSimulationPlatform.h \
     SDNNet/showsportdialog.h \
     SDNCurl/sdncurl.h \
     SDNNet/sdnserver.h \
-    SDNNet/serverprocess.h
+    SDNNet/serverprocess.h \
+    SDNNet/parahostdlg.h \
+    SDNNet/weightinfo.h \
+    SDNNet/smainwindow.h \
+    SDNNet/ccdialog.h \
+    SDNNet/hismesdialog.h
 
 FORMS    += NetworkSimulationPlatform.ui \
     CSwitherConfigure.ui \
@@ -89,7 +99,12 @@ FORMS    += NetworkSimulationPlatform.ui \
     CPortDialog.ui \
     SDNNet/showflowsdialog.ui \
     SDNNet/addflowdialog.ui \
-    SDNNet/showsportdialog.ui
+    SDNNet/showsportdialog.ui \
+    SDNNet/parahostdlg.ui \
+    SDNNet/weightinfo.ui \
+    SDNNet/smainwindow.ui \
+    SDNNet/ccdialog.ui \
+    SDNNet/hismesdialog.ui
 
 
 UI_DIR=./UI

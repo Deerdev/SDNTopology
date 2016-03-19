@@ -10,7 +10,6 @@ class SDNServer: public QTcpServer
 
 public:
     SDNServer(QObject *parent=NULL);
-    ~ParaServer();
 
 private:
     void incomingConnection(int _socketId);

@@ -6,6 +6,7 @@
 #include <string>
 #include <QObject>
 #include <QList>
+#include <QString>
 
 #define MAX_BUFSIZE 4096
 class QString;
@@ -26,6 +27,7 @@ public:
 private:
     static char wr_buf[MAX_BUFSIZE];
     static int wr_index;
+    std::string m_ip;
 };
 
 

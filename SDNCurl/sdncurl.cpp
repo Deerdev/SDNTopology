@@ -12,7 +12,7 @@ int SDNCurl::wr_index = 0;
 
 SDNCurl::SDNCurl()
 {
-
+    m_ip="192.168.1.100";
 }
 
 /*
@@ -50,7 +50,7 @@ bool SDNCurl::getFlows(QString &_flowsStr, QString _DPID)
     CURL *curl;
     CURLcode res;
     int  wr_error;
-    std::string t_url = "http://127.0.0.1:8080/wm/staticflowpusher/list/" + _DPID.toStdString() + "/json";
+    std::string t_url = "http://"+m_ip+"/wm/staticflowpusher/list/" + _DPID.toStdString() + "/json";
 
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();    // 初始化
@@ -301,13 +301,15 @@ bool SDNCurl::addFlows( QList<QString> &_sjsonVec)
         // In windows, this will init the winsock stuff
         curl_global_init(CURL_GLOBAL_ALL);
 
+        std::string t_url = "http://"+m_ip+"/wm/staticflowpusher/json";
+
         // get a curl handle
         pCurl = curl_easy_init();
         if (NULL != pCurl)
         {
             // 设置超时时间为1秒
             //curl_easy_setopt(pCurl, CURLOPT_TIMEOUT, 1);
-            curl_easy_setopt(pCurl, CURLOPT_URL, "http://127.0.0.1:8080/wm/staticflowpusher/json");
+            curl_easy_setopt(pCurl, CURLOPT_URL, t_url.c_str());
             // 设置http发送的内容类型为JSON
             curl_slist *headers = curl_slist_append(NULL, "Content-Type:application/json;charset=UTF-8");
             curl_easy_setopt(pCurl, CURLOPT_HTTPHEADER, headers);
@@ -343,13 +345,15 @@ bool SDNCurl::deleteFlow(QString _flowName)
     CURL *pCurl;
     CURLcode res;
 
+    std::string t_url = "http://"+m_ip+"/wm/staticflowpusher/json";
+
     curl_global_init(CURL_GLOBAL_ALL);
     pCurl = curl_easy_init();
     if(pCurl) {
         curl_easy_setopt(pCurl, CURLOPT_VERBOSE, 1L);
         curl_easy_setopt(pCurl,CURLOPT_CUSTOMREQUEST,"DELETE");
         //curl_easy_setopt(pCurl, CURLOPT_WRITEFUNCTION,&http_callback);
-        curl_easy_setopt(pCurl, CURLOPT_URL,"http://127.0.0.1:8080/wm/staticflowpusher/json");
+        curl_easy_setopt(pCurl, CURLOPT_URL, t_url.c_str());
         // 设置http发送的内容类型为JSON
         curl_slist *headers = curl_slist_append(NULL, "Accept: Agent-007");
         curl_easy_setopt(pCurl, CURLOPT_HTTPHEADER, headers);
@@ -374,6 +378,8 @@ bool SDNCurl::getTopo(QString &_TopoStr)
     CURLcode res;
     int  wr_error;
 
+
+    std::string t_url = "http://"+m_ip+"/wm/topology/links/json";
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();    // 初始化
     if (curl)
@@ -384,7 +390,7 @@ bool SDNCurl::getTopo(QString &_TopoStr)
         //curl_easy_setopt(curl, CURLOPT_PROXY, "10.99.60.201:8080");// 代理
         //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);// 改协议头
 
-        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8080/wm/topology/links/json");
+        curl_easy_setopt(curl, CURLOPT_URL, t_url.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&wr_error);
         curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, SDNCurl::write_data );
@@ -414,6 +420,7 @@ bool SDNCurl::getSwitchesInf(QString &_switchInf)
     CURLcode res;
     int  wr_error;
 
+    std::string t_url = "http://"+m_ip+"/wm/core/controller/switches/json";
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();    // 初始化
     if (curl)
@@ -424,7 +431,7 @@ bool SDNCurl::getSwitchesInf(QString &_switchInf)
         //curl_easy_setopt(curl, CURLOPT_PROXY, "10.99.60.201:8080");// 代理
         //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);// 改协议头
 
-        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8080/wm/core/controller/switches/json");
+        curl_easy_setopt(curl, CURLOPT_URL, t_url.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&wr_error);
         curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, SDNCurl::write_data );
@@ -454,6 +461,7 @@ bool SDNCurl::getHostDevices(QString &_hostInf)
     CURLcode res;
     int  wr_error;
 
+    std::string t_url = "http://"+m_ip+"/wm/device/";
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();    // 初始化
     if (curl)
@@ -464,7 +472,7 @@ bool SDNCurl::getHostDevices(QString &_hostInf)
         //curl_easy_setopt(curl, CURLOPT_PROXY, "10.99.60.201:8080");// 代理
         //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);// 改协议头
 
-        curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8080/wm/device/");
+        curl_easy_setopt(curl, CURLOPT_URL, t_url.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&wr_error);
         curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, SDNCurl::write_data );

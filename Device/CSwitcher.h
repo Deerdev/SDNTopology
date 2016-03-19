@@ -38,7 +38,6 @@ private:
 	QRectF m_boundingRect;
 	bool m_selectedFlag;
 
-
 	CSwitcherInfo   m_switcherInfo;
 	QColor m_color;
 

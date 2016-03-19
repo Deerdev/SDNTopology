@@ -75,4 +75,13 @@ struct NodeList{
     int linkNum;
 };
 
+class SockData{
+public:
+    SockData();
+    SockData(const SockData&);
+    ~SockData();
+    int msgType;
+};
+
+
 #endif // DATADEFINE_H

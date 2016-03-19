@@ -50,6 +50,11 @@ class NetworkSimulationPlatform : public QMainWindow, public Ui_NetworkSimulatio
         void closeSimuWindowSlot();
 
         void showFlowsSlot();
+        void paraHostSlot();
+
+        void weightInfoSlot();
+
+        void serverDlgSlot();
 
 
         //void saveItem(void);

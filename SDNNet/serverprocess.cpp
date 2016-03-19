@@ -26,26 +26,26 @@ void ServerProcess::readData()
     qDebug()<<"read-sprocess: ";
     //qDebug()<<buff<<endl;
 
-    quint8 tag = CGraphicItemData::TAG;
-    QDataStream in_data(m_socket);
-    in_data.setVersion(QDataStream::Qt_4_3);
+//    quint8 tag = CGraphicItemData::TAG;
+//    QDataStream in_data(m_socket);
+//    in_data.setVersion(QDataStream::Qt_4_3);
 
-    if (nextBlockSize == 0)
-    {
-        if (m_socket->bytesAvailable() < sizeof(quint16))
-            return;
-        in_data >> nextBlockSize;
-    }
-    if (m_socket->bytesAvailable() < nextBlockSize)
-        return;
-    SockData t_data;
-    in_data >> t_data.msgType;
-    CGraphicItemData *pada = new CGraphicItemData;
-    in_data >> tag;
-    in_data >> (*pada);
-    t_data.pData = pada;
-    nextBlockSize = 0;
-    emit recvedData(t_data);
+//    if (nextBlockSize == 0)
+//    {
+//        if (m_socket->bytesAvailable() < sizeof(quint16))
+//            return;
+//        in_data >> nextBlockSize;
+//    }
+//    if (m_socket->bytesAvailable() < nextBlockSize)
+//        return;
+//    SockData t_data;
+//    in_data >> t_data.msgType;
+//    CGraphicItemData *pada = new CGraphicItemData;
+//    in_data >> tag;
+//    in_data >> (*pada);
+//    t_data.pData = pada;
+//    nextBlockSize = 0;
+//    emit recvedData(t_data);
 }
 
 void ServerProcess::sendData(SockData _data)
@@ -53,17 +53,17 @@ void ServerProcess::sendData(SockData _data)
     qDebug()<<"w-sprocess, current thread Id: "<<QThread::currentThreadId()<<endl;
     qDebug()<<"write!"<<endl;
 
-    QByteArray block;
-    QDataStream out(&block, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_3);
-    out<< quint16(0);
-    out << _data.msgType;
+//    QByteArray block;
+//    QDataStream out(&block, QIODevice::WriteOnly);
+//    out.setVersion(QDataStream::Qt_4_3);
+//    out<< quint16(0);
+//    out << _data.msgType;
 
-    out << quint8(CGraphicItemData::TAG) << (*_data.pData);
-    out.device()->seek(0);
-    int t_size = quint16(block.size() - sizeof(quint16));
-    out << quint16(block.size() - sizeof(quint16));
-    m_socket->write(block);
+//    out << quint8(CGraphicItemData::TAG) << (*_data.pData);
+//    out.device()->seek(0);
+//    int t_size = quint16(block.size() - sizeof(quint16));
+//    out << quint16(block.size() - sizeof(quint16));
+//    m_socket->write(block);
 }
 
 void ServerProcess::connect2client()
