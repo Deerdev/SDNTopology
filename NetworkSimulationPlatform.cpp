@@ -511,24 +511,31 @@ void NetworkSimulationPlatform::createDockWindow( void )
     ui_LinkInfDock->setAllowedAreas(Qt::AllDockWidgetAreas);
     ui_LinkInfDock->setWidget(ui_LinkDockWidget);
     addDockWidget(Qt::LeftDockWidgetArea, ui_LinkInfDock);
+    menu_DockShowMenu->addAction(ui_LinkInfDock->toggleViewAction());
 
 
     ui_LinkInfTable->setRowCount(12);
     ui_LinkInfTable->setColumnCount(3);
 
-    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr(""));
+    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr("源交换机"));
     newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     ui_LinkInfTable->setItem(0, 0, newItem00);
-    QTableWidgetItem *newItem01 = new QTableWidgetItem("1");
+    QTableWidgetItem *newItem01 = new QTableWidgetItem(tr("目的交换机"));
     newItem01->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     ui_LinkInfTable->setItem(0, 1, newItem01);
+    QTableWidgetItem *newItem02 = new QTableWidgetItem(tr("权重值"));
+    newItem02->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(0, 2, newItem02);
 
-    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("名称: "));
+    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("0"));
     newItem10->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
     ui_LinkInfTable->setItem(1, 0, newItem10);
     QTableWidgetItem *newItem11 = new QTableWidgetItem("2");
     newItem11->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
    ui_LinkInfTable->setItem(1, 1, newItem11);
+   QTableWidgetItem *newItem12 = new QTableWidgetItem("2");
+   newItem12->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+  ui_LinkInfTable->setItem(1, 2, newItem12);
 
     QTableWidgetItem *newItem20 = new QTableWidgetItem(tr("ID: "));
     newItem20->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
@@ -536,6 +543,9 @@ void NetworkSimulationPlatform::createDockWindow( void )
     QTableWidgetItem *newItem21 = new QTableWidgetItem("3");
     newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     ui_LinkInfTable->setItem(2, 1, newItem21);
+    QTableWidgetItem *newItem22 = new QTableWidgetItem("2");
+    newItem22->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+   ui_LinkInfTable->setItem(2, 2, newItem22);
 
     QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("端口数: "));
     newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
@@ -543,6 +553,36 @@ void NetworkSimulationPlatform::createDockWindow( void )
     QTableWidgetItem *newItem31 = new QTableWidgetItem("3");
     newItem31->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     ui_LinkInfTable->setItem(3, 1, newItem31);
+    QTableWidgetItem *newItem32 = new QTableWidgetItem("2");
+    newItem32->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+   ui_LinkInfTable->setItem(3, 2, newItem32);
+
+    QTableWidgetItem *newItem40 = new QTableWidgetItem(tr("端口数: "));
+    newItem40->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(4, 0, newItem40);
+    QTableWidgetItem *newItem41 = new QTableWidgetItem("3");
+    newItem41->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(4, 1, newItem41);
+    QTableWidgetItem *newItem42 = new QTableWidgetItem("2");
+    newItem42->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+   ui_LinkInfTable->setItem(4, 2, newItem42);
+
+    QTableWidgetItem *newItem50 = new QTableWidgetItem(tr("端口数: "));
+    newItem50->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(5, 0, newItem50);
+    QTableWidgetItem *newItem51 = new QTableWidgetItem("3");
+    newItem51->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(5, 1, newItem51);
+    QTableWidgetItem *newItem52 = new QTableWidgetItem("2");
+    newItem52->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+   ui_LinkInfTable->setItem(5, 2, newItem52);
+
+    QTableWidgetItem *newItem60 = new QTableWidgetItem(tr("端口数: "));
+    newItem60->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(6, 0, newItem60);
+    QTableWidgetItem *newItem61 = new QTableWidgetItem("3");
+    newItem61->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(6, 1, newItem61);
 
     ui_LinkInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //设置选择的模式为单选择
     ui_LinkInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //设置选择行为时每次选择一行

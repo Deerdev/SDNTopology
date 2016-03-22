@@ -96,7 +96,8 @@ void CSwitcher::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 
 	qreal t_textHeight = t_textFontM.height();
 
-    QString t_str2 = m_switcherInfo.name;
+    QString s_id = QString("%1").arg(m_switcherInfo.ID);
+    QString t_str2 = s_id +"-" + m_switcherInfo.name;
 	qreal t_textWidth2 = t_textFontM.width(t_str2);
 
     if(t_textWidth2 > m_boundingRect.width())

@@ -1951,7 +1951,7 @@ bool CTopologyWidget::getSwitchHostDevice()
        t_switchNames.append(t_sName);
     }
     //Í¼ÔªidÇå¿Õ
-    m_id = 0;
+    m_id = 1;
     for(int i=0; i<t_switchNames.size();++i)
     {
         struct SwitchNode *t_node1 = new SwitchNode;
@@ -2024,7 +2024,7 @@ bool CTopologyWidget::getSwitchHostDevice()
         HostNode *t_h1 = new HostNode;
         t_h1->type = HOST;
         t_h1->macAddr = t_hostMac;
-        t_h1->ID = m_id++;
+
         t_h1->switchDPID = t_attachSDPID;
         t_h1->attachSId = t_sid;
         t_h1->attachSPort = t_attachSPortNum;
@@ -2034,6 +2034,7 @@ bool CTopologyWidget::getSwitchHostDevice()
 
         if(!t_h1->switchDPID.isEmpty())//·ÀÖ¹Îª¿Õ
         {
+            t_h1->ID = m_id++;
             NodeInf t_nInf;
             t_nInf.type = HOST;
             t_nInf.pNode = t_h1;
