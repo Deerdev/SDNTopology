@@ -130,6 +130,8 @@ private:
         //QDockWidget *ui_networkDeviceDock;
         QDockWidget *ui_DeviceInfDock;
         QWidget *ui_DeviceDockWidget;
+        QDockWidget *ui_LinkInfDock;
+        QWidget *ui_LinkDockWidget;
 
         QToolBox *ui_networkToolBox;
         QGridLayout* ui_toolBoxGridLayout;
@@ -153,6 +155,7 @@ private:
 public:
         QTextEdit *historyListWidget;
         QTableWidget *ui_DeviceInfTable;
+        QTableWidget *ui_LinkInfTable;
 };
 
 #endif // NETWORKSIMULATIONPLATFORM_H

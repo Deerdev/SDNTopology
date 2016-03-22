@@ -12,7 +12,7 @@ int SDNCurl::wr_index = 0;
 
 SDNCurl::SDNCurl()
 {
-    m_ip="192.168.1.100";
+    m_ip="127.0.0.1:8080";
 }
 
 /*

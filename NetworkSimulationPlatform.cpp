@@ -475,7 +475,7 @@ void NetworkSimulationPlatform::createDockWindow( void )
     menu_DockShowMenu->addAction(ui_historyDock->toggleViewAction());
 
     ui_DeviceInfDock = new QDockWidget(tr("设备信息"), this);
-    ui_DeviceInfDock->setMinimumWidth(150);
+    ui_DeviceInfDock->setMinimumWidth(200);
     ui_DeviceInfDock->setMaximumWidth(500);
 
     ui_DeviceDockWidget = new QWidget(ui_DeviceInfDock);
@@ -494,6 +494,64 @@ void NetworkSimulationPlatform::createDockWindow( void )
     ui_DeviceInfDock->setWidget(ui_DeviceDockWidget);
     addDockWidget(Qt::RightDockWidgetArea, ui_DeviceInfDock);
     menu_DockShowMenu->addAction(ui_DeviceInfDock->toggleViewAction());
+
+    ui_LinkInfDock = new QDockWidget(tr("链路信息"), this);
+    ui_LinkInfDock->setMinimumWidth(200);
+    ui_LinkInfDock->setMaximumWidth(500);
+
+
+    ui_LinkDockWidget = new QWidget(ui_LinkInfDock);
+    ui_LinkInfTable  = new QTableWidget(ui_LinkDockWidget);
+    QPalette pll2 = ui_LinkInfTable->palette();
+    pll2.setBrush(QPalette::Base,QBrush(QColor(255,255,255,0)));
+    ui_LinkInfTable->setPalette(pll2);
+    //ui_DeviceInfTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui_LinkInfTable->horizontalHeader()->setHidden(true);
+    ui_LinkInfTable->verticalHeader()->setHidden(true);
+    ui_LinkInfDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    ui_LinkInfDock->setWidget(ui_LinkDockWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, ui_LinkInfDock);
+
+
+    ui_LinkInfTable->setRowCount(12);
+    ui_LinkInfTable->setColumnCount(3);
+
+    QTableWidgetItem *newItem00 = new QTableWidgetItem(tr(""));
+    newItem00->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(0, 0, newItem00);
+    QTableWidgetItem *newItem01 = new QTableWidgetItem("1");
+    newItem01->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(0, 1, newItem01);
+
+    QTableWidgetItem *newItem10 = new QTableWidgetItem(tr("名称: "));
+    newItem10->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(1, 0, newItem10);
+    QTableWidgetItem *newItem11 = new QTableWidgetItem("2");
+    newItem11->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+   ui_LinkInfTable->setItem(1, 1, newItem11);
+
+    QTableWidgetItem *newItem20 = new QTableWidgetItem(tr("ID: "));
+    newItem20->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+   ui_LinkInfTable->setItem(2, 0, newItem20);
+    QTableWidgetItem *newItem21 = new QTableWidgetItem("3");
+    newItem21->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(2, 1, newItem21);
+
+    QTableWidgetItem *newItem30 = new QTableWidgetItem(tr("端口数: "));
+    newItem30->setTextAlignment(Qt::AlignCenter| Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(3, 0, newItem30);
+    QTableWidgetItem *newItem31 = new QTableWidgetItem("3");
+    newItem31->setTextAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+    ui_LinkInfTable->setItem(3, 1, newItem31);
+
+    ui_LinkInfTable->setSelectionMode(QAbstractItemView::SingleSelection);   //设置选择的模式为单选择
+    ui_LinkInfTable->setSelectionBehavior(QAbstractItemView::SelectRows);    //设置选择行为时每次选择一行
+    //m_platform->ui_DeviceInfTable->setShowGrid(false);   //设置不显示格子线
+    //m_platform->ui_DeviceInfTable->resizeColumnToContents(0);
+    //m_platform->ui_DeviceInfTable->resizeColumnToContents(1);
+    ui_LinkInfTable->resizeColumnsToContents();
+    ui_LinkInfTable->horizontalHeader()->setStretchLastSection(true);
+    ui_LinkInfTable->verticalHeader()->setStretchLastSection(true);
 }
 
 //void NetworkSimulationPlatform::importSNMPTopology(void)

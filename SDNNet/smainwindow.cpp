@@ -75,7 +75,7 @@ void SMainWindow::listening()
 
     ui->listenButton->setEnabled(false);
 
-    if(!tcpServer->listen(QHostAddress::LocalHost, ui->portLineEdit->text().toInt()))
+    if(!tcpServer->listen(QHostAddress::Any, ui->portLineEdit->text().toInt()))
     {
         qDebug() << tcpServer->errorString();
         close();

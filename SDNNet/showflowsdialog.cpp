@@ -18,10 +18,10 @@ ShowFlowsDialog::ShowFlowsDialog(NetworkSimulationPlatform *_platform,QWidget *p
     //ui->flowShowWidget->verticalHeader()->setHidden(true);
 
     ui->flowShowWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//按行选中
-    ui->flowShowWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//不能编辑
+   // ui->flowShowWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//不能编辑
     ui->flowShowWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);//多选
 
-    ui->flowShowWidget->setRowCount(12);
+    ui->flowShowWidget->setRowCount(16);
     ui->flowShowWidget->setColumnCount(3);
 
     QFont serifFont("Ubuntu", 13);
